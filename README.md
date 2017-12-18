@@ -4,7 +4,7 @@ This full node level A SmartHoldem network
 
 # Ubuntu Installation
 
-Recomend 2 CPU 3.4Ghz / HDD SSD 60GB / RAM 4Gb
+Recomend 2 CPU 3.4Ghz / HDD SSD 60GB / RAM 4Gb / OS Ubuntu 16 LTS
 
 adduser smartholdem
 
