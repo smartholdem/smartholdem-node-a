@@ -4,6 +4,8 @@ This full node level A SmartHoldem network
 
 # Ubuntu Installation
 
+Recomend 2 CPU 3.4Ghz / HDD SSD 60GB / RAM 4Gb
+
 adduser smartholdem
 
 usermod -a -G sudo smartholdem
