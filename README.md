@@ -14,6 +14,6 @@ cd /home/smartholdem
 
 su smartholdem
 
-sudo apt-get update && sudo apt-get dist-upgrade
+sudo apt-get update && sudo apt-get dist-upgrade -y
 
-sudo apt-get install postgresql postgresql-contrib libpq-dev build-essential python git curl jq libtool autoconf locales automake locate zip unzip htop nmon iftop
+sudo apt-get install postgresql postgresql-contrib libpq-dev build-essential python git curl jq libtool autoconf locales automake locate zip unzip htop nmon iftop -y
