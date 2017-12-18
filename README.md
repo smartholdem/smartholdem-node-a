@@ -1,6 +1,6 @@
 # SmartHoldem Full Node Level A
 
-This full node level A Smartholdem network
+This full node level A SmartHoldem network
 
 # Ubuntu 16 Installation
 
