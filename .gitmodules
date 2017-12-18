@@ -1,0 +1,3 @@
+[submodule "test/smartholdem-js"]
+	path = test/smartholdem-js
+	url = https://github.com/smartholdem/smartholdem-js.git

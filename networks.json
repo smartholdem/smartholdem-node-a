@@ -1,0 +1,44 @@
+{
+  "smartholdem": {
+    "messagePrefix": "SmartHoldem message:\n",
+    "bip32": {
+      "public": 46090607,
+      "private": 46089527
+    },
+    "pubKeyHash": 63,
+    "wif": 255,
+    "client": {
+      "token": "STH",
+      "symbol": "STH",
+      "explorer": "https://explorer.smartholdem.io"
+    }
+  },
+  "testnet": {
+    "messagePrefix": "TESTNET message:\n",
+    "bip32": {
+      "public": 70617039,
+      "private": 70615956
+    },
+    "pubKeyHash": 66,
+    "wif": 186,
+    "client": {
+      "token": "TSTH",
+      "symbol": "TS",
+      "explorer": "http://texplorer.smartholdem.io"
+    }
+  },
+  "postcoin": {
+    "messagePrefix": "PostCoin message:\n",
+    "bip32": {
+      "public": 70617039,
+      "private": 70615956
+    },
+    "pubKeyHash": 55,
+    "wif": 183,
+    "client": {
+      "token": "POST",
+      "symbol": "POST",
+      "explorer": "http://texplorer.smartholdem.io"
+    }
+  }
+}
