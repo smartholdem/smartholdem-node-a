@@ -2,7 +2,7 @@
 
 This full node level A SmartHoldem network
 
-# Ubuntu 16 Installation
+# Ubuntu Installation
 
 adduser smartholdem
 
