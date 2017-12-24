@@ -75,11 +75,8 @@ BlockReward.prototype.calcSupply = function (height) {
 			if (height < this.rewardOffset) {
 				break; // Rewards not started yet
 			} else if (height < this.distance) {
-				//amount = height % this.distance; // Measure this.distance thus far
-                break; // Rewards not started yet //reward remove
+				amount = height % this.distance; // Measure this.distance thus far
 			} else {
-                break; // Rewards not started yet //reward remove
-				/*
 				amount = this.distance; // Assign completed milestone
 				height -= this.distance; // Deduct from total height
 
@@ -93,7 +90,6 @@ BlockReward.prototype.calcSupply = function (height) {
 						amount += (postHeight - height);
 					}
 				}
-				*/
 			}
 
 			rewards.push([amount, multiplier]);
