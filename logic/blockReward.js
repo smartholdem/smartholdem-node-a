@@ -52,7 +52,8 @@ BlockReward.prototype.calcReward = function (height) {
 	if (height < this.rewardOffset) {
 		return 0;
 	} else {
-		return this.milestones[this.calcMilestone(height)];
+		//return this.milestones[this.calcMilestone(height)];
+        return 0;
 	}
 };
 
