@@ -275,6 +275,7 @@ NodeManager.prototype.performSPVFix = function (cb) {
 			async.series(series, function(err, result){
 				if(publicKey){
 					result.balance = parseInt(result.received.total||0) - parseInt(result.spent.total||0) + parseInt(result.rewards.total||0);
+
 				}
 				else {
 					result.balance = parseInt(result.received.total||0);
