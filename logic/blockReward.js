@@ -70,7 +70,6 @@ BlockReward.prototype.calcSupply = function (height) {
 
 	for (var i = 0; i < this.milestones.length; i++) {
 		if (milestone >= i) {
-			/*
 			multiplier = (this.milestones[i] / Math.pow(10,8));
 
 			if (height < this.rewardOffset) {
@@ -94,8 +93,6 @@ BlockReward.prototype.calcSupply = function (height) {
 			}
 
 			rewards.push([amount, multiplier]);
-			*/
-            break; // Milestone out of bounds
 		} else {
 			break; // Milestone out of bounds
 		}
