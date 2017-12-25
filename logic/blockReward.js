@@ -95,6 +95,7 @@ BlockReward.prototype.calcSupply = function (height) {
 
 			rewards.push([amount, multiplier]);
 			*/
+            break; // Milestone out of bounds
 		} else {
 			break; // Milestone out of bounds
 		}
