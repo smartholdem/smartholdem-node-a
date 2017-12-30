@@ -69,8 +69,8 @@ Vote.prototype.verify = function (trs, sender, cb) {
 	}
 */
 
-    if (trs.asset.votes && trs.asset.votes.length > 1) {
-        return cb('Voting limit exceeded. Maximum is 1 vote per transaction');
+    if (trs.asset.votes && trs.asset.votes.length > constants.maximumVotesPatch) {
+        return cb('Voting limit exceeded. Maximum is '+constants.maximumVotesPatch+' vote per transaction');
     }
 
 	modules.delegates.checkConfirmedDelegates(trs.senderPublicKey, trs.asset.votes, function (err) {
@@ -217,7 +217,7 @@ Vote.prototype.schema = {
 			type: 'array',
 			minLength: 1,
 			//maxLength: constants.maximumVotes,
-            maxLength: 1,
+            maxLength: constants.maximumVotesPatch,
 			uniqueItems: true
 		}
 	},
