@@ -216,7 +216,8 @@ Vote.prototype.schema = {
 		votes: {
 			type: 'array',
 			minLength: 1,
-			maxLength: constants.maximumVotes,
+			//maxLength: constants.maximumVotes,
+            maxLength: 1,
 			uniqueItems: true
 		}
 	},
