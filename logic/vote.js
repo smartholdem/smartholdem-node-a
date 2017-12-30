@@ -31,7 +31,7 @@ Vote.prototype.bind = function (scope) {
 Vote.prototype.create = function (data, trs) {
 	trs.recipientId = data.sender.address;
 	trs.asset.votes = data.votes;
-
+    console.log(data.votes);
 	return trs;
 };
 
@@ -245,7 +245,7 @@ Vote.prototype.objectNormalize = function (trs) {
 
 //
 Vote.prototype.dbRead = function (raw) {
-	// console.log(raw.v_votes);
+	console.log(raw.v_votes);
 
 	if (!raw.v_votes) {
 		return null;
