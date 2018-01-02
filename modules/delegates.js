@@ -405,10 +405,11 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			}
 
             // too many votes from 1 account, please vote from another account
+			/*
             if (math === '+' && additions > constants.maximumVotesPatch) {
                 return eachSeriesCb('Failed to add vote, too many votes from 1 account, please vote from another account');
             }
-
+*/
 			if (math === '-' && (delegates === null || delegates.indexOf(publicKey) === -1)) {
 				return eachSeriesCb('Failed to remove vote, account has not voted for this delegate');
 			}
