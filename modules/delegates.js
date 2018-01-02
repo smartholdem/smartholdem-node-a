@@ -425,7 +425,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			}
 
 			var total_votes = (existing_votes + additions) - removals;
-
+/*
 			if (total_votes > constants.maximumVotes) {
 				var exceeded = total_votes - constants.maximumVotes;
 
@@ -433,6 +433,17 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			} else {
 				return cb();
 			}
+*/
+            if (total_votes > constants.maximumVotesPatch) {
+                var exceeded = total_votes - constants.maximumVotesPatch;
+
+                return cb('Maximum number of ' + constants.maximumVotesPatch + ' votes exceeded (' + exceeded + ' too many)');
+            } else {
+                return cb();
+            }
+
+
+
 		});
 	});
 };
