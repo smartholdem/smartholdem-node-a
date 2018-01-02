@@ -400,7 +400,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 				return eachSeriesCb('Invalid public key');
 			}
 
-			if (math === '+' && (delegates != null && delegates.indexOf(publicKey) !== -1)) {
+			if (math === '+' && (delegates != null && delegates.indexOf(publicKey) !== -1) && additions > constants.maximumVotesPatch) {
 				return eachSeriesCb('Failed to add vote, account has already voted for this delegate');
 			}
 
