@@ -404,6 +404,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 				return eachSeriesCb('Failed to add vote, account has already voted for this delegate');
 			}
 
+			// too many votes from 1 account, please vote from another account
             if (math === '+' && additions > constants.maximumVotesPatch) {
                 return eachSeriesCb('Failed to add vote, too many votes from 1 account, please vote from another account');
             }
