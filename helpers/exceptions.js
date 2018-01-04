@@ -2,6 +2,8 @@
 
 module.exports = {
 	senderPublicKey: [
+		"0381878b87f0dc7577ab8e9d93694d0f95eb41e451b8dad419f2e718c6b96908fd",
+		"02b391c9b1d8607861254c081b0902d1793fe0c0544ef912a584dc40be48aa390a"
 	],
 	signatures: [
 	],
