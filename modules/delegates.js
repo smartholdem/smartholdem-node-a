@@ -391,6 +391,12 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 				removals += 1;
 			}
 
+			// 1 vote patch
+            if (math === '+' && (existing_votes > 0 || additions > 1)) {
+                return cb('--- Only 1 vote from 1 address');
+                return eachSeriesCb('--- Only 1 vote from 1 address');
+            }
+
 			var publicKey = action.slice(1);
 
 			try {
@@ -404,6 +410,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 				return eachSeriesCb('Failed to add vote, account has already voted for this delegate');
 			}
 
+
 			/*
 			// too many votes from 1 account, please vote from another account
             if (math === '+' && additions > constants.maximumVotesPatch) {
@@ -413,6 +420,8 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			if (math === '-' && (delegates === null || delegates.indexOf(publicKey) === -1)) {
 				return eachSeriesCb('Failed to remove vote, account has not voted for this delegate');
 			}
+
+
 
 			modules.accounts.getAccount({ publicKey: publicKey, isDelegate: 1 }, function (err, account) {
 				if (err) {
