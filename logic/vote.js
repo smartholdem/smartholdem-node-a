@@ -63,16 +63,17 @@ Vote.prototype.verify = function (trs, sender, cb) {
 	if (!trs.asset.votes.length) {
 		return cb('Invalid votes. Must not be empty');
 	}
-/*
+
+
 	if (trs.asset.votes && trs.asset.votes.length > constants.maximumVotes) {
 		return cb('Voting limit exceeded. Maximum is '+constants.maximumVotes+' vote per transaction');
 	}
-*/
 
+/*
     if (trs.asset.votes && trs.asset.votes.length > constants.maximumVotesPatch) {
         return cb('Voting limit exceeded. Maximum is '+constants.maximumVotesPatch+' vote per transaction');
     }
-
+*/
 	modules.delegates.checkConfirmedDelegates(trs.senderPublicKey, trs.asset.votes, function (err) {
 		if (err && exceptions.votes.indexOf(trs.id) > -1) {
 			library.logger.debug(err);
@@ -216,8 +217,8 @@ Vote.prototype.schema = {
 		votes: {
 			type: 'array',
 			minLength: 1,
-			//maxLength: constants.maximumVotes,
-            maxLength: constants.maximumVotesPatch,
+			maxLength: constants.maximumVotes,
+            //maxLength: constants.maximumVotesPatch,
 			uniqueItems: true
 		}
 	},
