@@ -443,16 +443,6 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			} else {
 				return cb();
 			}
-/*
-            if (total_votes > constants.maximumVotesPatch) {
-                var exceeded = total_votes - constants.maximumVotesPatch;
-
-                return cb('Maximum number of ' + constants.maximumVotesPatch + ' votes exceeded (' + exceeded + ' too many)');
-            } else {
-                return cb();
-            }
-*/
-
 
 		});
 	});
