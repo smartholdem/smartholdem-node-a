@@ -393,8 +393,9 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 				removals += 1;
 			}
 
-           if (math === '+' && existing_votes > 1) {
+           if (math === '+' && existing_votes > 0) {
                return cb('--- Only 1 vote from 1 address');
+               return eachSeriesCb('--- Only 1 vote from 1 address');
 		   }
 
 			var publicKey = action.slice(1);
