@@ -407,7 +407,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 
 			// vote log
             if (math === '+') {
-                console.log('additions:' + additions);
+                library.logger.info('additions:', additions);
             }
 
 			if (math === '-' && (delegates === null || delegates.indexOf(publicKey) === -1)) {
