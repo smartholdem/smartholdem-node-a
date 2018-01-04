@@ -380,12 +380,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 
         library.logger.info('existing_votes:', existing_votes);
 
-        if (existing_votes > 1) {
-            return cb('Only 1 vote');
-		}
-
-
-		async.eachSeries(votes, function (action, eachSeriesCb) {
+       async.eachSeries(votes, function (action, eachSeriesCb) {
 			var math = action[0];
 
 			if (math !== '+' && math !== '-') {
@@ -394,6 +389,9 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 
 			if (math === '+') {
 				additions += 1;
+                if (existing_votes > 1) {
+                    return cb('---- Only 1 vote');
+                }
 			} else if (math === '-') {
 				removals += 1;
 			}
