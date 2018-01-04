@@ -388,8 +388,8 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			if (math === '+') {
 				additions += 1;
                 if (existing_votes > 0) {
-                    library.logger.info('--- Only 1 vote from 1 address:');
-                    return cb('--- Only 1 vote from 1 address');
+                    library.logger.info('--- Only 1 vote from 1 address');
+                    //return cb('--- Only 1 vote from 1 address');
                     //return eachSeriesCb('--- Only 1 vote from 1 address');
                 }
 			} else if (math === '-') {
