@@ -378,6 +378,8 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 		var existing_votes = Array.isArray(delegates) ? delegates.length : 0;
 		var additions = 0, removals = 0;
 
+        library.logger.info('existing_votes:', existing_votes);
+
 		async.eachSeries(votes, function (action, eachSeriesCb) {
 			var math = action[0];
 
