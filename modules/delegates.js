@@ -404,12 +404,12 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 				return eachSeriesCb('Failed to add vote, account has already voted for this delegate');
 			}
 
-            // too many votes from 1 account, please vote from another account
-			/*
-            if (math === '+' && additions > constants.maximumVotesPatch) {
-                return eachSeriesCb('Failed to add vote, too many votes from 1 account, please vote from another account');
+
+			// vote log
+            if (math === '+') {
+                console.log('additions:' + additions);
             }
-*/
+
 			if (math === '-' && (delegates === null || delegates.indexOf(publicKey) === -1)) {
 				return eachSeriesCb('Failed to remove vote, account has not voted for this delegate');
 			}
@@ -432,10 +432,10 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 
 			var total_votes = (existing_votes + additions) - removals;
 
-			if (total_votes > constants.maximumVotesPatch) {
-				var exceeded = total_votes - constants.maximumVotesPatch;
+			if (total_votes > constants.maximumVotes) {
+				var exceeded = total_votes - constants.maximumVotes;
 
-				return cb('Maximum number of ' + constants.maximumVotesPatch + ' votes exceeded (' + exceeded + ' too many)');
+				return cb('Maximum number of ' + constants.maximumVotes + ' votes exceeded (' + exceeded + ' too many)');
 			} else {
 				return cb();
 			}
