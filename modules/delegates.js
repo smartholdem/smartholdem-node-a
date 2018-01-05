@@ -392,12 +392,15 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			} else if (math === '-') {
 				removals += 1;
 			}
+           var lastBlockV = modules.blockchain.getLastBlock()
+           // 1 vote patch
 
-           if (math === '+' && (existing_votes > 0 || additions > 1)) {
-               return cb('--- Only 1 vote from 1 address');
-               //return eachSeriesCb('--- Only 1 vote from 1 address');
-		   }
-
+           if (lastBlockV.height > 203000) {
+               if (math === '+' && (existing_votes > 0 || additions > 1)) {
+                   return cb('--- Only 1 vote from 1 address');
+                   //return eachSeriesCb('--- Only 1 vote from 1 address');
+               }
+           }
 			var publicKey = action.slice(1);
 
 			try {
@@ -747,8 +750,6 @@ __private.toggleForgingOnReceipt = function () {
 
 	if (lastReceipt) {
 		var timeOut = Number(constants.forgingTimeOut);
-
-
 /*
 		// if (lastReceipt.secondsAgo > timeOut) {
 		// 	return self.disableForging('timeout');
