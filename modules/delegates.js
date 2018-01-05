@@ -544,6 +544,10 @@ Delegates.prototype.getDelegates = function (query, cb) {
 			var percent = 100 - (delegates[i].missedblocks / ((delegates[i].producedblocks + delegates[i].missedblocks) / 100));
 			percent = Math.abs(percent) || 0;
 
+			if (percent < 1) {
+                delegates[i].rate = i + 64;
+			}
+
 			var outsider = i + 1 > slots.delegates;
 			delegates[i].productivity = (!outsider) ? Math.round(percent * 1e2) / 1e2 : 0;
 		}
