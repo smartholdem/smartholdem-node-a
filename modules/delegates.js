@@ -177,11 +177,11 @@ __private.attachApi = function () {
 		});
 	});
 
-	// router.map(__private, {
-	//   'post /forging/enable': 'enableForging',
-	//   'post /forging/disable': 'disableForging',
-	//   'get /forging/status': 'statusForging'
-	// });
+	 router.map(__private, {
+	   'post /forging/enable': 'enableForging',
+	   'post /forging/disable': 'disableForging',
+	   'get /forging/status': 'statusForging'
+	 });
 
 	library.network.app.use('/api/delegates', router);
 	library.network.app.use(function (err, req, res, next) {
