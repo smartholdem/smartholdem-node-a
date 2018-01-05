@@ -540,7 +540,7 @@ Delegates.prototype.getDelegates = function (query, cb) {
 			var percent = 100 - (delegates[i].missedblocks / ((delegates[i].producedblocks + delegates[i].missedblocks) / 100));
 			percent = Math.abs(percent) || 0;
 
-			if (percent < 1) {
+			if (percent < 1 && delegates[i].rate < 64) {
                 delegates[i].rate = i + 1;
                 library.logger.info('rate down:', delegates[i]);
 			}
