@@ -83,6 +83,10 @@ Delegate.prototype.verify = function (trs, sender, cb) {
 		return cb('Empty username');
 	}
 
+    if (username.length < 3) {
+        return cb('Username is too short. Minimum is 3 characters');
+    }
+
 	if (username.length > 20) {
 		return cb('Username is too long. Maximum is 20 characters');
 	}
