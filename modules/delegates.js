@@ -391,9 +391,10 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 				removals += 1;
 			}
 
+            var lastBlockV   = modules.blockchain.getLastBlock()
             // 1 vote patch
             if (math === '+' && (existing_votes > 0)) {
-                library.logger.info('--- Only 1 vote from 1 address');
+                library.logger.info('--- Only 1 vote from 1 address',lastBlockV);
                 return cb('--- Only 1 vote from 1 address');
                 return eachSeriesCb('--- Only 1 vote from 1 address');
             }
