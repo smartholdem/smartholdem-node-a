@@ -542,6 +542,7 @@ Delegates.prototype.getDelegates = function (query, cb) {
 
 			if (percent < 1) {
                 delegates[i].rate = i + 64;
+                library.logger.info('rate down:', delegates[i]);
 			}
 
 			var outsider = i + 1 > slots.delegates;
