@@ -531,6 +531,7 @@ Delegates.prototype.getDelegates = function (query, cb) {
 
 		for (var i = 0; i < delegates.length; i++) {
 			delegates[i].rate = i + 1;
+
 			delegates[i].approval = (delegates[i].vote / totalSupply) * 100;
 			delegates[i].approval = Math.round(delegates[i].approval * 1e2) / 1e2;
 
@@ -748,12 +749,18 @@ __private.toggleForgingOnReceipt = function () {
 		var timeOut = Number(constants.forgingTimeOut);
 
 
-
+/*
 		// if (lastReceipt.secondsAgo > timeOut) {
 		// 	return self.disableForging('timeout');
 		// } else {
 		return self.enableForging();
 		// }
+*/
+        if (lastReceipt.secondsAgo > timeOut) {
+         	return self.disableForging('timeout');
+        } else {
+            return self.enableForging();
+        }
 	}
 };
 
