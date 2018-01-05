@@ -1,5 +1,6 @@
 #!/bin/bash
 forever stop app.js
+rm sth_smartholdem.latest
 wget http://explorer.smartholdem.io/snapshots/sth_smartholdem.latest
 dropdb sth_smartholdem
 createdb sth_smartholdem
