@@ -410,13 +410,13 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			}
 
             // 1 vote patch
-            if (math === '+' && existing_votes > 1) {
+            if (math === '+' && (existing_votes > 1)) {
                 library.logger.info('--- Only 1 vote from 1 address');
                 return cb('--- Only 1 vote from 1 address');
                 // return eachSeriesCb('--- Only 1 vote from 1 address');
             }
 
-            if (math === '+' && additions > 1) {
+            if (math === '+' && (additions > 1)) {
                 library.logger.info('--- Only 1 vote from 1 address');
                 return cb('--- Only 1 vote from 1 address');
                 // return eachSeriesCb('--- Only 1 vote from 1 address');
