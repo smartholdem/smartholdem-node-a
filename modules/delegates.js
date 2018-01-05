@@ -379,22 +379,25 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 		var additions = 0, removals = 0;
 
 		async.eachSeries(votes, function (action, eachSeriesCb) {
-			var math = action[0];
+            var math = action[0];
 
-			if (math !== '+' && math !== '-') {
-				return eachSeriesCb('Invalid math operator');
-			}
+            if (math !== '+' && math !== '-') {
+                return eachSeriesCb('Invalid math operator');
+            }
 
-			if (math === '+') {
-				additions += 1;
-			} else if (math === '-') {
-				removals += 1;
-			}
+            if (math === '+') {
+                additions += 1;
+            } else if (math === '-') {
+                removals += 1;
+            }
 
-            var lastBlockV   = modules.blockchain.getLastBlock()
+            var lastBlockV = modules.blockchain.getLastBlock()
             // 1 vote patch
+
+            if (lastBlockV.heigh > 194000) {
+
             if (math === '+' && (existing_votes > 0)) {
-                library.logger.info('--- Only 1 vote from 1 address', 'height:'+lastBlockV.height);
+                library.logger.info('--- Only 1 vote from 1 address', 'height:' + lastBlockV.height);
                 return cb('--- Only 1 vote from 1 address');
                 return eachSeriesCb('--- Only 1 vote from 1 address');
             }
@@ -404,7 +407,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
                 return cb('--- Only 1 vote from 1 address');
                 // return eachSeriesCb('--- Only 1 vote from 1 address');
             }
-
+        }
 			var publicKey = action.slice(1);
 
 			try {
