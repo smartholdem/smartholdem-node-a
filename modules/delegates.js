@@ -758,6 +758,7 @@ __private.toggleForgingOnReceipt = function () {
 		// }
 */
         if (lastReceipt.secondsAgo > timeOut) {
+            library.logger.info('disable forging');
          	return self.disableForging('timeout');
         } else {
             return self.enableForging();
