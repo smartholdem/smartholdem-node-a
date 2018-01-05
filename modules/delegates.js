@@ -914,7 +914,7 @@ shared.getDelegates = function (req, cb) {
 			}
 
 			if (data.sortField) {
-				if (['approval', 'productivity', 'rate', 'vote'].indexOf(data.sortField) > -1) {
+				if (['productivity', 'approval', 'rate', 'vote'].indexOf(data.sortField) > -1) {
 					data.delegates = data.delegates.sort(compareNumber);
 				} else if (['username', 'address', 'publicKey'].indexOf(data.sortField) > -1) {
 					data.delegates = data.delegates.sort(compareString);
