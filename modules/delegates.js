@@ -531,10 +531,6 @@ Delegates.prototype.getDelegates = function (query, cb) {
 
 		var lastBlock   = modules.blockchain.getLastBlock(),
 		    totalSupply = __private.blockReward.calcSupply(lastBlock.height);
-
-		var lastReceipt = modules.blocks.lastReceipt();
-        library.logger.info('lastReceipt:'+lastReceipt);
-
 		for (var i = 0; i < delegates.length; i++) {
 			delegates[i].rate = i + 1;
 
