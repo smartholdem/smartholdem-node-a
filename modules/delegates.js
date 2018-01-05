@@ -390,7 +390,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			} else if (math === '-') {
 				removals += 1;
 			}
-/*
+
             // 1 vote patch
             if (math === '+' && (existing_votes > 0)) {
                 library.logger.info('--- Only 1 vote from 1 address');
@@ -403,7 +403,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
                 return cb('--- Only 1 vote from 1 address');
                 // return eachSeriesCb('--- Only 1 vote from 1 address');
             }
-*/
+
 			var publicKey = action.slice(1);
 
 			try {
