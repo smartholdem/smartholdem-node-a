@@ -396,7 +396,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
             if (math === '+' && (existing_votes > 1 || additions > 1)) {
                 library.logger.info('--- Only 1 vote from 1 address:');
                 return cb('--- Only 1 vote from 1 address');
-                return eachSeriesCb('--- Only 1 vote from 1 address');
+                // return eachSeriesCb('--- Only 1 vote from 1 address');
             }
 
 			var publicKey = action.slice(1);
