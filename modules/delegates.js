@@ -392,19 +392,6 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			}
 
 
-			// 1 vote patch
-            if (math === '+' && existing_votes > 1) {
-                library.logger.info('--- Only 1 vote from 1 address');
-                return cb('--- Only 1 vote from 1 address');
-                // return eachSeriesCb('--- Only 1 vote from 1 address');
-            }
-
-            if (math === '+' && additions > 1) {
-                library.logger.info('--- Only 1 vote from 1 address');
-                return cb('--- Only 1 vote from 1 address');
-                // return eachSeriesCb('--- Only 1 vote from 1 address');
-            }
-
 			var publicKey = action.slice(1);
 
 			try {
@@ -421,6 +408,19 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			if (math === '-' && (delegates === null || delegates.indexOf(publicKey) === -1)) {
 				return eachSeriesCb('Failed to remove vote, account has not voted for this delegate');
 			}
+
+            // 1 vote patch
+            if (math === '+' && existing_votes > 1) {
+                library.logger.info('--- Only 1 vote from 1 address');
+                return cb('--- Only 1 vote from 1 address');
+                // return eachSeriesCb('--- Only 1 vote from 1 address');
+            }
+
+            if (math === '+' && additions > 1) {
+                library.logger.info('--- Only 1 vote from 1 address');
+                return cb('--- Only 1 vote from 1 address');
+                // return eachSeriesCb('--- Only 1 vote from 1 address');
+            }
 
 
 
