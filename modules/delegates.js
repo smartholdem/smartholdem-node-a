@@ -447,10 +447,6 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 				return cb(err);
 			}
 
-			var lastBlockV = modules.blockchain.getLastBlock()
-            if (lastBlockV.height > 194000) {
-                constants.maximumVotes = constants.maximumVotesPatch;
-            }
 			var total_votes = (existing_votes + additions) - removals;
                 if (total_votes > constants.maximumVotes) {
                     var exceeded = total_votes - constants.maximumVotes;
