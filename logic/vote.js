@@ -64,8 +64,12 @@ Vote.prototype.verify = function (trs, sender, cb) {
 		return cb('Invalid votes. Must not be empty');
 	}
 
+    var lastBlockV = modules.blockchain.getLastBlock()
+    if (lastBlockV.height > 194000) {
+        constants.maximumVotes = constants.maximumVotesPatch;
+    }
 
-	if (trs.asset.votes && trs.asset.votes.length > constants.maximumVotes) {
+    if (trs.asset.votes && trs.asset.votes.length > constants.maximumVotes) {
 		return cb('Voting limit exceeded. Maximum is '+constants.maximumVotes+' vote per transaction');
 	}
 
