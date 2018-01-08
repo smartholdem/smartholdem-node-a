@@ -29,7 +29,7 @@ sudo -u postgres psql -c "CREATE USER $USER WITH PASSWORD 'password' CREATEDB;" 
 
 createdb sth_smartholdem
 
-git clone https://github.com/smartholdem/smartholdem-node-a.git
+git clone -b master https://github.com/smartholdem/smartholdem-node-a.git
 
 cd smartholdem-node-a
 
