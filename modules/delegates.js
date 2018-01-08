@@ -377,7 +377,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 		var delegates = (state === 'confirmed') ? account.delegates : account.u_delegates;
 		var existing_votes = Array.isArray(delegates) ? delegates.length : 0;
 		var additions = 0, removals = 0;
-        var lastBlockV = modules.blockchain.getLastBlock()
+
 
 		async.eachSeries(votes, function (action, eachSeriesCb) {
             var math = action[0];
@@ -394,7 +394,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 
 
             // 1 vote patch
-
+            var lastBlockV = modules.blockchain.getLastBlock()
             if (lastBlockV.height > 194000) {
                 constants.maximumVotes = constants.maximumVotesPatch;
 
@@ -447,6 +447,10 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 				return cb(err);
 			}
 
+			var lastBlockV = modules.blockchain.getLastBlock()
+            if (lastBlockV.height > 194000) {
+                constants.maximumVotes = constants.maximumVotesPatch;
+            }
 			var total_votes = (existing_votes + additions) - removals;
                 if (total_votes > constants.maximumVotes) {
                     var exceeded = total_votes - constants.maximumVotes;
