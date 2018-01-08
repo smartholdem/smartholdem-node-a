@@ -2,7 +2,7 @@
 
 module.exports = {
     activeDelegates: 64,
-    maximumVotes: 1,
+    maximumVotes: 2,
     maximumVotesPatch: 1,
     addressLength: 208,
     blockHeaderLength: 248,
