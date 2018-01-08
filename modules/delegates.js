@@ -377,6 +377,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 		var delegates = (state === 'confirmed') ? account.delegates : account.u_delegates;
 		var existing_votes = Array.isArray(delegates) ? delegates.length : 0;
 		var additions = 0, removals = 0;
+        var lastBlockV = modules.blockchain.getLastBlock()
 
 		async.eachSeries(votes, function (action, eachSeriesCb) {
             var math = action[0];
@@ -391,10 +392,11 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
                 removals += 1;
             }
 
-            var lastBlockV = modules.blockchain.getLastBlock()
+
             // 1 vote patch
 
             if (lastBlockV.height > 194000) {
+                constants.maximumVotes = constants.maximumVotesPatch;
 
             if (math === '+' && (existing_votes > 0)) {
                 library.logger.info('--- Only 1 vote from 1 address', 'height:' + lastBlockV.height);
@@ -446,14 +448,13 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			}
 
 			var total_votes = (existing_votes + additions) - removals;
+                if (total_votes > constants.maximumVotes) {
+                    var exceeded = total_votes - constants.maximumVotes;
+                    return cb('Maximum number of ' + constants.maximumVotes + ' votes exceeded (' + exceeded + ' too many)');
+                } else {
+                    return cb();
+                }
 
-			if (total_votes > constants.maximumVotes) {
-				var exceeded = total_votes - constants.maximumVotes;
-
-				return cb('Maximum number of ' + constants.maximumVotes + ' votes exceeded (' + exceeded + ' too many)');
-			} else {
-				return cb();
-			}
 
 		});
 	});
