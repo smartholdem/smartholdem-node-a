@@ -19,7 +19,11 @@ su smartholdem
 
 sudo apt-get update && sudo apt-get dist-upgrade -y
 
+ENTER smartholdem user password (if it is needed)
+
 sudo apt-get install postgresql postgresql-contrib libpq-dev build-essential python git curl jq libtool autoconf locales automake locate zip unzip htop nmon iftop -y
+
+ENTER smartholdem user password (if it is needed)
 
 sudo reboot
 
