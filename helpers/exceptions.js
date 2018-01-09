@@ -296,7 +296,8 @@ module.exports = {
         "9fa7f5542a00366b0ccc74809ccea83ebccd585fb48494eab96fbfbb9deb600c",
         "20640a14b8f1ac33ff28a891c9d4a825d93f67d4e49660c3cdf8b4b925cd6999",
         "ef9b6b229ffebc35650d63dd93ec459bee46cd93285e90e0deaa865e98eee7f2",
-        "45169b6f07dfd6ef184a677eb27fcdb43a33eb61345d5367a27dd9cecb371dd7"
+        "45169b6f07dfd6ef184a677eb27fcdb43a33eb61345d5367a27dd9cecb371dd7",
+        "d9988f7eea71eecb532212b9f3da63bfb7af2b32ee3b1a1cdf84407893b085f9"
 	],
 	balance:[
 		"02657cb82fdda6467be08f11c4fa9b6c86638f2289e3f3d4dbd9f5a959a3bbdfa2"
