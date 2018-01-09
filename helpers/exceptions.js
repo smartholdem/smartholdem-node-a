@@ -254,7 +254,8 @@ module.exports = {
         "0a82b81660bec2f90b26bae9aa2b07be56d65bda80ede2c4bdbecaf49305890b",
         "1f7000cb3ce8513cd1f7750f5e5548db83ea0a6aeae8fde9fe4c1d9d789db8d0",
         "12d2c1954ab4a368e35a992366bfc7a42bc3d98bc7c0ecc91d007626146d6858",
-        "f6e96fcf524c98f738242eb8a8ba7da9f6368cb1ef8c7ae7bd8673a30d28e4d0"
+        "f6e96fcf524c98f738242eb8a8ba7da9f6368cb1ef8c7ae7bd8673a30d28e4d0",
+        "58fd2351084c2036aea9fb6a6a6d44529940f166d55ad557d95c1f3cecbac1b7"
 	],
 	balance:[
 		"02657cb82fdda6467be08f11c4fa9b6c86638f2289e3f3d4dbd9f5a959a3bbdfa2"
