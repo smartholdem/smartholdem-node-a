@@ -394,6 +394,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 
 
             // 1 vote patch
+			/*
             var lastBlockV = modules.blockchain.getLastBlock()
             if (lastBlockV.height > 194000) {
                 constants.maximumVotes = constants.maximumVotesPatch;
@@ -410,6 +411,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
                 // return eachSeriesCb('--- Only 1 vote from 1 address');
             }
         }
+        */
 			var publicKey = action.slice(1);
 
 			try {
