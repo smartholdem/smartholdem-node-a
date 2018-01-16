@@ -1,6 +1,7 @@
 'use strict';
 
 var appConfig = require('./config.smartholdem.json');
+// var appSecret = require('./secret.json');
 var networks = require('./networks.json');
 var async = require('async');
 var checkIpInList = require('./helpers/checkIpInList.js');
@@ -123,7 +124,7 @@ d.on('error', function (err) {
 
 d.run(function () {
 	var modules = [];
-	console.log(colors.cyan("\n\
+	console.log(colors.green("\n\
       {___     {__    {____     {_____    {________\n\
      {_ {__   {__  {__    {__  {__   {__ {__\n\
     {__ {__  {__{__        {__{__    {__{__\n\
