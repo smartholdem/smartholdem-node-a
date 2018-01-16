@@ -1,12 +1,12 @@
 'use strict';
 
-var appConfig = require('./config.json');
+var appConfig = require('./config.smartholdem.json');
 var networks = require('./networks.json');
 var async = require('async');
 var checkIpInList = require('./helpers/checkIpInList.js');
 var extend = require('extend');
 var fs = require('fs');
-var genesisblock = require('./genesisBlock.json');
+var genesisblock = require('./genesisBlock.smartholdem.json');
 var sthjs = require('sthjs');
 var https = require('https');
 var Logger = require('./logger.js');
