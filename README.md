@@ -63,7 +63,7 @@ insert your key into line
 
 "forging": {
     ...
-    "secret": ["your_secret_passphrase"]
+    "secret": ["your delegate secret passphrase"]
     ...
     }
   
@@ -71,6 +71,6 @@ insert your key into line
   
   CTRL+x
   
-  forever start app.js --config config.smartholdem.json --genesis genesisBlock.smartholdem.json
+  forever start app.js
   
   for log view: tail -f ./logs/sth.log
