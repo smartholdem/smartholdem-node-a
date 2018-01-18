@@ -1,9 +1,9 @@
 #!/bin/bash
 forever stop app.js
-rm sth_smartholdem.latest
-wget http://explorer.smartholdem.io/snapshots/sth_smartholdem.latest
+rm current
+wget http://explorer.smartholdem.io/snapshots/current
 dropdb sth_smartholdem
 createdb sth_smartholdem
-psql sth_smartholdem < sth_smartholdem.191200
-forever start app.js --config config.smartholdem.json --genesis genesisBlock.smartholdem.json
+psql sth_smartholdem < current
+forever start app.js
 tail -f ./logs/sth.log
