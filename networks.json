@@ -10,7 +10,7 @@
     "client": {
       "token": "STH",
       "symbol": "STH",
-      "explorer": "https://explorer.smartholdem.io"
+      "explorer": "https://blockexplorer.smartholdem.io"
     }
   },
   "testnet": {
@@ -38,7 +38,7 @@
     "client": {
       "token": "POST",
       "symbol": "POST",
-      "explorer": "http://texplorer.smartholdem.io"
+      "explorer": "https://bitexplorer.top/post"
     }
   }
 }
