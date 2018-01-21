@@ -415,10 +415,6 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			}
 
 
-			// vote log
-            if (math === '+') {
-                library.logger.info('additions:', additions);
-            }
 
 			if (math === '-' && (delegates === null || delegates.indexOf(publicKey) === -1)) {
 				return eachSeriesCb('Failed to remove vote, account has not voted for this delegate');
