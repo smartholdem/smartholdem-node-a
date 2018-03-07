@@ -9,15 +9,13 @@ Recomend 2 CPU 3.4Ghz / HDD SSD 60GB / RAM 4Gb / OS Ubuntu 16 LTS
 
 from root user:
 
+```shell
 adduser smartholdem
-
 usermod -a -G sudo smartholdem
-
 cd /home/smartholdem
-
 su smartholdem
-
 sudo apt-get update && sudo apt-get dist-upgrade -y
+```
 
 ENTER smartholdem user password (if it is needed)
 
