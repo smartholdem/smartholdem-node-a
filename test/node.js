@@ -1,13 +1,20 @@
 'use strict';
-process.env.SILENT='true';
+// process.env.SILENT='true';
 // Root object
 var node = {};
+var networkName = "testnet"
+var network = require('../networks.json')[networkName];
+node.sth = require('./sth-js');
+node.sth.crypto.setNetworkVersion(network.pubKeyHash);
 
 // Requires
 node.bignum = require('../helpers/bignum.js');
 node.config = require('./config.json');
 node.constants = require('../helpers/constants.js');
 node.txTypes = require('../helpers/transactionTypes.js');
+node.delegates = require('./delegatesPassphrases.'+networkName+'.json');
+node.gAccount = require('./genesisPassphrase.'+networkName+'.json');
+node.gAccount.password = node.gAccount.passphrase;
 
 node._ = require('lodash');
 node.async = require('async');
@@ -16,12 +23,11 @@ node.expect = require('chai').expect;
 node.chai = require('chai');
 node.chai.config.includeStack = true;
 node.chai.use(require('chai-bignumber')(node.bignum));
-node.sth = require('./sth-js');
 node.supertest = require('supertest');
 require('colors');
 
 // Node configuration
-// node.baseUrl = 'http://' + node.config.address + ':' + node.config.port;
+//node.baseUrl = 'http://' + node.config.address + ':' + node.config.port;
 node.baseUrl = 'http://localhost:' + node.config.port;
 node.api = node.supertest(node.baseUrl);
 
@@ -41,21 +47,11 @@ node.fees = {
 
 
 // Existing delegate account
-node.eAccount = {
-	address: 'SgfSC4H3AViZHwf1MeXaThsvJBThwV1AS9',
-	publicKey: '0259dc2549cf0e7c7bd2a0c203bb6bebf12a7ca468e130d86fcbc9ffb6b52f0eda',
-	password: 'seat excess fat category basic entire salute feed various guard treat history',
-	balance: '0',
-	delegateName: 'gendelegate_1'
-};
+node.eAccount = node.delegates[0];
+node.eAccount.password = node.eAccount.passphrase;
 
+console.log(node.eAccount);
 // Genesis account, initially holding 240M total supply
-node.gAccount = {
-	address: 'SVx2j3NdZbDLfZ9HWS57NvqYg4c9grQLnx',
-	publicKey: '03b2000d0e5042e82aed1fe7d7b556ba7cbc921406fe65cc3881652115f843fbb9',
-	password: 'frame lawn ring correct produce rookie guard grant fence repair suspect foot',
-	balance: '720000000000000'
-};
 
 // Optional logging
 if (process.env.SILENT === 'true') {
@@ -93,7 +89,7 @@ node.randomProperty = function (obj, needKey) {
 
 // Returns random STH amount
 node.randomSTH = function () {
-	return Math.floor(Math.random() * (10000 * 100000000)) + (1000 * 100000000);
+	return Math.floor(Math.random() * (100 * 100000000)) + (10 * 100000000);
 };
 
 // Returns current block height
@@ -274,8 +270,8 @@ node.randomAccount = function () {
 	account.password = node.randomPassword();
 	account.secondPassword = node.randomPassword();
 	account.username = node.randomDelegateName();
-	// account.publicKey = node.sth.crypto.getKeys(account.password).publicKey;
-	account.address = node.sth.crypto.getAddress(account.publicKey);
+	account.publicKey = node.sth.crypto.getKeys(account.password, network).publicKey;
+	account.address = node.sth.crypto.getAddress(account.publicKey, network.pubKeyHash);
 
 	return account;
 };
