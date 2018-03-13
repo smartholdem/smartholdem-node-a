@@ -9,7 +9,7 @@
   "db": {
     "host": "localhost",
     "port": 5432,
-    "database": "sth_testnet",
+    "database": "sth_smartholdem",
     "user": null,
     "password": "password",
     "poolSize": 20,
