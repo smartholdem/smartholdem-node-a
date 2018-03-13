@@ -271,8 +271,9 @@ node.randomAccount = function () {
 	account.password = node.randomPassword();
 	account.secondPassword = node.randomPassword();
 	account.username = node.randomDelegateName();
+	console.log(node.Sth.crypto.getKeys(account.password, network).publicKey);
 	account.publicKey = node.Sth.crypto.getKeys(account.password, network).publicKey;
-	account.address = node.Sth.crypto.getAddress(account.publicKey, network.pubKeyHash);
+    account.address = node.Sth.crypto.getAddress(account.publicKey, network.pubKeyHash);
 
 	return account;
 };
