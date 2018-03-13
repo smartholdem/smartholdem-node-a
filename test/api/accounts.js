@@ -3,6 +3,7 @@
 var node = require('./../node.js');
 
 var account = node.randomAccount();
+console.log(account);
 
 describe('GET /api/accounts/getBalance?address=', function () {
 
