@@ -4,6 +4,7 @@
 var node = {};
 var networkName = "testnet"
 var network = require('../networks.json')[networkName];
+console.log(network);
 node.Sth = require('./sth-js');
 node.Sth.crypto.setNetworkVersion(network.pubKeyHash);
 
