@@ -81,3 +81,12 @@ update node sxcripts:
 ```shell
 bash update.sh
 ```
+
+
+## Docs Generate
+
+```shell
+npm install -g docco
+docco -t docs/template/smartholdemio.jst -c docs/template/smartholdemio.css modules/* app.js README.md
+```
+
