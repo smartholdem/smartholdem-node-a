@@ -4,8 +4,8 @@
 var node = {};
 var networkName = "testnet"
 var network = require('../networks.json')[networkName];
-node.sth = require('./sth-js');
-node.sth.crypto.setNetworkVersion(network.pubKeyHash);
+node.Sth = require('./sth-js');
+node.Sth.crypto.setNetworkVersion(network.pubKeyHash);
 
 // Requires
 node.bignum = require('../helpers/bignum.js');
@@ -61,7 +61,7 @@ if (process.env.SILENT === 'true') {
 }
 
 // Random STH amount
-node.sth = Math.floor(Math.random() * (100000 * 100000000)) + 1;
+node.Sth = Math.floor(Math.random() * (100000 * 100000000)) + 1;
 
 // Returns a random delegate name
 node.randomDelegateName = function () {
@@ -270,8 +270,8 @@ node.randomAccount = function () {
 	account.password = node.randomPassword();
 	account.secondPassword = node.randomPassword();
 	account.username = node.randomDelegateName();
-	account.publicKey = node.sth.crypto.getKeys(account.password, network).publicKey;
-	account.address = node.sth.crypto.getAddress(account.publicKey, network.pubKeyHash);
+	account.publicKey = node.Sth.crypto.getKeys(account.password, network).publicKey;
+	account.address = node.Sth.crypto.getAddress(account.publicKey, network.pubKeyHash);
 
 	return account;
 };
