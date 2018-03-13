@@ -38,7 +38,7 @@
     "list": [
       {
         "ip": "127.0.0.1",
-        "port": 6100
+        "port": 4100
       }
     ],
     "blackList": [],
@@ -81,6 +81,6 @@
       "cert": "./ssl/sth.crt"
     }
   },
-  "network": "smartholdem",
-  "nethash": "fc46bfaf9379121dd6b09f5014595c7b7bd52a0a6d57c5aff790b42a73c76da7"
+  "network": "testnet",
+  "nethash": "e1882350a56f22a79d62b903dc2d0fc03c6aae88c6f09908ee3e2d6f1da7e2b3"
 }
