@@ -3,8 +3,8 @@ require('./api/blocks.js');
 require('./api/delegates.js');
 require('./api/loader.js');
 require('./api/multisignatures.js');
-/*
 require('./api/peer.js');
+/*
 require('./api/peer.transactions.delegates.js');
 require('./api/peer.transactions.js');
 require('./api/peer.transactions.signatures.js');
