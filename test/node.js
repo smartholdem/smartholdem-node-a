@@ -21,8 +21,8 @@ node.supertest = require('supertest');
 require('colors');
 
 // Node configuration
-node.baseUrl = 'http://' + node.config.address + ':' + node.config.port;
-//node.baseUrl = 'http://localhost:' + node.config.port;
+// node.baseUrl = 'http://' + node.config.address + ':' + node.config.port;
+node.baseUrl = 'http://localhost:' + node.config.port;
 node.api = node.supertest(node.baseUrl);
 
 node.normalizer = 100000000; // Use this to convert STH amount to normal value
@@ -242,7 +242,7 @@ node.randomUsername = function () {
 // Returns a random capitialized username
 node.randomCapitalUsername = function () {
 	var size = node.randomNumber(1, 16); // Min. username size is 1, Max. username size is 16
-	var username = 'S';
+	var username = 'A';
 	var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@$&_.';
 
 	for (var i = 0; i < size - 1; i++) {
@@ -274,7 +274,7 @@ node.randomAccount = function () {
 	account.password = node.randomPassword();
 	account.secondPassword = node.randomPassword();
 	account.username = node.randomDelegateName();
-	account.publicKey = node.sth.crypto.getKeys(account.password).publicKey;
+	// account.publicKey = node.sth.crypto.getKeys(account.password).publicKey;
 	account.address = node.sth.crypto.getAddress(account.publicKey);
 
 	return account;
