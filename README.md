@@ -185,7 +185,7 @@ To start the Vagrant environment:
 vagrant up
 ```
 
-All dependency installation and configuration for the dev environment is in the VagrantFile. After installation, ark-node will automatically start and log all output to the console.
+All dependency installation and configuration for the dev environment is in the VagrantFile. After installation, smartholdem-node-a will automatically start and log all output to the console.
 
 To log into the Vagrant environment:
 
