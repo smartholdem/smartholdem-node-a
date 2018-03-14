@@ -205,3 +205,8 @@ There will be a drive shared with the host machine inside the VM, mounted at /va
 
 Load git submodule
 
+```shell
+git submodule init
+git submodule update
+```
+
