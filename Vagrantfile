@@ -73,7 +73,7 @@ Vagrant.configure("2") do |config|
     sudo -u postgres createdb -O $USER sth_testnet
     sudo service postgresql start
 
-    git clone https://github.com/smartholdem/smartholdem-node-a.git
+    git clone -b testnet https://github.com/smartholdem/smartholdem-node-a.git
 
     cd /home/vagrant/smartholdem-node-a
     #rm -fr node_modules
