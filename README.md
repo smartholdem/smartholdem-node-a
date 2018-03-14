@@ -210,3 +210,8 @@ git submodule init
 git submodule update
 ```
 
+Run the test suite:
+
+```shell
+npm test
+```
