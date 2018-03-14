@@ -70,22 +70,22 @@ Vagrant.configure("2") do |config|
     # Creating DB and user
     sudo -u postgres psql -c "CREATE USER $USER WITH PASSWORD 'password';"
     #sudo -u postgres createuser --createdb --password $USER
-    sudo -u postgres createdb -O $USER sth_testnet
+    sudo -u postgres createdb -O $USER sth_smartholdem
     sudo service postgresql start
 
-    git clone https://github.com/smartholdem/smartholdem-node-a.git
+    git clone -b master https://github.com/smartholdem/smartholdem-node-a.git
 
     cd /home/vagrant/smartholdem-node-a
     #rm -fr node_modules
     npm install grunt-cli
     npm install
-    forever app.js --genesis genesisBlock.testnet.json --config config.testnet.json
+    forever app.js --genesis genesisBlock.smartholdem.json --config config.smartholdem.json
   SHELL
 
   config.vm.provider "virtualbox" do |v|
     v.memory = 1024
     v.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
-    v.name = "smartholdem_node_vm"
+    v.name = "smartholdem_node_mainnet_vm"
   end
 
   # Disable automatic box update checking. If you disable this, then
