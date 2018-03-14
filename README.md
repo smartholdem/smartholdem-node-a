@@ -200,3 +200,8 @@ vagrant destroy
 ```
 
 There will be a drive shared with the host machine inside the VM, mounted at /vagrant.
+
+# Tests
+
+Load git submodule
+
