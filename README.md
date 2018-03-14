@@ -171,3 +171,32 @@ Change the following in config.mainnet.json:
 ```shell
 npm run start:mainnet
 ```
+
+
+# Dev Install
+
+## Vagrant
+
+Vagrant is a virtual development environment manager backed by a provider like VirtualBox.
+
+To start the Vagrant environment:
+
+```shell
+vagrant up
+```
+
+All dependency installation and configuration for the dev environment is in the VagrantFile. After installation, ark-node will automatically start and log all output to the console.
+
+To log into the Vagrant environment:
+
+```shell
+vagrant ssh
+```
+
+To destroy and revert to the original state:
+
+```shell
+vagrant destroy
+```
+
+There will be a drive shared with the host machine inside the VM, mounted at /vagrant.
