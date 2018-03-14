@@ -215,3 +215,9 @@ Run the test suite:
 ```shell
 npm test
 ```
+
+Run individual tests:
+
+```shell
+npm test -- test/api/accounts.js
+```
