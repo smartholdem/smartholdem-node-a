@@ -185,7 +185,8 @@ To start the Vagrant environment:
 vagrant up
 ```
 
-All dependency installation and configuration for the dev environment is in the VagrantFile. After installation, smartholdem-node-a will automatically start and log all output to the console.
+All dependency installation and configuration for the dev environment is in the VagrantFile.
+After installation, your current folder will be sync with folder /vagrant.
 
 To log into the Vagrant environment:
 
@@ -193,13 +194,17 @@ To log into the Vagrant environment:
 vagrant ssh
 ```
 
+To start node: 
+
+```shell
+app.js --genesis genesisBlock.smartholdem.json --config config.smartholdem.json
+```
+
 To destroy and revert to the original state:
 
 ```shell
 vagrant destroy
 ```
-
-There will be a drive shared with the host machine inside the VM, mounted at /vagrant.
 
 # Tests
 
