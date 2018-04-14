@@ -33,11 +33,11 @@
       "public": 46090608,
       "private": 46089528
     },
-    "pubKeyHash": 63,
-    "wif": 255,
+    "pubKeyHash": 30,
+    "wif": 1,
     "client": {
       "token": "DSTH",
-      "symbol": "DS",
+      "symbol": "DEV",
       "explorer": "http://devexplorer.smartholdem.io"
     }
   },
