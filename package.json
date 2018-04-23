@@ -13,7 +13,7 @@
   },
   "author": "SmartHoldem <support@smartholdem.io>",
   "dependencies": {
-    "sthjs": "github:smartholdem/sth-js",
+    "sthjs": "github:smartholdem/sth-js#wallet",
     "async": "=2.0.1",
     "bindings": "^1.3.0",
     "bip39": "^2.2.0",
