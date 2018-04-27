@@ -50,7 +50,7 @@ if (program.networks) {
 }
 
 if (program.port) {
-	appConfig.port = program.port;
+    appConfig.port = program.port;
 }
 
 if (program.address) {
@@ -174,7 +174,7 @@ d.run(function () {
 
 			require('./helpers/request-limiter')(app, appConfig);
 
-			app.use(compression({ level: 6 }));
+			app.use(compression({ level: 9 })); //default 6 (currently what zlib.Z_DEFAULT_COMPRESSION points to).
 			app.use(cors());
 			app.options('*', cors());
 
