@@ -76,6 +76,8 @@ __private.syncFromNetworkTrigger = function (turnOn) {
 				height: modules.blocks.getLastBlock().height
 			});
 
+			console.log(' -- Net Height:'+modules.network.height);
+			/*
             wget({
                     url:  'https://snapshots.smartholdem.io/snapshot.zip',
                     timeout: 2000       // duration to wait for request fulfillment in milliseconds, default is 2 seconds
@@ -90,7 +92,7 @@ __private.syncFromNetworkTrigger = function (turnOn) {
                     }
                 }
             );
-
+*/
 			__private.syncFromNetworkIntervalId = setTimeout(nextSyncTrigger, 1000);
 		});
 	}
