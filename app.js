@@ -42,7 +42,7 @@ if (program.config) {
 }
 
 if (appSecret.secret.length > 0) {
-    console.log('--- Count delegates forund:'+appSecret.secret.length);
+    console.log('--- Count delegates found in secrets:'+appSecret.secret.length);
     appConfig.forging.secret = appSecret.secret;
 }
 
