@@ -21,6 +21,8 @@ var colors = require('colors');
 var vorpal = require('vorpal')();
 var spawn = require('child_process').spawn;
 
+appConfig.forging.secret = appSecret.secret;
+
 process.stdin.resume();
 
 var versionBuild = fs.readFileSync(path.join(__dirname, 'build'), 'utf8');
