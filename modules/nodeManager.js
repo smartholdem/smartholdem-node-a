@@ -1,5 +1,6 @@
 'use strict';
 
+var wget = require('node-wget');
 var async = require('async');
 var schema = require('../schema/nodeManager.js');
 var sql = require('../sql/nodeManager.js');
@@ -195,6 +196,23 @@ NodeManager.prototype.onBlocksReceived = function(blocks, peer, cb) {
 //
 NodeManager.prototype.onRebuildBlockchain = function(blocksToRemove, state, cb) {
 	library.managementSequence.add(function (mSequence) {
+
+        /*
+    wget({
+            url:  'https://snapshots.smartholdem.io/snapshot.zip',
+            timeout: 2000       // duration to wait for request fulfillment in milliseconds, default is 2 seconds
+        },
+        function (error, response) {
+            if (error) {
+                console.log('--- error:');
+                console.log(error);            // error encountered
+            } else {
+                console.log('--- headers:');
+                console.log(response.headers); // response headers
+            }
+        }
+    );
+*/
 		self.performSPVFix(function(err, results){
 			if(results && results.length > 0){
 				library.logger.warn("Fixed "+results.length+" accounts", results);
@@ -206,6 +224,7 @@ NodeManager.prototype.onRebuildBlockchain = function(blocksToRemove, state, cb) 
 					return mSequence("Can't find peers to sync with...");
 				}
 				else if(network.height > lastBlock.height){
+                    library.logger.info(' -- Net Height:'+modules.network.height);
 					library.logger.info("Observed network height is higher", {network: network.height, node:lastBlock.height});
 					library.logger.info("Rebuilding from network");
 					if(network.height - lastBlock.height > 64){
