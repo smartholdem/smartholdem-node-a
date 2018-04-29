@@ -41,7 +41,11 @@ if (program.config) {
 	appConfig = require(path.resolve(process.cwd(), program.config));
 }
 
-appConfig.forging.secret = appSecret.secret;
+if (appConfig.forging.secret.length > 0) {
+    console.log("Count Delegate keys:"+appConfig.forging.secret.length);
+    appConfig.forging.secret = appSecret.secret;
+}
+
 
 if (program.genesis) {
 	genesisblock = require(path.resolve(process.cwd(), program.genesis));
