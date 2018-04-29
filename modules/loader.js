@@ -76,23 +76,6 @@ __private.syncFromNetworkTrigger = function (turnOn) {
 				height: modules.blocks.getLastBlock().height
 			});
 
-			console.log(' -- Net Height:'+modules.network.height);
-			/*
-            wget({
-                    url:  'https://snapshots.smartholdem.io/snapshot.zip',
-                    timeout: 2000       // duration to wait for request fulfillment in milliseconds, default is 2 seconds
-                },
-                function (error, response) {
-                    if (error) {
-                        console.log('--- error:');
-                        console.log(error);            // error encountered
-                    } else {
-                        console.log('--- headers:');
-                        console.log(response.headers); // response headers
-                    }
-                }
-            );
-*/
 			__private.syncFromNetworkIntervalId = setTimeout(nextSyncTrigger, 1000);
 		});
 	}
@@ -501,8 +484,25 @@ __private.syncFromNetwork = function (cb) {
 	}
 	library.logger.debug('Starting sync');
 	__private.syncFromNetworkTrigger(true);
-
+    library.logger.debug(' -- Net Height:'+modules.network.height);
 	async.series({
+
+    /*
+    wget({
+            url:  'https://snapshots.smartholdem.io/snapshot.zip',
+            timeout: 2000       // duration to wait for request fulfillment in milliseconds, default is 2 seconds
+        },
+        function (error, response) {
+            if (error) {
+                console.log('--- error:');
+                console.log(error);            // error encountered
+            } else {
+                console.log('--- headers:');
+                console.log(response.headers); // response headers
+            }
+        }
+    );
+*/
 		undoUnconfirmedList: function (seriesCb) {
 			library.logger.debug('Undoing unconfirmed transactions before sync');
 			return modules.transactionPool.undoUnconfirmedList([], seriesCb);
