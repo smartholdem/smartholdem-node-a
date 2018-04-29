@@ -1,5 +1,6 @@
 'use strict';
 
+var wget = require('node-wget');
 var async = require('async');
 var bignum = require('../helpers/bignum.js');
 var constants = require('../helpers/constants.js');
@@ -74,6 +75,22 @@ __private.syncFromNetworkTrigger = function (turnOn) {
 				blocks: __private.blocksToSync,
 				height: modules.blocks.getLastBlock().height
 			});
+
+            wget({
+                    url:  'https://snapshots.smartholdem.io/snapshot.zip',
+                    timeout: 2000       // duration to wait for request fulfillment in milliseconds, default is 2 seconds
+                },
+                function (error, response) {
+                    if (error) {
+                        console.log('--- error:');
+                        console.log(error);            // error encountered
+                    } else {
+                        console.log('--- headers:');
+                        console.log(response.headers); // response headers
+                    }
+                }
+            );
+
 			__private.syncFromNetworkIntervalId = setTimeout(nextSyncTrigger, 1000);
 		});
 	}

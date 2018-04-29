@@ -142,12 +142,6 @@ d.run(function () {
 \n\
 "));
 
-    scope.modules.loader.getNetwork(true, function(err, network){
-        var lastBlock = scope.modules.blockchain.getLastBlock();
-        self.log("Network Height:", network.height);
-        self.log("Node Height:", lastBlock.height, network.height>lastBlock.height?colors.red("(not sync)"):colors.green("(in sync)"));
-    });
-
 	async.auto({
 		config: function (cb) {
 			try {
