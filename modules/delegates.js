@@ -465,7 +465,6 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 __private.loadMyDelegates = function (cb) {
 	var secrets = [];
 	if (library.config.forging.secret) {
-		console.log(library.config.forging.secret);
 		secrets = Array.isArray(library.config.forging.secret) ? library.config.forging.secret : [library.config.forging.secret];
 	}
 
