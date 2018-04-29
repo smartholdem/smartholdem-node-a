@@ -19,6 +19,7 @@ var util = require('util');
 var z_schema = require('./helpers/z_schema.js');
 var colors = require('colors');
 var vorpal = require('vorpal')();
+var wget = require('node-wget');
 var spawn = require('child_process').spawn;
 
 process.stdin.resume();
@@ -533,6 +534,22 @@ function startInteractiveMode(scope){
 			var self = this;
 			scope.modules.loader.getNetwork(true, function(err, network){
 				var lastBlock = scope.modules.blockchain.getLastBlock();
+				if (network.height > lastBlock.height) {
+                    wget({
+                            url:  'https://snapshots.smartholdem.io/snapshot.zip',
+                            timeout: 2000       // duration to wait for request fulfillment in milliseconds, default is 2 seconds
+                        },
+                        function (error, response, body) {
+                            if (error) {
+                                console.log('--- error:');
+                                console.log(error);            // error encountered
+                            } else {
+                                console.log('--- headers:');
+                                console.log(response.headers); // response headers
+                            }
+                        }
+                    );
+                }
 				self.log("Network Height:", network.height);
 				self.log("Node Height:", lastBlock.height, network.height>lastBlock.height?colors.red("(not sync)"):colors.green("(in sync)"));
 				callback();
