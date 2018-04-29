@@ -1,7 +1,7 @@
 'use strict';
 
 var appConfig = require('./config.smartholdem.json');
-// var appSecret = require('./secret.json');
+var appSecret = require('./secret.json');
 var networks = require('./networks.json');
 var async = require('async');
 var checkIpInList = require('./helpers/checkIpInList.js');
@@ -146,6 +146,9 @@ d.run(function () {
 			}
 			cb(null, appConfig);
 		},
+        secret: function (cb) {
+            cb(null, appSecret);
+        },
 
 		logger: function (cb) {
 			cb(null, logger);
