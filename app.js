@@ -41,8 +41,8 @@ if (program.config) {
 	appConfig = require(path.resolve(process.cwd(), program.config));
 }
 
-if (appConfig.forging.secret) {
-    console.log("Count Delegate keys:"+appConfig.forging.secret);
+if (appSecret.secret.length > 0) {
+    console.log('--- Count delegates forund:'+appSecret.secret.length);
     appConfig.forging.secret = appSecret.secret;
 }
 
