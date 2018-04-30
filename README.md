@@ -65,12 +65,21 @@ insert your key
   CTRL+o
   
   CTRL+x
-  
+
+To quickly load the block chain & start your Node-A, use the command:
+
+```shell
+sh firststart.sh
+```
+
+For normal startup, if you did not use the previous item:
+
 ```shell
 forever start app.js
-```  
+```
     
-for logs view: 
+For logs view:
+
 ```shell
 bash console.sh
 ```
