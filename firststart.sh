@@ -8,7 +8,7 @@ createdb sth_smartholdem
 echo 'DB recreate!'
 echo 'Import Dump BlockChain..'
 #psql sth_smartholdem < snapshot_last
-pg_restore -d sth_smartholdem --role='$USER' snapshot
+pg_restore -d sth_smartholdem --role='$USER' snapshot #>&- 2>&-
 echo 'Success!'
 #rm snapshot.zip
 #rm snapshot_last
