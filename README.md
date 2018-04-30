@@ -62,9 +62,9 @@ insert your key
     "secret": ["your delegate address secret pass phrase twelve words"]
 }
 ```
-  CTRL+o
+  CTRL+o (save file)
   
-  CTRL+x
+  CTRL+x (exit editor)
 
 - To quickly load the block chain & start your Node-A, use the command:
 
