@@ -49,7 +49,7 @@ npm install grunt-cli -g
 npm install
 ```
 
-edit node config
+- Edit Secret config
 
 ```shell
 nano secret.json
