@@ -6,7 +6,7 @@ wget http://snapshots.smartholdem.io/snapshot
 dropdb sth_smartholdem
 createdb sth_smartholdem
 echo 'DB recreate!'
-echo 'Import Dump BlockChain..'
+echo 'Loading Full BlockChain, please wait..'
 #psql sth_smartholdem < snapshot_last
 pg_restore -d sth_smartholdem --role=$USER snapshot >&- 2>&-
 echo 'Success!'
