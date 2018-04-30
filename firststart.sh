@@ -1,5 +1,5 @@
 forever stop app.js
-echo 'Getting last snapshot for $USER..'
+echo 'Getting last snapshot for' $USER
 #wget http://snapshots.smartholdem.io/snapshot.zip
 wget http://snapshots.smartholdem.io/snapshot
 #unzip snapshot.zip
@@ -8,7 +8,7 @@ createdb sth_smartholdem
 echo 'DB recreate!'
 echo 'Import Dump BlockChain..'
 #psql sth_smartholdem < snapshot_last
-pg_restore -d sth_smartholdem --role='$USER' snapshot #>&- 2>&-
+pg_restore -d sth_smartholdem --role=$USER snapshot >&- 2>&-
 echo 'Success!'
 #rm snapshot.zip
 #rm snapshot_last
