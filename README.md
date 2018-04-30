@@ -52,17 +52,15 @@ npm install
 edit node config
 
 ```shell
-nano config.smartholdem.json
+nano secret.json
 ```
 
-insert your key into line 
+insert your key
 
-```shell
-"forging": {
-    ...
-        "secret": ["your delegate address secret passphrase"]
-    ...
-    }
+```json
+{
+    "secret": ["your delegate address secret pass phrase twelve words"]
+}
 ```
   CTRL+o
   
