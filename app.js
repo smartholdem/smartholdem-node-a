@@ -1,7 +1,7 @@
 'use strict';
 
 var appConfig = require('./config.smartholdem.json');
-// var appSecret = require('./secret.json');
+var appSecret = require('./secret.json'); // conectar secret.json
 var networks = require('./networks.json');
 var async = require('async');
 var checkIpInList = require('./helpers/checkIpInList.js');
@@ -39,6 +39,10 @@ program
 
 if (program.config) {
 	appConfig = require(path.resolve(process.cwd(), program.config));
+}
+
+if (appSecret.secret.length > 0) {
+    appConfig.forging.secret = appSecret.secret; // si los delegados están en secret.json, entonces úselos
 }
 
 if (program.genesis) {
