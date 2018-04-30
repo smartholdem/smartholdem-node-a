@@ -43,9 +43,7 @@ export NVM_DIR="$HOME/.nvm"
 nvm install 6.14.1 >>install.log
 nvm use 6.14.1 >>install.log
 nvm alias default 6.14.1
-npm install -g npm
-npm install forever -g
-npm install grunt-cli -g
+npm install -g npm forever grunt-cli
 npm install
 ```
 
