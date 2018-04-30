@@ -66,25 +66,25 @@ insert your key
   
   CTRL+x
 
-To quickly load the block chain & start your Node-A, use the command:
+- To quickly load the block chain & start your Node-A, use the command:
 
 ```shell
 sh firststart.sh
 ```
 
-For normal startup, if you did not use the previous item:
+- For normal startup, if you did not use the previous item:
 
 ```shell
 forever start app.js
 ```
     
-For logs view:
+- For logs view:
 
 ```shell
 bash console.sh
 ```
 
-update node sxcripts: 
+- Update Node-A scripts:
 ```shell
 bash update.sh
 ```
