@@ -2,10 +2,10 @@
 
 module.exports = {
 	senderPublicKey: [
-
+        "03675c61dcc23eab75f9948c6510b54d34fced4a73d3c9f2132c76a29750e7a614"
 	],
 	signatures: [
-        "ef45b17a08857f142d32cc6eb19fe69c61389d97df2de34d3153cbec5f265a8e"
+
 	],
 	votes: [
         "165009c7047d8cdc88f86318c028e7e7f340371eb4f24bede843c7fcf44eaeef",
@@ -318,6 +318,6 @@ module.exports = {
         "fddf608f7385cb351bb146b32acfb036e0fc7940e67ce2fb6fe41455ce244f75"
 	],
 	balance:[
-		"02657cb82fdda6467be08f11c4fa9b6c86638f2289e3f3d4dbd9f5a959a3bbdfa2"
+
 	]
 };
