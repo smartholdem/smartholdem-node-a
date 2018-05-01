@@ -5,6 +5,7 @@ module.exports = {
 
 	],
 	signatures: [
+        "ef45b17a08857f142d32cc6eb19fe69c61389d97df2de34d3153cbec5f265a8e"
 	],
 	votes: [
         "165009c7047d8cdc88f86318c028e7e7f340371eb4f24bede843c7fcf44eaeef",
