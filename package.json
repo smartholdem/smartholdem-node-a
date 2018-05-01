@@ -35,7 +35,6 @@
     "libpq": "^1.8.7",
     "lodash": "=4.16.2",
     "method-override": "=2.3.6",
-    "node-wget": "^0.4.2",
     "pg-monitor": "=0.5.11",
     "pg-native": "=1.10.0",
     "pg-promise": "=5.3.3",
