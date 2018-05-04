@@ -58,7 +58,7 @@
     }
   },
   "forging": {
-    "coldstart": 30,
+    "coldstart": 6,
     "force": true,
     "secret": [],
     "access": {
