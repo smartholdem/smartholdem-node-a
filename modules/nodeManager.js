@@ -1,6 +1,5 @@
 'use strict';
 
-var wget = require('node-wget');
 var async = require('async');
 var schema = require('../schema/nodeManager.js');
 var sql = require('../sql/nodeManager.js');
