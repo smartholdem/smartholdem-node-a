@@ -41,11 +41,11 @@ if (program.config) {
 	appConfig = require(path.resolve(process.cwd(), program.config));
 }
 
-/*
+
 if (appSecret.secret.length > 0) {
     appConfig.forging.secret = appSecret.secret; // si los delegados están en secret.json, entonces úselos
 }
-*/
+
 
 if (program.genesis) {
 	genesisblock = require(path.resolve(process.cwd(), program.genesis));
