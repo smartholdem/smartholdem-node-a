@@ -37,7 +37,7 @@
     "method-override": "^2.3.10",
     "pg-monitor": "=0.5.11",
     "pg-native": "=1.10.0",
-    "pg-promise": "^8.4.4",
+    "pg-promise": "=5.3.3",
     "popsicle": "=8.2.0",
     "pug": "^2.0.0-beta11",
     "randomstring": "=1.1.5",
