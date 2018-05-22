@@ -911,8 +911,8 @@ Blocks.prototype.verifyBlockHeader = function (block) {
 
 	// TODO: make extrapolation for a refined check:
 	// if (block.timestamp - lastBlock.timestamp)/(block.height-lastBlock.height) < blocktime (here 8s)
-	if( block.height > lastBlock.height && block.timestamp < lastBlock.timestamp){
-		result.errors.push('Invalid block timestamp, block forged on another chain');
+	if ( block.height > lastBlock.height && block.timestamp < lastBlock.timestamp) {
+		result.errors.push('915 Invalid block timestamp, block forged on another chain');
 	}
 
 	var valid;
@@ -934,7 +934,7 @@ Blocks.prototype.verifyBlockHeader = function (block) {
 	var blockSlotNumber = slots.getSlotNumber(block.timestamp);
 
 	if (blockSlotNumber > slots.getSlotNumber()){
-		result.errors.push('Invalid block timestamp');
+		result.errors.push('937 Invalid block timestamp');
 	}
 
 	if (block.payloadLength > constants.maxPayloadLength) {
@@ -1010,7 +1010,7 @@ Blocks.prototype.verifyBlock = function (block, checkPreviousBlock) {
 
 
 	if (blockSlotNumber > slots.getSlotNumber()){
-		result.errors.push('Invalid block timestamp');
+		result.errors.push('1013 Invalid block timestamp');
 	}
 
 	// Disabling to allow orphanedBlocks?
