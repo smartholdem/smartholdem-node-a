@@ -68,9 +68,10 @@ insert your key
 
 ```shell
 sh firststart.sh
+sh console.sh
 ```
 
-- For normal startup, if you did not use the previous item:
+- For standard start, if you did not use the previous item:
 
 ```shell
 forever start app.js
