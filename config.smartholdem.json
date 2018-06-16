@@ -34,6 +34,7 @@
     }
   },
   "peers": {
+    "queryReach": 20,
     "minimumNetworkReach": 20,
     "list": [
       {"ip": "88.198.67.196","port": 6100},
