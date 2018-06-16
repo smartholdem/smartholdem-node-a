@@ -114,6 +114,7 @@ __private.updatePeersList = function (cb) {
 
             async.each(peers, function (peer, eachCb) {
                 peer = self.inspect(peer);
+                console.log(peer);
 
                 library.schema.validate(peer, schema.updatePeersList.peer, function (err) {
                     if (err) {
