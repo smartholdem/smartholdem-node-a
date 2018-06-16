@@ -109,7 +109,7 @@ __private.updatePeersList = function (cb) {
             var peers = shuffle(
                 res.body.peers
                     .filter(peer => peer.ip.substr(0,3) != "127") // exclude loopback addresses
-        )
+        ) // randomize the list to prevent malicious list crafting
         .slice(0, reach); // don't query everyone - that would be spammy
 
             console.log(peers);
