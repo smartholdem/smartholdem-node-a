@@ -34,6 +34,7 @@
     }
   },
   "peers": {
+    "queryReach": 20,
     "minimumNetworkReach": 1,
     "list": [
       {"ip": "213.239.207.170","port": 6101},
