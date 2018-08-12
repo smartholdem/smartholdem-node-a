@@ -33,10 +33,10 @@ module.exports = {
     rewards: {
         milestones: [
             200000000, // Initial Reward // 2 //   +6M  Year 2019
-            2500000, // Milestone 1 // 0.025 //    +75k Year 2020
-            200000,  // Milestone 2 // 0.002 //    6k   Year 2021
+            20000000, // Milestone 1 // 0.20 //    600k Year 2020
+            2000000,  // Milestone 2 // 0.02 //    60k   Year 2021
             200000,  // Milestone 3 // 0.002 //    6k   Year 2022
-            20000    // Milestone 4 // 0.0002 //   600  Year 2023
+            200000    // Milestone 4 // 0.002 //   6k  Year 2023
         ],
         offset: 75600,  // Start rewards at block, ie 7 days after net start
         distance: 3000000, // Distance between each milestone
