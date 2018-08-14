@@ -33,7 +33,7 @@ module.exports = {
     rewards: {
         milestones: [
             200000000, // Initial Reward // 2 //   +6M Year 2019
-            2000000, // Milestone 1 // 0.02 //     60k Year 2020
+            20000000, // Milestone 1 // 0.20 //    600k Year 2020
             200000,  // Milestone 2 // 0.002 //    6k  Year 2021
             200000,  // Milestone 3 // 0.002 //    6k  Year 2022
             200000    // Milestone 4 // 0.002 //   6k  Year 2023
