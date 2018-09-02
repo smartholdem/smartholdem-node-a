@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "doc": "docco -t docs/template/smartholdemio.jst -c docs/template/smartholdemio.css modules/* app.js README.md",
-    "start:testnet": "node app.js --genesis genesisBlock.testnet.json --config config.testnet.json",
+    "start:devnet": "node app.js --config config.devnet.json --genesis genesisBlock.devnet.json",
     "start:mainnet": "node app.js --genesis genesisBlock.smartholdem.json --config config.smartholdem.json -i",
     "start:test": "node app.js --genesis test/genesisBlock.json --config test/config.json",
     "test": "./node_modules/.bin/mocha",
