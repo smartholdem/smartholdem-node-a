@@ -1052,7 +1052,7 @@ Blocks.prototype.verifyBlock = function (block, checkPreviousBlock) {
 		var bytes;
 
 		try {
-			bytes = new Buffer(transaction.id, "hex");
+			bytes = new Buffer.from(transaction.id, "hex");
 		} catch (e) {
 			result.errors.push(e.toString());
 		}

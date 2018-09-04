@@ -2,7 +2,7 @@
   "port": 6101,
   "address": "0.0.0.0",
   "version": "0.0.2",
-  "fileLogLevel": "info",
+  "fileLogLevel": "debug",
   "logFileName": "logs/sth.log",
   "consoleLogLevel": "debug",
   "trustProxy": false,

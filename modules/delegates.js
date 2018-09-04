@@ -415,7 +415,7 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			var publicKey = action.slice(1);
 
 			try {
-				new Buffer(publicKey, 'hex');
+				new Buffer.from(publicKey, 'hex');
 			} catch (e) {
 				library.logger.error("stack", e.stack);
 				return eachSeriesCb('Invalid public key');
@@ -477,7 +477,7 @@ __private.loadMyDelegates = function (cb) {
 		}
 
 		modules.accounts.getAccount({
-			publicKey: new Buffer(keypair.publicKey, "hex")
+			publicKey: new Buffer.from(keypair.publicKey, "hex")
 		}, function (err, account) {
 			if (err) {
 				return seriesCb(err);

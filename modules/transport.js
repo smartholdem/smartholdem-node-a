@@ -362,9 +362,9 @@ __private.attachApi = function () {
 };
 
 __private.hashsum = function (obj) {
-	var buf = new Buffer(JSON.stringify(obj), 'utf8');
+	var buf = new Buffer.from(JSON.stringify(obj), 'utf8');
 	var hashdig = crypto.createHash('sha256').update(buf).digest();
-	var temp = new Buffer(8);
+	var temp = new Buffer.alloc(8);
 	for (var i = 0; i < 8; i++) {
 		temp[i] = hashdig[7 - i];
 	}

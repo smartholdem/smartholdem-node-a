@@ -8,7 +8,7 @@ function schema(network){
 
   this.z_schema.registerFormat('hex', function (str) {
     try {
-      new Buffer(str, 'hex');
+      new Buffer.from(str, 'hex');
     } catch (e) {
       return false;
     }
@@ -22,7 +22,7 @@ function schema(network){
     }
 
     try {
-      var publicKey = new Buffer(str, 'hex');
+      var publicKey = new Buffer.from(str, 'hex');
       return publicKey.length === 33;
     } catch (e) {
       return false;
@@ -50,7 +50,7 @@ function schema(network){
     }
 
     try {
-      var vendorField = new Buffer(str);
+      var vendorField = new Buffer.from(str);
 
       return vendorField.length < 65;
     } catch (e) {
@@ -77,7 +77,7 @@ function schema(network){
     }
 
     try {
-      var signature = new Buffer(str, 'hex');
+      var signature = new Buffer.from(str, 'hex');
       return signature.length < 73;
     } catch (e) {
       return false;

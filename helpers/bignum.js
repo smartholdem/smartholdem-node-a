@@ -1763,7 +1763,7 @@ P['toBuffer'] = function ( opts ) {
 		var len = buf.length === 1 && buf[0] === 0 ? 0 : buf.length;
 		if (buf[0] & 0x80) len ++;
 
-		var ret = new Buffer(4 + len);
+		var ret = new Buffer.alloc(4 + len);
 		if (len > 0) buf.copy(ret, 4 + (buf[0] & 0x80 ? 1 : 0));
 		if (buf[0] & 0x80) ret[4] = 0;
 
@@ -1799,7 +1799,7 @@ P['toBuffer'] = function ( opts ) {
 	var size = opts.size === 'auto' ? Math.ceil(hex.length / 2) : (opts.size || 1);
 
 	var len = Math.ceil(hex.length / (2 * size)) * size;
-	var buf = new Buffer(len);
+	var buf = new Buffer.alloc(len);
 
 	// zero-pad the hex string so the chunks are all `size` long
 	while (hex.length < 2 * len) hex = '0' + hex;

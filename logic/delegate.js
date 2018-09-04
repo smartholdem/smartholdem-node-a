@@ -135,7 +135,7 @@ Delegate.prototype.getBytes = function (trs) {
 	var buf;
 
 	try {
-		buf = new Buffer(trs.asset.delegate.username, 'utf8');
+		buf = new Buffer.from(trs.asset.delegate.username, 'utf8');
 	} catch (e) {
 		throw e;
 	}
