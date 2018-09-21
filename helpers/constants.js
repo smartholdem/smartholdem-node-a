@@ -32,7 +32,10 @@ module.exports = {
     requestLength: 104,
     rewards: {
         milestones: [
-            200000000 // Initial Reward // 2 //   +6M Year 2019
+            200000000, // Initial Reward // 2 //   +6M Year 2019
+            0,
+            0,
+            0
         ],
         offset: 75600,  // Start rewards at block, ie 7 days after net start
         distance: 3000000, // Distance between each milestone
