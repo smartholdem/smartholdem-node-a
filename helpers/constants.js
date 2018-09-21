@@ -33,13 +33,13 @@ module.exports = {
     rewards: {
         milestones: [
             200000000, // Initial Reward // 2 //   6 000 000
-            20000000, // Milestone 1 // 0.2 //     600 000
-            1000000, // Milestone 2 // 0.01 //     30 000
-            100000, // Milestone 3 //  0.001 //    3 000
-            10000  // Milestone 4 //  0.0001 //    3 00
+            20000000 // Milestone 1 // 0.2 //     600 000
+            // 1000000, // Milestone 2 // 0.01 //     30 000
+            // 100000, // Milestone 3 //  0.001 //    3 000
+            // 10000  // Milestone 4 //  0.0001 //    3 00
         ],
-        offset: 75600,  // Start rewards at block, ie 7 days after net start
-        distance: 826000 // Distance between each milestone // main 3000000
+        offset: 75600,  // 75600 main Start rewards at block, ie 7 days after net start
+        distance: 826000 // Distance between each milestone // main 3000000 // 826000 dev
     },
     signatureLength: 196,
     totalAmount: 24000000000000000,
