@@ -4,7 +4,7 @@ echo 'Getting last snapshot for' $USER
 wget http://snapshots.smartholdem.io/snapshot
 #unzip snapshot.zip
 dropdb sth_smartholdem
-createdb sth_smartholdem
+createdb -E UTF8 -T template0 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.utf8 sth_smartholdem
 echo 'DB recreate!'
 echo 'Loading Full BlockChain, please wait..'
 #psql sth_smartholdem < snapshot_last
