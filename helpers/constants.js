@@ -32,7 +32,7 @@ module.exports = {
     requestLength: 104,
     rewards: {
         milestones: [
-            200000000, // Initial Reward // 2 //   +6M Year 2019
+            200000000, // Initial Reward // 2 //   +6M Oct 2018
             0,
             0,
             0
