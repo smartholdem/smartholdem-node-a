@@ -40,5 +40,19 @@
       "symbol": "POST",
       "explorer": "https://bitexplorer.top/post"
     }
+  },
+  "bitcoin": {
+    "messagePrefix": "Bitcoin message:\n",
+    "bip32": {
+      "public": 76067358,
+      "private": 76066276
+    },
+    "pubKeyHash": 5,
+    "wif": 128,
+    "client": {
+      "token": "BTC",
+      "symbol": "฿",
+      "explorer": "https://chainz.cryptoid.info/btc"
+    }
   }
 }
