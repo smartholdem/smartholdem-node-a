@@ -33,7 +33,6 @@ __private.parseHeight = function (height) {
 //
 BlockReward.prototype.calcMilestone = function (height) {
 	var location = Math.trunc((__private.parseHeight(height) - this.rewardOffset) / this.distance);
-	console.log('location',location);
 	var lastMile = this.milestones[this.milestones.length - 1];
 
 	if (location > (this.milestones.length - 1)) {
@@ -84,7 +83,6 @@ BlockReward.prototype.calcSupply = function (height) {
 				// After last milestone
 				if (height > 0 && i === this.milestones.length - 1) {
 					var postHeight = this.rewardOffset - 1;
-					console.log(postHeight);
 
 					if (height >= postHeight) {
 						amount += (height - postHeight);
