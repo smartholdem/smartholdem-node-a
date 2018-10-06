@@ -21,7 +21,7 @@ ENTER smartholdem user password (if it is needed)
 
 ```shell
 sudo apt-get install postgresql postgresql-contrib libpq-dev build-essential g++ python git curl ntp -y
-sudo apt-get install jq libtool autoconf locales automake locate zip unzip htop nmon iftop -y
+sudo apt-get install jq libtool autoconf locales automake locate zip unzip htop nmon iftop nano -y
 ```
 
 ENTER smartholdem user password (if it is needed)
@@ -40,9 +40,9 @@ cd smartholdem-node-a
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh 2>/dev/null | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm install 8.11.1 >>install.log
-nvm use 8.11.1 >>install.log
-nvm alias default 8.11.1
+nvm install 8.12.0 >>install.log
+nvm use 8.12.0 >>install.log
+nvm alias default 8.12.0
 npm install -g npm forever grunt-cli
 npm install
 ```
@@ -61,7 +61,7 @@ insert your key
 }
 ```
   CTRL+o (save file)
-  
+
   CTRL+x (exit editor)
 
 - To quickly load the block chain & start your Node-A, use the command:
@@ -76,7 +76,7 @@ sh console.sh
 ```shell
 forever start app.js
 ```
-    
+
 - For logs view:
 
 ```shell
@@ -119,7 +119,7 @@ To log into the Vagrant environment:
 vagrant ssh
 ```
 
-To start node: 
+To start node:
 
 ```shell
 app.js --genesis genesisBlock.smartholdem.json --config config.smartholdem.json
