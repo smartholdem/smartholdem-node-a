@@ -17,3 +17,4 @@ genesisBlock.main.json
 .vagrant
 private/
 sidechaincreator/yoursidechain/
+secret.json
