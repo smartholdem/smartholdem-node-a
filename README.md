@@ -33,6 +33,7 @@ sudo reboot
 connect with smartholdem user to server
 
 ```shell
+sudo locale-gen en_US.UTF-8
 sudo -u postgres psql -c "CREATE USER $USER WITH PASSWORD 'password' CREATEDB;" >&- 2>&-
 createdb sth_smartholdem
 git clone -b master https://github.com/smartholdem/smartholdem-node-a.git
