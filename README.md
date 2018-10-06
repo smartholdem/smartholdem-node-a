@@ -17,20 +17,14 @@ cd /home/smartholdem
 su smartholdem
 ```
 
-ENTER smartholdem user password (if it is needed)
+ENTER user password (if it is needed)
 
 ```shell
 sudo apt-get install postgresql postgresql-contrib libpq-dev build-essential g++ python git curl ntp -y
 sudo apt-get install jq libtool autoconf locales automake locate zip unzip htop nmon iftop nano -y
 ```
 
-ENTER smartholdem user password (if it is needed)
-
-```shell
-sudo reboot
-```
-
-connect with smartholdem user to server
+ENTER user password (if it is needed)
 
 ```shell
 sudo locale-gen en_US.UTF-8
