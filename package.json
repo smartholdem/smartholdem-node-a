@@ -72,7 +72,7 @@
     "jsdox": "=0.4.10",
     "jshint": "=2.9.5",
     "mocha": "=5.2.0",
-    "moment": "=2.19.3",
+    "moment": "=2.22.2",
     "supertest": "=3.1.0"
   },
   "config": {
