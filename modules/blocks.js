@@ -759,7 +759,7 @@ Blocks.prototype.removeSomeBlocks = function(numbers, cb){
    	popLastBlock: function (seriesCb) {
 			async.whilst(
 				function () {
-					// if numbers = 50, on average remove 50 Blocks, roughly 1 round
+					// if numbers = 63, on average remove 63 Blocks, roughly 1 round
 					return (Math.random() > 1/(numbers+1));
 				},
 				function (next) {
@@ -1311,7 +1311,7 @@ Blocks.prototype.processBlock = function (block, cb) {
 							// Check if transaction id valid against database state (mem_* tables).
 							// DATABASE: read only
 							// TODO: remove this check and create a processGenesisBlock instead
-							if(block.height!=1){
+							if(block.height!==1){
 								library.logic.transaction.verify(transaction, sender, waterfallCb);
 							}
 							else{
