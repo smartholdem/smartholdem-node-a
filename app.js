@@ -1,13 +1,13 @@
 'use strict';
 
-var appConfig = require('./config.smartholdem.json');
-var appSecret = require('./secret.json'); // conectar secret.json
+var appConfig = require('./config.json');
+const appSecret = require('./secret.json'); // conectar secret.json
 var networks = require('./networks.json');
 var async = require('async');
 var checkIpInList = require('./helpers/checkIpInList.js');
 var extend = require('extend');
 var fs = require('fs');
-var genesisblock = require('./genesisBlock.smartholdem.json');
+var genesisblock = require('./genesisBlock.json');
 var sthjs = require('sthjs');
 var https = require('https');
 var Logger = require('./logger.js');
@@ -20,6 +20,7 @@ var z_schema = require('./helpers/z_schema.js');
 var colors = require('colors');
 var vorpal = require('vorpal')();
 var spawn = require('child_process').spawn;
+var requestIp = require('request-ip');
 
 process.stdin.resume();
 
@@ -128,7 +129,7 @@ d.on('error', function (err) {
 
 d.run(function () {
 	var modules = [];
-	console.log(colors.green("\n\
+    console.log(colors.green("\n\
       {___     {__    {____     {_____    {________\n\
      {_ {__   {__  {__    {__  {__   {__ {__\n\
     {__ {__  {__{__        {__{__    {__{__\n\
@@ -306,7 +307,7 @@ d.run(function () {
 
 			scope.network.app.use(function (req, res, next) {
 				var parts = req.url.split('/');
-				var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+				var ip = requestIp.getClientIp(req);
 
 				// Log client connections
 				logger.trace(req.method + ' ' + req.url + ' from ' + ip + ":" + req.headers.port);
@@ -684,9 +685,9 @@ function startInteractiveMode(scope){
 
 	  });
 
-	vorpal.history('smartholdem-node-a');
+	vorpal.history('smartholdem-node');
 
 	vorpal
-	  .delimiter('smartholdem-node-a>')
+	  .delimiter('smartholdem-node>')
 	  .show();
 }
