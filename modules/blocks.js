@@ -694,7 +694,7 @@ Blocks.prototype.loadBlocksOffset = function (limit, offset, verify, cb) {
 			block.reward = parseInt(block.reward);
 			block.totalAmount = parseInt(block.totalAmount);
 			block.totalFee = parseInt(block.totalFee);
-			if(block.height%100 == 0){
+			if(block.height%200 == 0){
 				library.logger.info("Processing block height", block.height);
 			}
 			if (verify && block.id !== genesisblock.block.id) {
