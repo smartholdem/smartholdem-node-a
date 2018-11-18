@@ -90,7 +90,8 @@
   },
   "loading": {
     "verifyOnLoading": false,
-    "loadPerIteration": 5000
+    "loadPerIteration": 5000,
+    "fastSync": false
   },
   "ssl": {
     "enabled": false,
