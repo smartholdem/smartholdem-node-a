@@ -181,7 +181,7 @@ __private.list = function (filter, cb) {
 	}
 
 	if (!filter.limit) {
-		params.limit = 150;
+		params.limit = 100;
 	} else {
 		params.limit = Math.abs(filter.limit);
 	}
@@ -192,8 +192,8 @@ __private.list = function (filter, cb) {
 		params.offset = Math.abs(filter.offset);
 	}
 
-	if (params.limit > 150) {
-		return cb('Invalid limit. Maximum is 150');
+	if (params.limit > 100) {
+		return cb('Invalid limit. Maximum is 100');
 	}
 
 	var orderBy = OrderBy(
