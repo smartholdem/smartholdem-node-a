@@ -2,7 +2,7 @@
 Fix slow query execution times by adding an index on mem_accounts2delegates ("dependentId")
 Before index fix:
 ```
-sth_mainnet=> EXPLAIN (ANALYZE) UPDATE mem_accounts m
+sth_smartholdem=> EXPLAIN (ANALYZE) UPDATE mem_accounts m
 SET vote = (SELECT COALESCE(SUM(b.balance), 0) AS vote
             FROM mem_accounts2delegates a, mem_accounts b
             WHERE a."accountId" = b.address AND a."dependentId" = encode(m."publicKey", 'hex'))
@@ -25,7 +25,7 @@ Execution time: 2801.446 ms
 ```
 After creating index fix:
 ```
-sth_mainnet=> EXPLAIN (ANALYZE) UPDATE mem_accounts m
+sth_smartholdem=> EXPLAIN (ANALYZE) UPDATE mem_accounts m
 SET vote = (SELECT COALESCE(SUM(b.balance), 0) AS vote
             FROM mem_accounts2delegates a, mem_accounts b
             WHERE a."accountId" = b.address AND a."dependentId" = encode(m."publicKey", 'hex'))
