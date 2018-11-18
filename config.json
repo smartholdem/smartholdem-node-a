@@ -4,8 +4,9 @@
   "version": "0.0.4",
   "fileLogLevel": "info",
   "logFileName": "logs/sth.log",
-  "consoleLogLevel": "debug",
+  "consoleLogLevel": "info",
   "trustProxy": false,
+  "minimumVersion": "0.0.3",
   "db": {
     "host": "localhost",
     "port": 5432,
