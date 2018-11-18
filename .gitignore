@@ -18,5 +18,5 @@ genesisBlock.main.json
 private/
 sidechaincreator/
 secret.json
-tasks/
-test/
+tasks
+test
