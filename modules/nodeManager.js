@@ -171,7 +171,7 @@ NodeManager.prototype.onBlocksReceived = function(blocks, peer, cb) {
 
 			modules.blockchain.addBlock(block);
 			currentBlock=block;
-			if(block.height%128 == 0){
+			if(block.height%110 == 0){
 				library.logger.info("Processing block height", block.height);
 			}
 			return library.bus.message('verifyBlock', block, eachSeriesCb);

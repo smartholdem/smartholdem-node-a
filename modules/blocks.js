@@ -181,7 +181,7 @@ __private.list = function (filter, cb) {
 	}
 
 	if (!filter.limit) {
-		params.limit = 128;
+		params.limit = 110;
 	} else {
 		params.limit = Math.abs(filter.limit);
 	}
@@ -192,8 +192,8 @@ __private.list = function (filter, cb) {
 		params.offset = Math.abs(filter.offset);
 	}
 
-	if (params.limit > 128) {
-		return cb('Invalid limit. Maximum is 128');
+	if (params.limit > 110) {
+		return cb('Invalid limit. Maximum is 110');
 	}
 
 	var orderBy = OrderBy(
@@ -694,7 +694,7 @@ Blocks.prototype.loadBlocksOffset = function (limit, offset, verify, cb) {
 			block.reward = parseInt(block.reward);
 			block.totalAmount = parseInt(block.totalAmount);
 			block.totalFee = parseInt(block.totalFee);
-			if(block.height%128 == 0){
+			if(block.height%110 == 0){
 				library.logger.info("Processing block height", block.height);
 			}
 			if (verify && block.id !== genesisblock.block.id) {
