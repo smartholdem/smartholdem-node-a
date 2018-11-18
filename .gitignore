@@ -18,5 +18,6 @@ genesisBlock.main.json
 private/
 sidechaincreator/
 secret.json
+package-lock.json
 tasks
 test
