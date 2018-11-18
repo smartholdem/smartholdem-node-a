@@ -352,6 +352,8 @@ __private.loadBlocksFromNetwork = function (cb) {
 
 			async.waterfall([
 				function getCommonBlock (seriesCb) {
+                    return seriesCb(); //experimental fast simply sync
+				/*
 					if (lastBlock.height === 1){
 						return seriesCb();
 					}
@@ -376,6 +378,7 @@ __private.loadBlocksFromNetwork = function (cb) {
 							return seriesCb();
 						}
 					});
+					*/
 				},
 				function loadBlocks (seriesCb) {
 					modules.blocks.loadBlocksFromPeer(peer, seriesCb);
