@@ -685,9 +685,9 @@ function startInteractiveMode(scope){
 
 	  });
 
-	vorpal.history('smartholdem-node');
+	vorpal.history('smartholdem-cli');
 
 	vorpal
-	  .delimiter('smartholdem-node>')
+	  .delimiter('smartholdem-cli>')
 	  .show();
 }
