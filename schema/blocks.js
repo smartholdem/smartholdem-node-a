@@ -25,7 +25,7 @@ module.exports = {
 			limit: {
 				type: 'integer',
 				minimum: 0,
-				maximum: 200
+				maximum: 128
 			},
 			orderBy: {
 				type: 'string'
