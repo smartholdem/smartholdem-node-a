@@ -388,6 +388,7 @@ __private.loadBlocksFromNetwork = function (cb) {
 				}
 				else{
 					if(err){
+                        tryCount++; //experimental
 						library.logger.error(err);
 					}
 					library.logger.info("Processsed blocks to height " + block.height + " from " + peer.toString());
