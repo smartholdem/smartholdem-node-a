@@ -324,6 +324,7 @@ __private.loadBlocksFromNetwork = function (cb) {
 	var tryCount = 0;
 	//var loaded = false;
     var fastSync = library.config.loading.fastSync;
+    var skipPeersWithErr = library.config.loading.skipPeersWithErr;
 
 	var network = __private.network;
 
@@ -393,7 +394,9 @@ __private.loadBlocksFromNetwork = function (cb) {
 				}
 				else{
 					if(err){
-                        tryCount++; // experimental // don't spam nodes with errors
+					    if (skipPeersWithErr) {
+                            tryCount++; // experimental // don't spam nodes with errors
+                        }
 						library.logger.error(err);
 					}
 					library.logger.info("Processsed blocks to height " + block.height + " from " + peer.toString());
