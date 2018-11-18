@@ -86,7 +86,7 @@ __private.attachApi = function () {
 	}
 
 	router.get('/count', function (req, res) {
-		console.log(__private.accounts);
+        library.logger.info(__private.accounts);
 		return res.json({success: true, count: Object.keys(__private.accounts).length});
 	});
 
