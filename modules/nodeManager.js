@@ -160,7 +160,7 @@ NodeManager.prototype.onBlocksReceived = function(blocks, peer, cb) {
 			block.verified = false;
 			block.processed = false;
 			if (block.numberOfTransactions == 0) block.transactions = [];
-      // looks like the last block pulled, let's broadcast it
+      		// looks like the last block pulled, let's broadcast it
 			block.broadcast = blocks.length == 1;
 
 			// rationale: onBlocksReceived received is called within another thread than onBlockReceived
@@ -171,7 +171,7 @@ NodeManager.prototype.onBlocksReceived = function(blocks, peer, cb) {
 
 			modules.blockchain.addBlock(block);
 			currentBlock=block;
-			if(block.height%110 == 0){
+			if(block.height%100 == 0){
 				library.logger.info("Processing block height", block.height);
 			}
 			return library.bus.message('verifyBlock', block, eachSeriesCb);
