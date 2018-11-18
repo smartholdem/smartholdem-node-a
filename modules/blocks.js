@@ -572,7 +572,7 @@ Blocks.prototype.getCommonBlock = function (peer, height, cb) {
 				if (err || res.body.error) {
 					return waterCb(err || res.body.error.toString());
 				} else if (!res.body.common) {
-					return waterCb(['Chain comparison failed with peer:', peer.string, 'using ids:', ids].join(' '));
+					return waterCb(['Chain comparison failed with peer:', peer.toString(), 'using ids:', ids].join(' '));
 				} else {
 					return waterCb(null, res);
 				}
@@ -586,7 +586,7 @@ Blocks.prototype.getCommonBlock = function (peer, height, cb) {
 				height: res.body.common.height
 			}).then(function (rows) {
 				if (!rows.length || !rows[0].count) {
-					return waterCb(['Chain comparison failed with peer:', peer.string, 'using block:', JSON.stringify(res.body.common)].join(' '));
+					return waterCb(['Chain comparison failed with peer:', peer.toString(), 'using block:', JSON.stringify(res.body.common)].join(' '));
 				} else {
 					return waterCb(null, res.body);
 				}
@@ -759,7 +759,7 @@ Blocks.prototype.removeSomeBlocks = function(numbers, cb){
    	popLastBlock: function (seriesCb) {
 			async.whilst(
 				function () {
-					// if numbers = 50, on average remove 50 Blocks, roughly 1 round
+					// if numbers = 63, on average remove 63 Blocks, roughly 1 round
 					return (Math.random() > 1/(numbers+1));
 				},
 				function (next) {
@@ -911,8 +911,8 @@ Blocks.prototype.verifyBlockHeader = function (block) {
 
 	// TODO: make extrapolation for a refined check:
 	// if (block.timestamp - lastBlock.timestamp)/(block.height-lastBlock.height) < blocktime (here 8s)
-	if ( block.height > lastBlock.height && block.timestamp < lastBlock.timestamp) {
-		result.errors.push('915 Invalid block timestamp, block forged on another chain');
+	if( block.height > lastBlock.height && block.timestamp < lastBlock.timestamp){
+		result.errors.push('Invalid block timestamp, block forged on another chain');
 	}
 
 	var valid;
@@ -934,7 +934,7 @@ Blocks.prototype.verifyBlockHeader = function (block) {
 	var blockSlotNumber = slots.getSlotNumber(block.timestamp);
 
 	if (blockSlotNumber > slots.getSlotNumber()){
-		result.errors.push('937 Invalid block timestamp');
+		result.errors.push('Invalid block timestamp');
 	}
 
 	if (block.payloadLength > constants.maxPayloadLength) {
@@ -1010,7 +1010,7 @@ Blocks.prototype.verifyBlock = function (block, checkPreviousBlock) {
 
 
 	if (blockSlotNumber > slots.getSlotNumber()){
-		result.errors.push('1013 Invalid block timestamp');
+		result.errors.push('Invalid block timestamp');
 	}
 
 	// Disabling to allow orphanedBlocks?
@@ -1301,7 +1301,7 @@ Blocks.prototype.processBlock = function (block, cb) {
 								}
 								// Get account from database if any (otherwise cold wallet).
 								// DATABASE: read only
-								modules.accounts.getAccount({publicKey: transaction.senderPublicKey}, cb);
+								modules.accounts.getAccount({publicKey: transaction.senderPublicKey}, waterfallCb);
 							}).catch(function (err) {
 								library.logger.error("stack", err.stack);
 								return waterfallCb('Blocks#processBlock error');
