@@ -92,7 +92,7 @@
     "verifyOnLoading": false,
     "loadPerIteration": 5000,
     "fastSync": false,
-    "skipPeersWithErr": true
+    "skipPeersWithErr": false
   },
   "ssl": {
     "enabled": false,
