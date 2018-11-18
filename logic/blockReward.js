@@ -34,7 +34,6 @@ __private.parseHeight = function (height) {
 BlockReward.prototype.calcMilestone = function (height) {
 	var location = Math.trunc((__private.parseHeight(height) - this.rewardOffset) / this.distance);
 	var lastMile = this.milestones[this.milestones.length - 1];
-	console.log('lastMile', lastMile, 'location',location);
 
 	if (location > (this.milestones.length - 1)) {
 		return this.milestones.lastIndexOf(lastMile);
@@ -85,14 +84,11 @@ BlockReward.prototype.calcSupply = function (height) {
 				if (height > 0 && i === this.milestones.length - 1) {
 					var postHeight = this.rewardOffset - 1;
 
-
 					if (height >= postHeight) {
 						amount += (height - postHeight);
 					} else {
 						amount += (postHeight - height);
 					}
-
-                    console.log('amount', amount);
 				}
 			}
 
@@ -107,7 +103,6 @@ BlockReward.prototype.calcSupply = function (height) {
 		supply += reward[0] * reward[1];
 	}
 
-	console.log('supply', supply);
 	return supply * Math.pow(10,8);
 };
 
