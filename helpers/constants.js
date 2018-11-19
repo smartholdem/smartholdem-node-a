@@ -3,7 +3,6 @@
 module.exports = {
     activeDelegates: 64,
     maximumVotes: 1,
-    maximumVotesPatch: 1,
     addressLength: 208,
     blockHeaderLength: 248,
     confirmationLength: 77,
@@ -39,10 +38,10 @@ module.exports = {
             100000,    // Milestone 4 // 0.001 //   3k  Year 2022
             10000    // Milestone 5 // 0.0001 //   300  Year 2023
         ],
-        offset: 75600,  // Start rewards at block, ie 7 days after net start
+        offset: 75600, // Start rewards at block, ie 7 days after net start
         distance: 3000000, // Distance between each milestone
     },
     signatureLength: 196,
-    totalAmount: 24000000000000000,
+    totalAmount: 24000000000000004, // TODO: Fix properly because this value exceeds JS Number precision
     unconfirmedTransactionTimeOut: 10800 // 1080 blocks
 };
