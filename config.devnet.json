@@ -1,7 +1,7 @@
 {
-  "port": 4100,
+  "port": 6101,
   "address": "0.0.0.0",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "fileLogLevel": "info",
   "logFileName": "logs/sth.log",
   "consoleLogLevel": "debug",
@@ -9,7 +9,7 @@
   "db": {
     "host": "localhost",
     "port": 5432,
-    "database": "sth_smartholdem",
+    "database": "sth_devnet",
     "user": null,
     "password": "password",
     "poolSize": 20,
@@ -34,12 +34,12 @@
     }
   },
   "peers": {
+    "queryReach": 20,
     "minimumNetworkReach": 1,
     "list": [
-      {
-        "ip": "127.0.0.1",
-        "port": 4100
-      }
+      {"ip": "213.239.207.170","port": 6101},
+      {"ip": "80.211.38.83","port": 6101},
+      {"ip": "88.198.67.196","port": 6101}
     ],
     "blackList": [],
     "options": {
@@ -56,12 +56,7 @@
   "forging": {
     "coldstart": 6,
     "force": true,
-    "secret": {
-      "secret": [
-        "drill catch pride donkey unfair slush hood ensure benefit icon omit dose",
-        "flush floor silent forest purity derive equal wet range girl frame salmon"
-      ]
-    },
+    "secret": [],
     "access": {
       "whiteList": [
         "127.0.0.1"
@@ -81,6 +76,6 @@
       "cert": "./ssl/sth.crt"
     }
   },
-  "network": "testnet",
-  "nethash": "e1882350a56f22a79d62b903dc2d0fc03c6aae88c6f09908ee3e2d6f1da7e2b3"
+  "network": "devnet",
+  "nethash": "3a6d2bec6798dedea99a1e6c64120a3876781b85e46bb75908aba07ffda61360"
 }
