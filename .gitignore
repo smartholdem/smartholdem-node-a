@@ -16,5 +16,8 @@ config.main.json
 genesisBlock.main.json
 .vagrant
 private/
-sidechaincreator/yoursidechain/
+sidechaincreator/
 secret.json
+package-lock.json
+tasks
+test
