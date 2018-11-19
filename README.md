@@ -117,7 +117,7 @@ vagrant ssh
 To start node:
 
 ```shell
-app.js --genesis genesisBlock.smartholdem.json --config config.smartholdem.json
+app.js --genesis genesisBlock.json --config config.json
 ```
 
 To destroy and revert to the original state:

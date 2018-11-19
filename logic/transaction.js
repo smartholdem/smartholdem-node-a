@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var bs58check = require('bs58check');
+// var bs58check = require('bs58check');
 var bignum = require('../helpers/bignum.js');
 var ByteBuffer = require('bytebuffer');
 var constants = require('../helpers/constants.js');
@@ -391,10 +391,17 @@ Transaction.prototype.process = function (trs, sender, requester, cb) {
 Transaction.prototype.verify = function (trs, sender, requester, cb) {
 	var valid = false;
 	var err = null;
+	const INT_32_MIN = -2147483648;
+	const INT_32_MAX = 2147483647;
 
 	if (typeof requester === 'function') {
 		cb = requester;
 	}
+
+    // Skip validation for exceptions
+    if (exceptions.blocks.indexOf(trs.blockId) !== -1) {
+        return self.checkConfirmed(trs, cb);
+    }
 
 	// Get transaction id
 	var txId;
@@ -568,9 +575,13 @@ Transaction.prototype.verify = function (trs, sender, requester, cb) {
 		return cb(senderBalance.error);
 	}
 
+	if (trs.timestamp < INT_32_MIN || trs.timestamp > INT_32_MAX) {
+		return cb('Invalid transaction timestamp. Timestamp is not in the int32 range.');
+	}
+
 	// Check timestamp
 	if (slots.getSlotNumber(trs.timestamp) > slots.getSlotNumber()) {
-		return cb('Invalid transaction timestamp');
+		return cb('Invalid transaction timestamp. Timestamp is in the future.');
 	}
 
 	// Check fee
@@ -700,7 +711,7 @@ Transaction.prototype.apply = function (trs, block, sender, cb) {
 		return cb(senderBalance.error);
 	}
 
-	amount = amount.toNumber();
+	amount = parseInt(amount.toFixed(), 10);
 
 	this.scope.account.merge(sender.address, {
 		balance: -amount,
@@ -733,7 +744,7 @@ Transaction.prototype.apply = function (trs, block, sender, cb) {
 //
 Transaction.prototype.undo = function (trs, block, sender, cb) {
 	var amount = bignum(trs.amount.toString());
-	    amount = amount.plus(trs.fee.toString()).toNumber();
+	    amount = parseInt(amount.plus(trs.fee.toString()).toFixed(), 10);
 
 	this.scope.account.merge(sender.address, {
 		balance: amount,
@@ -777,7 +788,7 @@ Transaction.prototype.applyUnconfirmed = function (trs, sender, requester, cb) {
 		return cb(senderBalance.error);
 	}
 
-	amount = amount.toNumber();
+	amount = parseInt(amount.toFixed(), 10);
 
 	this.scope.account.merge(sender.address, {u_balance: -amount}, function (err, sender) {
 		if (err) {
@@ -802,7 +813,7 @@ Transaction.prototype.applyUnconfirmed = function (trs, sender, requester, cb) {
 //
 Transaction.prototype.undoUnconfirmed = function (trs, sender, cb) {
 	var amount = bignum(trs.amount.toString());
-	    amount = amount.plus(trs.fee.toString()).toNumber();
+	    amount = parseInt(amount.plus(trs.fee.toString()).toFixed(), 10);
 
 	this.scope.account.merge(sender.address, {u_balance: amount}, function (err, sender) {
 		if (err) {

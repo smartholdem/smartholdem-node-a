@@ -31,7 +31,7 @@ Vote.prototype.bind = function (scope) {
 Vote.prototype.create = function (data, trs) {
 	trs.recipientId = data.sender.address;
 	trs.asset.votes = data.votes;
-    console.log(data.votes);
+
 	return trs;
 };
 
@@ -64,13 +64,7 @@ Vote.prototype.verify = function (trs, sender, cb) {
 		return cb('Invalid votes. Must not be empty');
 	}
 
-	/*
-    var lastBlockV = modules.blockchain.getLastBlock()
-    if (lastBlockV.height > 194000) {
-        constants.maximumVotes = constants.maximumVotesPatch;
-    }
-*/
-    if (trs.asset.votes && trs.asset.votes.length > constants.maximumVotes) {
+	if (trs.asset.votes && trs.asset.votes.length > constants.maximumVotes) {
 		return cb('Voting limit exceeded. Maximum is '+constants.maximumVotes+' vote per transaction');
 	}
 
@@ -216,6 +210,10 @@ Vote.prototype.schema = {
 	properties: {
 		votes: {
 			type: 'array',
+			items: {
+				type: 'string',
+				format: 'voteString',
+			},
 			minLength: 1,
 			maxLength: constants.maximumVotes,
 			uniqueItems: true
@@ -245,7 +243,7 @@ Vote.prototype.objectNormalize = function (trs) {
 
 //
 Vote.prototype.dbRead = function (raw) {
-	console.log(raw.v_votes);
+	// console.log(raw.v_votes);
 
 	if (!raw.v_votes) {
 		return null;

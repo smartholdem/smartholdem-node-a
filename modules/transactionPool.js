@@ -18,6 +18,7 @@ function TransactionPool (cb, scope) {
 	self.unconfirmed = { };
 	self.queued = { };
 	self.multisignature = { };
+	self.invalid = { };
 
 	// TODO: to remove
 	self.expiryInterval = 30000;
@@ -29,7 +30,7 @@ function TransactionPool (cb, scope) {
 	if(!__private.mempoolConfig){
 		__private.mempoolConfig = {
 			intervalInSeconds: 3600*1000, // every hours
-			maximumAgeInMinutes: 72*3600  // 72 hours
+			maximumAgeInMinutes: 72*60  // 72 hours
 		}
 	}
 	else{
@@ -37,7 +38,7 @@ function TransactionPool (cb, scope) {
 			__private.mempoolConfig.intervalInSeconds=intervalInSeconds=3600*1000;
 		}
 		if(!__private.mempoolConfig.maximumAgeInMinutes){
-			__private.mempoolConfig.maximumAgeInMinutes=72*3600;
+			__private.mempoolConfig.maximumAgeInMinutes=72*60;
 		}
 	}
 
@@ -355,20 +356,22 @@ TransactionPool.prototype.receiveTransactions = function (transactions, cb) {
 			return eachSeriesCb();
 		}
 		else {
-			// we add transaction in mempool but still can be a spam.
-			// be sure to remove if there is an error in processing
-			__private.mempool[transaction.id]=transaction;
+			if (!self.invalid[transaction.id])
 			__private.processVerifyTransaction(transaction, function (err) {
 				if (!err) {
+					__private.mempool[transaction.id]=transaction;
 					return self.queueTransaction(transaction, eachSeriesCb);
 				} else {
-					// TODO: do we want to remove from mempool if somebody is spamming?
-					// we delete the tx in 1 min, so max 1 verification per spammy tx
-					// we keep the error in memory.
+					// delete all invalid txs after 1 min
 					transaction.error=err;
-					setTimeout(function(){
-						delete __private.mempool[transaction.id];
-					}, 60000);
+					if(JSON.stringify(self.invalid) === JSON.stringify({})) {
+						setTimeout(function() {
+							self.invalid = {};
+						}, 60000)
+					}
+
+					self.invalid[transaction.id] = true;
+
 					return eachSeriesCb(err, transaction);
 				}
 			});
