@@ -51,7 +51,7 @@ Block.prototype.create = function (data) {
 
 	for (var i = 0; i < transactions.length; i++) {
 		var transaction = transactions[i];
-		var bytes = new Buffer.from(transaction.id, "hex");
+		var bytes = new Buffer(transaction.id, "hex");
 
 		if (size + bytes.length > constants.maxPayloadLength) {
 			break;
@@ -109,7 +109,7 @@ Block.prototype.getBytes = function (block, includeSignature) {
 	var blockSignatureBuffer = null;
 
 	if(includeSignature){
-		blockSignatureBuffer = new Buffer.from(block.blockSignature, 'hex');
+		blockSignatureBuffer = new Buffer(block.blockSignature, 'hex');
 		size+=blockSignatureBuffer.length;
 	}
 	var b, i;
@@ -139,12 +139,12 @@ Block.prototype.getBytes = function (block, includeSignature) {
 
 		bb.writeInt(block.payloadLength);
 
-		var payloadHashBuffer = new Buffer.from(block.payloadHash, 'hex');
+		var payloadHashBuffer = new Buffer(block.payloadHash, 'hex');
 		for (i = 0; i < payloadHashBuffer.length; i++) {
 			bb.writeByte(payloadHashBuffer[i]);
 		}
 
-		var generatorPublicKeyBuffer = new Buffer.from(block.generatorPublicKey, 'hex');
+		var generatorPublicKeyBuffer = new Buffer(block.generatorPublicKey, 'hex');
 		for (i = 0; i < generatorPublicKeyBuffer.length; i++) {
 			bb.writeByte(generatorPublicKeyBuffer[i]);
 		}
@@ -174,8 +174,8 @@ Block.prototype.verifySignature = function (block) {
 	try {
 		var data = this.getBytes(block, false);
 		var hash = crypto.createHash('sha256').update(data).digest();
-		var blockSignatureBuffer = new Buffer.from(block.blockSignature, 'hex');
-		var generatorPublicKeyBuffer = new Buffer.from(block.generatorPublicKey, 'hex');
+		var blockSignatureBuffer = new Buffer(block.blockSignature, 'hex');
+		var generatorPublicKeyBuffer = new Buffer(block.generatorPublicKey, 'hex');
 
 		res = this.scope.crypto.verify(hash, blockSignatureBuffer || ' ', generatorPublicKeyBuffer || ' ');
 	} catch (e) {
@@ -212,9 +212,9 @@ Block.prototype.dbSave = function (block) {
 	var payloadHash, generatorPublicKey, blockSignature, rawtxs;
 
 	try {
-		payloadHash = new Buffer.from(block.payloadHash, 'hex');
-		generatorPublicKey = new Buffer.from(block.generatorPublicKey, 'hex');
-		blockSignature = new Buffer.from(block.blockSignature, 'hex');
+		payloadHash = new Buffer(block.payloadHash, 'hex');
+		generatorPublicKey = new Buffer(block.generatorPublicKey, 'hex');
+		blockSignature = new Buffer(block.blockSignature, 'hex');
 		rawtxs = JSON.stringify(block.transactions);
 	} catch (e) {
 		throw e;
@@ -341,7 +341,7 @@ Block.prototype.objectNormalize = function (block) {
 //
 Block.prototype.getId = function (block) {
 	var hash = crypto.createHash('sha256').update(this.getBytes(block)).digest();
-	var temp = new Buffer.alloc(8);
+	var temp = new Buffer(8);
 	for (var i = 0; i < 8; i++) {
 		temp[i] = hash[7 - i];
 	}

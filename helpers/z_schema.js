@@ -8,7 +8,7 @@ function schema(network){
 
   this.z_schema.registerFormat('hex', function (str) {
     try {
-      new Buffer.from(str, 'hex');
+      new Buffer(str, 'hex');
     } catch (e) {
       return false;
     }
@@ -22,7 +22,7 @@ function schema(network){
     }
 
     try {
-      var publicKey = new Buffer.from(str, 'hex');
+      var publicKey = new Buffer(str, 'hex');
       return publicKey.length === 33;
     } catch (e) {
       return false;
@@ -50,7 +50,7 @@ function schema(network){
     }
 
     try {
-      var vendorField = new Buffer.from(str);
+      var vendorField = new Buffer(str);
 
       return vendorField.length < 65;
     } catch (e) {
@@ -77,11 +77,17 @@ function schema(network){
     }
 
     try {
-      var signature = new Buffer.from(str, 'hex');
+      var signature = new Buffer(str, 'hex');
       return signature.length < 73;
     } catch (e) {
       return false;
     }
+  });
+
+  this.z_schema.registerFormat('voteString', function (str) {
+    //Excluding capital hex characters
+    //(mainnet database could contain mixed case vote strings?)
+    return /^[-+]0[23][0-9a-fA-F]{64}$/.test(str);
   });
 
   this.z_schema.registerFormat('queryList', function (obj) {

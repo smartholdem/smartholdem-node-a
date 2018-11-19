@@ -114,7 +114,7 @@ Multisignature.prototype.verify = function (trs, sender, cb) {
 		}
 
 		try {
-			var b = new Buffer.from(publicKey, 'hex');
+			var b = new Buffer(publicKey, 'hex');
 			if (b.length !== 33) {
 				return eachSeriesCb('Invalid public key in multisignature keysgroup');
 			}
@@ -155,7 +155,7 @@ Multisignature.prototype.process = function (trs, sender, cb) {
 
 //
 Multisignature.prototype.getBytes = function (trs, skip) {
-	var keysgroupBuffer = new Buffer.from(trs.asset.multisignature.keysgroup.join(''), 'utf8');
+	var keysgroupBuffer = new Buffer(trs.asset.multisignature.keysgroup.join(''), 'utf8');
 
 	var bb = new ByteBuffer(1 + 1 + keysgroupBuffer.length, true);
 	bb.writeByte(trs.asset.multisignature.min);

@@ -572,7 +572,7 @@ Blocks.prototype.getCommonBlock = function (peer, height, cb) {
 				if (err || res.body.error) {
 					return waterCb(err || res.body.error.toString());
 				} else if (!res.body.common) {
-					return waterCb(['Chain comparison failed with peer:', peer.string, 'using ids:', ids].join(' '));
+					return waterCb(['Chain comparison failed with peer:', peer.toString(), 'using ids:', ids].join(' '));
 				} else {
 					return waterCb(null, res);
 				}
@@ -586,7 +586,7 @@ Blocks.prototype.getCommonBlock = function (peer, height, cb) {
 				height: res.body.common.height
 			}).then(function (rows) {
 				if (!rows.length || !rows[0].count) {
-					return waterCb(['Chain comparison failed with peer:', peer.string, 'using block:', JSON.stringify(res.body.common)].join(' '));
+					return waterCb(['Chain comparison failed with peer:', peer.toString(), 'using block:', JSON.stringify(res.body.common)].join(' '));
 				} else {
 					return waterCb(null, res.body);
 				}
@@ -759,7 +759,7 @@ Blocks.prototype.removeSomeBlocks = function(numbers, cb){
    	popLastBlock: function (seriesCb) {
 			async.whilst(
 				function () {
-					// if numbers = 50, on average remove 50 Blocks, roughly 1 round
+					// if numbers = 63, on average remove 63 Blocks, roughly 1 round
 					return (Math.random() > 1/(numbers+1));
 				},
 				function (next) {
@@ -1052,7 +1052,7 @@ Blocks.prototype.verifyBlock = function (block, checkPreviousBlock) {
 		var bytes;
 
 		try {
-			bytes = new Buffer.from(transaction.id, "hex");
+			bytes = new Buffer(transaction.id, "hex");
 		} catch (e) {
 			result.errors.push(e.toString());
 		}
@@ -1301,7 +1301,7 @@ Blocks.prototype.processBlock = function (block, cb) {
 								}
 								// Get account from database if any (otherwise cold wallet).
 								// DATABASE: read only
-								modules.accounts.getAccount({publicKey: transaction.senderPublicKey}, cb);
+								modules.accounts.getAccount({publicKey: transaction.senderPublicKey}, waterfallCb);
 							}).catch(function (err) {
 								library.logger.error("stack", err.stack);
 								return waterfallCb('Blocks#processBlock error');

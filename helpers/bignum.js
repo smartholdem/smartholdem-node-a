@@ -30,7 +30,7 @@ var MAX = 1E9,                   // 0 to 1e+9
 	MAX_POWER = 1E6,               // 1 to 1e+6
 
 	// The maximum number of decimal places for operations involving division.
-	DECIMAL_PLACES = 20,           // 0 to MAX
+	DECIMAL_PLACES = 0,           // 0 to MAX
 
 	/*
 	 * The rounding mode used when rounding to the above decimal places, and when
@@ -51,11 +51,11 @@ var MAX = 1E9,                   // 0 to 1e+9
 
 	// The exponent value at and beneath which toString returns exponential notation.
 	// Number type: -7
-	TO_EXP_NEG = -7,                // 0 to -MAX
+	TO_EXP_NEG = -MAX,                // 0 to -MAX
 
 	// The exponent value at and above which toString returns exponential notation.
 	// Number type: 21
-	TO_EXP_POS = 21,                // 0 to MAX
+	TO_EXP_POS = MAX,                // 0 to MAX
 
 	// RANGE : [MIN_EXP, MAX_EXP]
 
@@ -1763,7 +1763,7 @@ P['toBuffer'] = function ( opts ) {
 		var len = buf.length === 1 && buf[0] === 0 ? 0 : buf.length;
 		if (buf[0] & 0x80) len ++;
 
-		var ret = new Buffer.alloc(4 + len);
+		var ret = new Buffer(4 + len);
 		if (len > 0) buf.copy(ret, 4 + (buf[0] & 0x80 ? 1 : 0));
 		if (buf[0] & 0x80) ret[4] = 0;
 
@@ -1799,7 +1799,7 @@ P['toBuffer'] = function ( opts ) {
 	var size = opts.size === 'auto' ? Math.ceil(hex.length / 2) : (opts.size || 1);
 
 	var len = Math.ceil(hex.length / (2 * size)) * size;
-	var buf = new Buffer.alloc(len);
+	var buf = new Buffer(len);
 
 	// zero-pad the hex string so the chunks are all `size` long
 	while (hex.length < 2 * len) hex = '0' + hex;

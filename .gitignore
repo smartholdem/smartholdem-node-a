@@ -1,4 +1,3 @@
-.idea
 .DS_Store
 .ed25519-node
 .idea/
@@ -17,3 +16,8 @@ config.main.json
 genesisBlock.main.json
 .vagrant
 private/
+sidechaincreator/
+secret.json
+package-lock.json
+tasks
+test

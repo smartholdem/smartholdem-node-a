@@ -137,9 +137,9 @@ RequestSanitizer.addRule('buffer', {
 		}
 
 		try {
-			return new Buffer.from(value||'', accept);
+			return new Buffer(value||'', accept);
 		} catch (err) {
-			return new Buffer.alloc(); //??
+			return new Buffer();
 		}
 	}
 });

@@ -4,35 +4,30 @@ This full node level A SmartHoldem network
 
 # Ubuntu Installation
 
-Recommend 2 CPU 3.4Ghz / HDD SSD 60GB / RAM 4Gb / OS Ubuntu 16 LTS
+Recommend 2 CPU 3.4Ghz / HDD SSD 40GB / RAM 4Gb / OS Ubuntu 16 LTS
 
 
 from root user:
 
 ```shell
+sudo apt-get update && sudo apt-get dist-upgrade -y
 adduser smartholdem
 usermod -a -G sudo smartholdem
 cd /home/smartholdem
 su smartholdem
-sudo apt-get update && sudo apt-get dist-upgrade -y
 ```
 
-ENTER smartholdem user password (if it is needed)
+ENTER user password (if it is needed)
 
 ```shell
-sudo apt-get install postgresql postgresql-contrib libpq-dev build-essential python git curl
-sudo apt-get install jq libtool autoconf locales automake locate zip unzip htop nmon iftop -y
+sudo apt-get install postgresql postgresql-contrib libpq-dev build-essential g++ python git curl ntp -y
+sudo apt-get install jq libtool autoconf locales automake locate zip unzip htop nmon iftop nano -y
 ```
 
-ENTER smartholdem user password (if it is needed)
+ENTER user password (if it is needed)
 
 ```shell
-sudo reboot
-```
-
-connect with smartholdem user to server
-
-```shell
+sudo locale-gen en_US.UTF-8
 sudo -u postgres psql -c "CREATE USER $USER WITH PASSWORD 'password' CREATEDB;" >&- 2>&-
 createdb sth_smartholdem
 git clone -b master https://github.com/smartholdem/smartholdem-node-a.git
@@ -40,44 +35,50 @@ cd smartholdem-node-a
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh 2>/dev/null | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm install 6.9.5 >>install.log
-nvm use 6.9.5 >>install.log
-nvm alias default 6.9.5
-npm install -g npm
-npm install forever -g
-npm install grunt-cli -g
+nvm install 8.12.0 >>install.log
+nvm use 8.12.0 >>install.log
+nvm alias default 8.12.0
+npm install -g npm forever grunt-cli
 npm install
 ```
 
-edit node config
+- Edit Secret config
 
 ```shell
-nano config.smartholdem.json
+nano secret.json
 ```
 
-insert your key into line 
+insert your key
+
+```json
+{
+    "secret": ["your delegate address secret pass phrase twelve words"]
+}
+```
+  CTRL+o (save file)
+
+  CTRL+x (exit editor)
+
+- To quickly load the block chain & start your Node-A, use the command:
 
 ```shell
-"forging": {
-    ...
-        "secret": ["your delegate address secret passphrase"]
-    ...
-    }
+sh firststart.sh
+sh console.sh
 ```
-  CTRL+o
-  
-  CTRL+x
-  
+
+- For standard start, if you did not use the previous item:
+
 ```shell
 forever start app.js
-```  
-    
-for logs view: 
+```
+
+- For logs view:
+
 ```shell
 bash console.sh
 ```
 
-update node sxcripts: 
+- Update Node-A scripts:
 ```shell
 bash update.sh
 ```
@@ -90,88 +91,7 @@ npm install -g docco
 docco -t docs/template/smartholdemio.jst -c docs/template/smartholdemio.css modules/* app.js README.md
 ```
 
-# Windows 7+
-
-### Developer Installation Install essentials
-
-```shell
-Python(min version 2.7.0) URL -  https://www.python.org/downloads/ 
-Visual Studio c++ 2010 express
-```
-
-```shell
-Install Node.js (min version 6.9.5)
-URL - https://nodejs.org/en/download/
-```
-
-```shell
-Install PostgreSQL (min version 9.0)
-URL -  http://www.postgresql.org/download/windows/
-```
-
-### Add following environment variable:
-
-```shell
-PATH as C:\Program Files\PostgreSQL\9.5\bin 
-(Windows Start -> Right click on Computer → Advanced System settings → Environment variables)
-Modify the file ‘pg_hba’, present at the location  C:\Program Files\PostgreSQL\9.5\data\pg_hba
-Replace ‘md5’ with ‘trust’  under ‘METHOD’ column
-```
-
-### Restart psql:
-
-```shell
-My Computer → Manage → Services and Application → Services → Restart postgres service
-Alter postgres user:
-psql -U postgres
-alter user postgres with password 'User Password'
-Create database:
-Create database ‘Database Name’ Name’  (this should match with the database name from config file)
-```
-
-### Clone repository:
-
-```shell
-git clone https://github.com/smartholdem/smartholdem-node-a.git (make sure you have git installed)
-cd smartholdem-node-a
-git checkout
-```
-
-### Install node modules:
-
-```shell
-npm install --global --production windows-build-tools 
-npm install libpq secp256k1
-npm install
-```
-
-### Add configurations for your node:
-
-```shell
-Change the following in config.mainnet.json:
-“address“: “set your IP”
-“database”: “set database name”
-“user”: “set database user”
-“password”: “set database password”
-“list”: [
-	{
-		“ip”: “set your IP address”
-		“port”: “set the port on which your node will be running”
-},
-{
-//For 5 Windows nodes, seed IP is already configured in the shared 5 files so no need of adding this entry
-		“ip”: “Set seed node IP address”
-		“port”: “set the port on which seed node will be running”
-}
-]
-```
-
-### Launch node on mainnet:
-
-```shell
-npm run start:mainnet
-```
-
+---
 
 # Dev Install
 
@@ -194,10 +114,10 @@ To log into the Vagrant environment:
 vagrant ssh
 ```
 
-To start node: 
+To start node:
 
 ```shell
-app.js --genesis genesisBlock.smartholdem.json --config config.smartholdem.json
+app.js --genesis genesisBlock.json --config config.json
 ```
 
 To destroy and revert to the original state:
@@ -226,3 +146,14 @@ Run individual tests:
 ```shell
 npm test -- test/api/accounts.js
 ```
+
+
+# IMPORTANT NOTE
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.

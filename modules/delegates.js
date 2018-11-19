@@ -14,6 +14,8 @@ var schema = require('../schema/delegates.js');
 var slots = require('../helpers/slots.js');
 var sql = require('../sql/delegates.js');
 var transactionTypes = require('../helpers/transactionTypes.js');
+var crypto = require('crypto')
+var requestIp = require('request-ip');
 
 // Private fields
 var modules, library, self, __private = {}, shared = {};
@@ -62,7 +64,7 @@ __private.attachApi = function () {
 		'get /fee': 'getFee',
 		'get /forging/getForgedByAccount': 'getForgedByAccount',
 		'put /': 'addDelegate',
- 		'get /getNextForgers': 'getNextForgers'
+		'get /getNextForgers': 'getNextForgers'
 	});
 
 	if (process.env.DEBUG) {
@@ -87,85 +89,85 @@ __private.attachApi = function () {
 			tmpKepairs = {};
 			return res.json({success: true});
 		});
+
+		router.post('/forging/enable', function (req, res) {
+			library.schema.validate(req.body, schema.enableForging, function (err) {
+				if (err) {
+					return res.json({success: false, error: err[0].message});
+				}
+
+				var ip = requestIp.getClientIp(req);
+
+				if (!checkIpInList(library.config.forging.access.whiteList, ip)) {
+					return res.json({success: false, error: 'Access denied'});
+				}
+
+				var keypair = library.crypto.makeKeypair(crypto.createHash('sha256').update(req.body.secret, 'utf8').digest());
+
+				if (req.body.publicKey) {
+					if (keypair.publicKey.toString('hex') !== req.body.publicKey) {
+						return res.json({success: false, error: 'Invalid passphrase'});
+					}
+				}
+
+				if (__private.keypairs[keypair.publicKey.toString('hex')]) {
+					return res.json({success: false, error: 'Forging is already enabled'});
+				}
+
+				modules.accounts.getAccount({publicKey: keypair.publicKey.toString('hex')}, function (err, account) {
+					if (err) {
+						return res.json({success: false, error: err});
+					}
+					if (account && account.isDelegate) {
+						__private.keypairs[keypair.publicKey.toString('hex')] = keypair;
+						library.logger.info('Forging enabled on account: ' + account.address);
+						return res.json({success: true, address: account.address});
+					} else {
+						return res.json({success: false, error: 'Delegate not found'});
+					}
+				});
+			});
+		});
+
+		router.post('/forging/disable', function (req, res) {
+			library.schema.validate(req.body, schema.disableForging, function (err) {
+				if (err) {
+					return res.json({success: false, error: err[0].message});
+				}
+
+				var ip = requestIp.getClientIp(req);
+
+				if (!checkIpInList(library.config.forging.access.whiteList, ip)) {
+					return res.json({success: false, error: 'Access denied'});
+				}
+
+				var keypair = library.crypto.makeKeypair(crypto.createHash('sha256').update(req.body.secret, 'utf8').digest());
+
+				if (req.body.publicKey) {
+					if (keypair.publicKey.toString('hex') !== req.body.publicKey) {
+						return res.json({success: false, error: 'Invalid passphrase'});
+					}
+				}
+
+				if (!__private.keypairs[keypair.publicKey.toString('hex')]) {
+					return res.json({success: false, error: 'Delegate not found'});
+				}
+
+				modules.accounts.getAccount({publicKey: keypair.publicKey.toString('hex')}, function (err, account) {
+					if (err) {
+						return res.json({success: false, error: err});
+					}
+					if (account && account.isDelegate) {
+						delete __private.keypairs[keypair.publicKey.toString('hex')];
+						library.logger.info('Forging disabled on account: ' + account.address);
+						return res.json({success: true, address: account.address});
+					} else {
+						return res.json({success: false, error: 'Delegate not found'});
+					}
+				});
+			});
+		});
 	}
-
-	router.post('/forging/enable', function (req, res) {
-		library.schema.validate(req.body, schema.enableForging, function (err) {
-			if (err) {
-				return res.json({success: false, error: err[0].message});
-			}
-
-			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-
-			if (!checkIpInList(library.config.forging.access.whiteList, ip)) {
-				return res.json({success: false, error: 'Access denied'});
-			}
-
-			var keypair = library.crypto.makeKeypair(crypto.createHash('sha256').update(req.body.secret, 'utf8').digest());
-
-			if (req.body.publicKey) {
-				if (keypair.publicKey.toString('hex') !== req.body.publicKey) {
-					return res.json({success: false, error: 'Invalid passphrase'});
-				}
-			}
-
-			if (__private.keypairs[keypair.publicKey.toString('hex')]) {
-				return res.json({success: false, error: 'Forging is already enabled'});
-			}
-
-			modules.accounts.getAccount({publicKey: keypair.publicKey.toString('hex')}, function (err, account) {
-				if (err) {
-					return res.json({success: false, error: err});
-				}
-				if (account && account.isDelegate) {
-					__private.keypairs[keypair.publicKey.toString('hex')] = keypair;
-					library.logger.info('Forging enabled on account: ' + account.address);
-					return res.json({success: true, address: account.address});
-				} else {
-					return res.json({success: false, error: 'Delegate not found'});
-				}
-			});
-		});
-	});
-
-	router.post('/forging/disable', function (req, res) {
-		library.schema.validate(req.body, schema.disableForging, function (err) {
-			if (err) {
-				return res.json({success: false, error: err[0].message});
-			}
-
-			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-
-			if (!checkIpInList(library.config.forging.access.whiteList, ip)) {
-				return res.json({success: false, error: 'Access denied'});
-			}
-
-			var keypair = library.crypto.makeKeypair(crypto.createHash('sha256').update(req.body.secret, 'utf8').digest());
-
-			if (req.body.publicKey) {
-				if (keypair.publicKey.toString('hex') !== req.body.publicKey) {
-					return res.json({success: false, error: 'Invalid passphrase'});
-				}
-			}
-
-			if (!__private.keypairs[keypair.publicKey.toString('hex')]) {
-				return res.json({success: false, error: 'Delegate not found'});
-			}
-
-			modules.accounts.getAccount({publicKey: keypair.publicKey.toString('hex')}, function (err, account) {
-				if (err) {
-					return res.json({success: false, error: err});
-				}
-				if (account && account.isDelegate) {
-					delete __private.keypairs[keypair.publicKey.toString('hex')];
-					library.logger.info('Forging disabled on account: ' + account.address);
-					return res.json({success: true, address: account.address});
-				} else {
-					return res.json({success: false, error: 'Delegate not found'});
-				}
-			});
-		});
-	});
 
 	router.get('/forging/status', function (req, res) {
 		library.schema.validate(req.query, schema.forgingStatus, function (err) {
@@ -378,44 +380,23 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 		var existing_votes = Array.isArray(delegates) ? delegates.length : 0;
 		var additions = 0, removals = 0;
 
-
 		async.eachSeries(votes, function (action, eachSeriesCb) {
-            var math = action[0];
+			var math = action[0];
 
-            if (math !== '+' && math !== '-') {
-                return eachSeriesCb('Invalid math operator');
-            }
+			if (math !== '+' && math !== '-') {
+				return eachSeriesCb('Invalid math operator');
+			}
 
-            if (math === '+') {
-                additions += 1;
-            } else if (math === '-') {
-                removals += 1;
-            }
+			if (math === '+') {
+				additions += 1;
+			} else if (math === '-') {
+				removals += 1;
+			}
 
-
-            // 1 vote patch
-			/*
-            var lastBlockV = modules.blockchain.getLastBlock()
-            if (lastBlockV.height > 194000) {
-                constants.maximumVotes = constants.maximumVotesPatch;
-
-            if (math === '+' && (existing_votes > 0)) {
-                library.logger.info('--- Only 1 vote from 1 address', 'height:' + lastBlockV.height);
-                return cb('--- Only 1 vote from 1 address');
-                //return eachSeriesCb('--- Only 1 vote from 1 address');
-            }
-
-            if (math === '+' && (additions > 1)) {
-                library.logger.info('--- Only 1 vote from 1 address');
-                return cb('--- Only 1 vote from 1 address');
-                // return eachSeriesCb('--- Only 1 vote from 1 address');
-            }
-        }
-        */
 			var publicKey = action.slice(1);
 
 			try {
-				new Buffer.from(publicKey, 'hex');
+				new Buffer(publicKey, 'hex');
 			} catch (e) {
 				library.logger.error("stack", e.stack);
 				return eachSeriesCb('Invalid public key');
@@ -428,10 +409,6 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			if (math === '-' && (delegates === null || delegates.indexOf(publicKey) === -1)) {
 				return eachSeriesCb('Failed to remove vote, account has not voted for this delegate');
 			}
-
-
-
-
 
 			modules.accounts.getAccount({ publicKey: publicKey, isDelegate: 1 }, function (err, account) {
 				if (err) {
@@ -450,14 +427,14 @@ __private.checkDelegates = function (publicKey, votes, state, cb) {
 			}
 
 			var total_votes = (existing_votes + additions) - removals;
-                if (total_votes > constants.maximumVotes) {
-                    var exceeded = total_votes - constants.maximumVotes;
-                    return cb('Maximum number of ' + constants.maximumVotes + ' votes exceeded (' + exceeded + ' too many)');
-                } else {
-                    return cb();
-                }
 
+			if (total_votes > constants.maximumVotes) {
+				var exceeded = total_votes - constants.maximumVotes;
 
+				return cb('Maximum number of ' + constants.maximumVotes + ' votes exceeded (' + exceeded + ' too many)');
+			} else {
+				return cb();
+			}
 		});
 	});
 };
@@ -477,7 +454,7 @@ __private.loadMyDelegates = function (cb) {
 		}
 
 		modules.accounts.getAccount({
-			publicKey: new Buffer.from(keypair.publicKey, "hex")
+			publicKey: new Buffer(keypair.publicKey, "hex")
 		}, function (err, account) {
 			if (err) {
 				return seriesCb(err);
@@ -539,7 +516,7 @@ Delegates.prototype.getDelegates = function (query, cb) {
 		var realLimit = Math.min(offset + limit, count);
 
 		var lastBlock   = modules.blockchain.getLastBlock(),
-		    totalSupply = __private.blockReward.calcSupply(lastBlock.height);
+			totalSupply = __private.blockReward.calcSupply(lastBlock.height);
 
 		for (var i = 0; i < delegates.length; i++) {
 			delegates[i].rate = i + 1;
@@ -762,7 +739,7 @@ __private.toggleForgingOnReceipt = function () {
 
 
 		// if (lastReceipt.secondsAgo > timeOut) {
-		// 	return self.disableForging('timeout');
+		//  return self.disableForging('timeout');
 		// } else {
 		return self.enableForging();
 		// }
@@ -904,7 +881,7 @@ shared.getDelegates = function (req, cb) {
 				if (data.sortMethod === 'ASC') {
 					return sorta - sortb;
 				} else {
-				 	return sortb - sorta;
+					return sortb - sorta;
 				}
 			}
 

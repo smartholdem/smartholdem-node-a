@@ -17,7 +17,7 @@ function Account (scope, cb) {
 
 	self = this;
 	db = this.scope.db;
-	library = this.scope.library;
+	library = this.scope;
 	genesisBlock = this.scope.genesisblock.block;
 
 	this.table = 'mem_accounts';
@@ -131,7 +131,7 @@ function Account (scope, cb) {
 				required: true,
 				type: 'integer',
 				minimum: 0,
-				maximum: constants.totalAMount
+				maximum: constants.totalAmount
 			},
 			conv: Number,
 			expression: '("u_balance")::bigint'
@@ -434,7 +434,7 @@ Account.prototype.verifyPublicKey = function (publicKey) {
 		}
 		// Check format
 		try {
-			new Buffer.from(publicKey, 'hex');
+			new Buffer(publicKey, 'hex');
 		} catch (e) {
 			throw 'Invalid public key, must be a hex string';
 		}
@@ -448,7 +448,7 @@ Account.prototype.verifyPublicKey = function (publicKey) {
 Account.prototype.toDB = function (raw) {
 	this.binary.forEach(function (field) {
 		if (raw[field]) {
-			raw[field] = new Buffer.from(raw[field], 'hex');
+			raw[field] = new Buffer(raw[field], 'hex');
 		}
 	});
 
