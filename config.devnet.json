@@ -67,7 +67,7 @@
   "loading": {
     "verifyOnLoading": false,
     "loadPerIteration": 5000,
-    "fastSync": false,
+    "fastSync": true,
     "skipPeersWithErr": true
   },
   "ssl": {
