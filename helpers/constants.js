@@ -16,12 +16,12 @@ module.exports = {
 	},
 	feeStart: 1,
 	feeStartVolume: 10000 * 100000000,
-	fixedPoint : Math.pow(10, 8),
+	fixedPoint: Math.pow(10, 8),
 	forgingTimeOut: 3840, // 128 blocks / 2 rounds
 	maxAddressesLength: 208 * 128,
 	maxAmount: 100000000,
 	maxClientConnections: 100,
-	maxConfirmations : 77 * 100,
+	maxConfirmations: 77 * 100,
 	maxPayloadLength: 2 * 1024 * 1024,
 	maxRequests: 10000 * 12,
 	maxSignaturesLength: 196 * 256,
@@ -38,7 +38,7 @@ module.exports = {
             100000,    // Milestone 4 // 0.001 //   3k  Year 2022
             10000    // Milestone 5 // 0.0001 //   300  Year 2023
 		],
-		offset: 75600,   // Start rewards at block, ie 7 days after net start
+		offset: 75600, // Start rewards at block, ie 7 days after net start
 		distance: 3000000, // Distance between each milestone
 	},
 	signatureLength: 196,
