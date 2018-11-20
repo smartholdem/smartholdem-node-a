@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = {
-	transactions: {
-		id: 'nodeManager.transactions',
-    type: 'array',
-    uniqueItems: true,
-		required: ['transactions']
-	}
+    transactions: {
+        id: 'nodeManager.transactions',
+        type: 'array',
+        uniqueItems: true,
+        required: ['transactions']
+    }
 };

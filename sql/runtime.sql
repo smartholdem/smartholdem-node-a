@@ -1,4 +1,4 @@
-/* SmartHoldem Runtime
+/* Runtime
  *
  */
 

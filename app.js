@@ -212,7 +212,7 @@ d.run(function () {
 		}],
 
 		//TODO: to move to modules/transactions.js ?
-		//To be deprecated in favor of blocksequence, encapsulating unconfirmed tx application in a blocksequence.
+		//To be deprecated in favor of block sequence, encapsulating unconfirmed tx application in a block sequence.
 		//To balance transaction application (unconfirmed and confirmed)
 		transactionSequence: ['logger', function (scope, cb) {
 			var sequence = new Sequence({

@@ -14,7 +14,6 @@ var BlocksSql = {
   ],
 
   getGenesisBlockId: 'SELECT "id" FROM blocks WHERE "id" = ${id}',
-
   deleteBlock: 'DELETE FROM blocks WHERE "id" = ${id};',
 
   countList: function (params) {
@@ -34,7 +33,6 @@ var BlocksSql = {
   },
 
   getById: 'SELECT * FROM blocks_list WHERE "b_id" = ${id}',
-
   getIdSequence: 'SELECT (ARRAY_AGG("id" ORDER BY "height" ASC))[1] AS "id", MIN("height") AS "height", CAST("height" / ${delegates} AS INTEGER) + (CASE WHEN "height" % ${activeDelegates} > 0 THEN 1 ELSE 0 END) AS "round" FROM blocks WHERE "height" <= ${height} GROUP BY "round" ORDER BY "height" DESC LIMIT ${limit}',
 
   getCommonBlock: function (params) {
@@ -46,7 +44,6 @@ var BlocksSql = {
   },
 
   countByRowId: 'SELECT COUNT("rowId")::int FROM blocks',
-
   getHeightByLastId: 'SELECT "height" FROM blocks WHERE "id" = ${lastId}',
 
   loadBlocksData: function (params) {
@@ -68,15 +65,10 @@ var BlocksSql = {
   },
 
   loadBlocksOffset: 'SELECT id, version, height, timestamp, "previousBlock", "numberOfTransactions" ,"totalAmount", "totalFee", reward, "payloadLength", encode("payloadHash", \'hex\') as "payloadHash", encode("generatorPublicKey", \'hex\') as "generatorPublicKey",  encode("blockSignature", \'hex\') as "blockSignature", rawtxs::json as transactions from blocks WHERE height >= ${offset} AND height < ${limit} ORDER BY height',
-
   loadLastBlock: 'SELECT id, version, height, timestamp, "previousBlock", "numberOfTransactions" ,"totalAmount", "totalFee", reward, "payloadLength", encode("payloadHash", \'hex\') as "payloadHash", encode("generatorPublicKey", \'hex\') as "generatorPublicKey",  encode("blockSignature", \'hex\') as "blockSignature", rawtxs::json as transactions from blocks WHERE height = (SELECT MAX("height") FROM blocks)',
-
   getBlockId: 'SELECT "id" FROM blocks WHERE "id" = ${id}',
-
   getBlockById: 'SELECT id, version, height, timestamp, "previousBlock", "numberOfTransactions" ,"totalAmount", "totalFee", reward, "payloadLength", encode("payloadHash", \'hex\') as "payloadHash", encode("generatorPublicKey", \'hex\') as "generatorPublicKey",  encode("blockSignature", \'hex\') as "blockSignature", rawtxs::json as transactions from blocks WHERE id = ${id}',
-
   getTransactionId: 'SELECT "id" FROM transactions WHERE "id" = ${id}',
-
   simpleDeleteAfterBlock: 'DELETE FROM blocks WHERE "height" >= (SELECT "height" FROM blocks WHERE "id" = ${id});'
 };
 
