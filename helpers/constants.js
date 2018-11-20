@@ -32,16 +32,16 @@ module.exports = {
     rewards: {
         milestones: [
             200000000, // Initial Reward // 2 //   +6M  Year 2018
-            20000000, // Milestone 1 // 0.20 //    600k Year 2019
-            10000000, // Milestone 2 // 0.10 //    300k Year 2020
-            2000000,  // Milestone 3 // 0.02 //    60k  Year 2021
-            0,    // Milestone 4 // 0.001 //   0 STH Year 2022
-            0    // Milestone 5 // 0.0001 //   0 STH Year 2023
+            20000000, // Mil 1 // 0.20 //    600k Year 2019
+            10000000, // Mil 2 // 0.10 //    300k Year 2020
+            2000000,  // Mil 3 // 0.02 //    60k  Year 2021
+            0,    // Mil 4 // 0.001 //   0 STH Year 2022
+            0    // Mil 5 // 0.0001 //   0 STH Year 2023
         ],
-        offset: 75600, // Start rewards at block, ie 7 days after net start
-        distance: 3000000, // Distance between each milestone
+        offset: 75600, // Start rewards, 7 days after net start
+        distance: 3000000, // Distance between milestone
     },
     signatureLength: 196,
-    totalAmount: 24000000000000004, // TODO: Fix properly because this value exceeds JS Number precision
+    totalAmount: 24000000000000004,
     unconfirmedTransactionTimeOut: 10800 // 1080 blocks
 };
