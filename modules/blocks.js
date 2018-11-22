@@ -1311,7 +1311,7 @@ Blocks.prototype.processBlock = function (block, cb) {
 							// Check if transaction id valid against database state (mem_* tables).
 							// DATABASE: read only
 							// TODO: remove this check and create a processGenesisBlock instead
-							if(block.height!=1){
+							if(block.height!==1){
 								library.logic.transaction.verify(transaction, sender, waterfallCb);
 							}
 							else{
