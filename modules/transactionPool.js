@@ -367,7 +367,7 @@ TransactionPool.prototype.receiveTransactions = function (transactions, cb) {
 					if(JSON.stringify(self.invalid) === JSON.stringify({})) {
 						setTimeout(function() {
 							self.invalid = {};
-						}, 1000)
+						}, 10000)
 					}
 
 					self.invalid[transaction.id] = true;
