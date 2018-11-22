@@ -664,7 +664,7 @@ __private.transactionTimeOut = function (transaction) {
 // TODO: to remove
 __private.expireTransactions = function (transactions, parentIds, cb) {
 	var ids = [];
-
+/*
 	async.eachSeries(transactions, function (transaction, eachSeriesCb) {
 		if (!transaction) {
 			return eachSeriesCb();
@@ -685,6 +685,7 @@ __private.expireTransactions = function (transactions, parentIds, cb) {
 	}, function (err) {
 		return cb(err, ids.concat(parentIds));
 	});
+*/
 };
 
 // Export
