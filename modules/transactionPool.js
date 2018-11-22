@@ -21,7 +21,7 @@ function TransactionPool (cb, scope) {
 	self.invalid = { };
 
 	// TODO: to remove
-	self.expiryInterval = 30000;
+	self.expiryInterval = 16000;
 
 	// mem pool for efficiency keeping tx for 72 hours
 	__private.mempool = null;
@@ -664,7 +664,7 @@ __private.transactionTimeOut = function (transaction) {
 // TODO: to remove
 __private.expireTransactions = function (transactions, parentIds, cb) {
 	var ids = [];
-/*
+
 	async.eachSeries(transactions, function (transaction, eachSeriesCb) {
 		if (!transaction) {
 			return eachSeriesCb();
@@ -685,7 +685,7 @@ __private.expireTransactions = function (transactions, parentIds, cb) {
 	}, function (err) {
 		return cb(err, ids.concat(parentIds));
 	});
-*/
+
 };
 
 // Export
