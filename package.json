@@ -14,7 +14,7 @@
   "author": "Boris Povod, SmartHoldem, William W",
   "dependencies": {
     "sthjs": "github:smartholdem/sth-js#mainnet",
-    "async": "=2.6.1",
+    "async": "=2.0.1",
     "bip39": "^2.5.0",
     "body-parser": "^1.18.3",
     "bytebuffer": "=5.0.1",
