@@ -21,7 +21,7 @@ function TransactionPool (cb, scope) {
 	self.invalid = { };
 
 	// TODO: to remove
-	self.expiryInterval = 16000;
+	self.expiryInterval = 30000;
 
 	// mem pool for efficiency keeping tx for 72 hours
 	__private.mempool = null;
