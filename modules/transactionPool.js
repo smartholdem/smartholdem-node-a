@@ -675,11 +675,11 @@ __private.expireTransactions = function (transactions, parentIds, cb) {
 		var seconds = Math.floor((timeNow.getTime() - new Date(transaction.receivedAt).getTime()) / 1000);
 
 		if (seconds > timeOut) {
-            async.setImmediate(function() {
+
                 ids.push(transaction.id);
                 self.removeUnconfirmedTransaction(transaction.id);
                 library.logger.info('Expired transaction: ' + transaction.id + ' received at: ' + transaction.receivedAt.toUTCString());
-            });
+
 			return eachSeriesCb();
 		} else {
 			return eachSeriesCb();
