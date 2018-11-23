@@ -147,7 +147,7 @@ Run individual tests:
 npm test -- test/api/accounts.js
 ```
 
-## License
+## Licenses
 
 The MIT License (MIT)
 
