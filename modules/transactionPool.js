@@ -667,7 +667,9 @@ __private.expireTransactions = function (transactions, parentIds, cb) {
 
 	async.eachSeries(transactions, function (transaction, eachSeriesCb) {
 		if (!transaction) {
-			return eachSeriesCb();
+            async.setImmediate(function() {
+                return eachSeriesCb();
+            });
 		}
 
 		var timeNow = new Date();
@@ -675,12 +677,16 @@ __private.expireTransactions = function (transactions, parentIds, cb) {
 		var seconds = Math.floor((timeNow.getTime() - new Date(transaction.receivedAt).getTime()) / 1000);
 
 		if (seconds > timeOut) {
-			ids.push(transaction.id);
-			self.removeUnconfirmedTransaction(transaction.id);
-			library.logger.info('Expired transaction: ' + transaction.id + ' received at: ' + transaction.receivedAt.toUTCString());
-			return eachSeriesCb();
+            async.setImmediate(function() {
+                ids.push(transaction.id);
+                self.removeUnconfirmedTransaction(transaction.id);
+                library.logger.info('Expired transaction: ' + transaction.id + ' received at: ' + transaction.receivedAt.toUTCString());
+                return eachSeriesCb();
+            });
 		} else {
-			return eachSeriesCb();
+            async.setImmediate(function() {
+                return eachSeriesCb();
+            });
 		}
 	}, function (err) {
 		return cb(err, ids.concat(parentIds));
