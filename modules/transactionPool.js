@@ -667,9 +667,7 @@ __private.expireTransactions = function (transactions, parentIds, cb) {
 
 	async.eachSeries(transactions, function (transaction, eachSeriesCb) {
 		if (!transaction) {
-            async.setImmediate(function() {
                 return eachSeriesCb();
-            });
 		}
 
 		var timeNow = new Date();
@@ -681,12 +679,10 @@ __private.expireTransactions = function (transactions, parentIds, cb) {
                 ids.push(transaction.id);
                 self.removeUnconfirmedTransaction(transaction.id);
                 library.logger.info('Expired transaction: ' + transaction.id + ' received at: ' + transaction.receivedAt.toUTCString());
-                return eachSeriesCb();
             });
+            return eachSeriesCb();
 		} else {
-            async.setImmediate(function() {
                 return eachSeriesCb();
-            });
 		}
 	}, function (err) {
 		return cb(err, ids.concat(parentIds));
