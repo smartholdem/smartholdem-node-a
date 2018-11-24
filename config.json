@@ -6,7 +6,7 @@
   "logFileName": "logs/sth.log",
   "consoleLogLevel": "info",
   "trustProxy": false,
-  "minimumVersion": "0.0.3",
+  "minimumVersion": "0.0.2",
   "db": {
     "host": "localhost",
     "port": 5432,
