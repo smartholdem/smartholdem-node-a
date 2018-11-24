@@ -36,7 +36,7 @@
   },
   "peers": {
     "queryReach": 20,
-    "minimumNetworkReach": 20,
+    "minimumNetworkReach": 16,
     "list": [
       {"ip": "95.216.143.219","port": 6100},
       {"ip": "95.216.139.28","port": 6100},
