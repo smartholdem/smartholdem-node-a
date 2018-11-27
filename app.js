@@ -62,11 +62,6 @@ if (program.address) {
 	appConfig.address = program.address;
 }
 
-appConfig.compressionLevel = 6;
-if (program.compressionLevel) {
-    appConfig.compressionLevel = program.compressionLevel;
-}
-
 if (program.peers) {
 	if (typeof program.peers === 'string') {
 		appConfig.peers.list = program.peers.split(',').map(function (peer) {
