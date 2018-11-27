@@ -254,7 +254,7 @@ Peer.prototype.request = function(api, options, cb){
 
       if (!report) {
         // no valid transport header, considering a public API call
-        if(that.status!="FORK"){
+        if(that.status!=="FORK"){
           that.status = "OK";
         }
         return cb(null, {body: res.body, peer: that});
@@ -275,7 +275,7 @@ Peer.prototype.request = function(api, options, cb){
         return cb(['Peer is not on the same network', header.nethash, req.method, req.url].join(' '));
       }
 
-      if(that.status!="FORK"){
+      if(that.status!=="FORK"){
         that.status = "OK";
       }
 

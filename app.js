@@ -282,7 +282,7 @@ d.run(function () {
 
 			scope.network.app.engine('html', require('ejs').renderFile);
 			scope.network.app.use(bodyParser.raw({limit: '4mb'}));
-			scope.network.app.use(bodyParser.urlencoded({extended: true, limit: '2mb', parameterLimit: 5000}));
+			scope.network.app.use(bodyParser.urlencoded({extended: true, limit: '5mb', parameterLimit: 6400}));
 			scope.network.app.use(bodyParser.json({limit: '4mb'}));
 			scope.network.app.use(methodOverride());
 
