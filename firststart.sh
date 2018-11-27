@@ -8,5 +8,5 @@ echo 'Loading Full BlockChain, please wait..'
 pg_restore -d sth_smartholdem --role=$USER snapshot >&- 2>&-
 echo 'Success!'
 rm snapshot
-forever start app.js --config config.json --genesis genesisBlock.json
+forever start app.js --config config.json --genesis genesisBlock.json >&- 2>&-
 tail -f ./logs/sth.log
