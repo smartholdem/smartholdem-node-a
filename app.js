@@ -62,6 +62,10 @@ if (program.address) {
 	appConfig.address = program.address;
 }
 
+if (program.compressionLevel) {
+    appConfig.compressionLevel = program.compressionLevel;
+}
+
 if (program.peers) {
 	if (typeof program.peers === 'string') {
 		appConfig.peers.list = program.peers.split(',').map(function (peer) {
@@ -179,7 +183,7 @@ d.run(function () {
 
 			require('./helpers/request-limiter')(app, appConfig);
 
-			app.use(compression({ level: 9 }));
+			app.use(compression({ level: appConfig.compressionLevel }));
 			app.use(cors());
 			app.options('*', cors());
 
