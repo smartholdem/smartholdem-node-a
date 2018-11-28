@@ -157,27 +157,6 @@ To destroy and revert to the original state:
 vagrant destroy
 ```
 
-# Tests
-
-Load git submodule
-
-```shell
-git submodule init
-git submodule update
-```
-
-Run the test suite:
-
-```shell
-npm test
-```
-
-Run individual tests:
-
-```shell
-npm test -- test/api/accounts.js
-```
-
 ## Licenses
 
 The MIT License (MIT)
