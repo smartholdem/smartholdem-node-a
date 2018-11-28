@@ -99,6 +99,22 @@ npm install
 sh update.sh
 ```
 
+reenter pass phrase if nessesary
+
+```
+nano secret.json
+```
+
+insert pass phrase
+
+```json
+{
+    "secret": ["your delegate address secret phrase twelve words"]
+}
+```
+
+CTRL+o, CTRL+x
+
 ## Docs Generate
 
 ```shell
