@@ -112,7 +112,7 @@ __private.updatePeersList = function (cb) {
 							res.body.peers
 								.filter(peer => peer.ip.substr(0,3) != "127") // exclude loopback addresses
 						) // randomize the list to prevent malicious list crafting
-						.slice(0, reach); // don't query everyone - that would be spammy
+						.slice(0, reach); // don't query everyone - that would be spam
 
 			async.each(peers, function (peer, eachCb) {
 				peer = self.inspect(peer);
