@@ -227,7 +227,7 @@ d.run(function () {
 		blockSequence: ['logger', function (scope, cb) {
 			var sequence = new Sequence({
 				onWarning: function (current, limit) {
-					scope.logger.warn('Block queue', current);
+					scope.logger.warn('blockSequence Block queue', current);
 				}
 			});
 			cb(null, sequence);
@@ -237,7 +237,7 @@ d.run(function () {
 		managementSequence: ['logger', function (scope, cb) {
 			var sequence = new Sequence({
 				onWarning: function (current, limit) {
-					scope.logger.warn('Block queue', current);
+					scope.logger.warn('managementSequence Block queue', current);
 				}
 			});
 			cb(null, sequence);
