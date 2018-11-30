@@ -575,7 +575,7 @@ __private.getMissingTransactions = function (ids, cb) {
         }
     }
     cb(null, missingtransactionsids, transactions);
-}
+};
 
 __private.processVerifyTransaction = function (transaction, cb) {
     async.waterfall([
