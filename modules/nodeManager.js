@@ -159,7 +159,7 @@ NodeManager.prototype.onBlocksReceived = function(blocks, peer, cb) {
 			block.totalFee = parseInt(block.totalFee);
 			block.verified = false;
 			block.processed = false;
-			if (block.numberOfTransactions == 0) block.transactions = [];
+			if (block.numberOfTransactions === 0) block.transactions = [];
       		// looks like the last block pulled, let's broadcast it
 			block.broadcast = blocks.length == 1;
 
