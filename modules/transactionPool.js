@@ -487,7 +487,7 @@ TransactionPool.prototype.cleanup = function (cb) {
             library.logger.error('Error cleaning TransactionPool', err);
         }
         else {
-            library.logger.info('Cleaned TransactionPool. Unconfirmed transations undone: ' + removedIds.length);
+            library.logger.info('Cleaned TransactionPool. Unconfirmed transactions undone: ' + removedIds.length);
         }
         return cb();
     });
