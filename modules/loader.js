@@ -47,7 +47,13 @@ __private.attachApi = function () {
 		});
 	});
 
-	router.map(shared, {
+    router.get('/pool', function (req, res) {
+        res.json({
+            transactionPool: modules.transactionPool.getMempoolSize()
+        });
+    });
+
+    router.map(shared, {
 		'get /status': 'status',
 		'get /status/sync': 'sync',
 		'get /autoconfigure': 'autoconfigure'
