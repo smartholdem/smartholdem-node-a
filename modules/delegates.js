@@ -314,7 +314,7 @@ __private.forge = function (cb) {
 
 							return cb();
 						}
-						// PBFT: most nodes are on same branch, no other block have been forged and we are on forgeable currentSlot
+						// PBFT: most nodes are on same branch, no other block have been forged and we are on forge able currentSlot
 						if(quorum/(quorum+noquorum) > 0.66){
 							letsforge = true;
 						}

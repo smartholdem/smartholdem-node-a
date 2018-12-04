@@ -29,7 +29,6 @@ __private.attachApi = function () {
 	});
 
 	library.network.app.engine('pug', require('pug').__express);
-
 	library.network.app.use('/app', router);
 };
 

@@ -179,7 +179,7 @@ d.run(function () {
 
 			require('./helpers/request-limiter')(app, appConfig);
 
-			app.use(compression({ level: 6 }));
+			app.use(compression({ level: appConfig.compressionLevel }));
 			app.use(cors());
 			app.options('*', cors());
 
@@ -212,7 +212,7 @@ d.run(function () {
 		}],
 
 		//TODO: to move to modules/transactions.js ?
-		//To be deprecated in favor of blocksequence, encapsulating unconfirmed tx application in a blocksequence.
+		//To be deprecated in favor of block sequence, encapsulating unconfirmed tx application in a block sequence.
 		//To balance transaction application (unconfirmed and confirmed)
 		transactionSequence: ['logger', function (scope, cb) {
 			var sequence = new Sequence({
@@ -227,7 +227,7 @@ d.run(function () {
 		blockSequence: ['logger', function (scope, cb) {
 			var sequence = new Sequence({
 				onWarning: function (current, limit) {
-					scope.logger.warn('Block queue', current);
+					scope.logger.warn('blockSequence Block queue', current);
 				}
 			});
 			cb(null, sequence);
@@ -237,7 +237,7 @@ d.run(function () {
 		managementSequence: ['logger', function (scope, cb) {
 			var sequence = new Sequence({
 				onWarning: function (current, limit) {
-					scope.logger.warn('Block queue', current);
+					scope.logger.warn('managementSequence Block queue', current);
 				}
 			});
 			cb(null, sequence);
@@ -282,7 +282,7 @@ d.run(function () {
 
 			scope.network.app.engine('html', require('ejs').renderFile);
 			scope.network.app.use(bodyParser.raw({limit: '4mb'}));
-			scope.network.app.use(bodyParser.urlencoded({extended: true, limit: '2mb', parameterLimit: 5000}));
+			scope.network.app.use(bodyParser.urlencoded({extended: true, limit: '5mb', parameterLimit: 5000}));
 			scope.network.app.use(bodyParser.json({limit: '4mb'}));
 			scope.network.app.use(methodOverride());
 

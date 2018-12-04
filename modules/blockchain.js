@@ -105,7 +105,7 @@ Blockchain.prototype.onStartBlockchain = function(){
 		}
 		return setTimeout(cleanBlockchain, 10000);
 	});
-}
+};
 
 
 //
@@ -124,7 +124,7 @@ Blockchain.prototype.upsertBlock = function(block, cb){
     __private.blockchain[block.height]=block;
   }
   return cb && cb(error, __private.blockchain[block.height]);
-}
+};
 
 //
 //__API__ `isOrphaned`
@@ -143,7 +143,7 @@ Blockchain.prototype.isOrphaned = function(block){
 	else {
 		return false;
 	}
-}
+};
 
 //
 //__API__ `isForked`
@@ -152,7 +152,7 @@ Blockchain.prototype.isOrphaned = function(block){
 Blockchain.prototype.isForked = function(block){
 	var previousBlock = __private.blockchain[""+(block.height-1)];
 	return previousBlock && previousBlock.id != block.previousBlock;
-}
+};
 
 //
 //__API__ `isPresent`
@@ -160,7 +160,7 @@ Blockchain.prototype.isForked = function(block){
 // Check if block is already in blockchain (ie same id) or already found as orphaned
 Blockchain.prototype.isPresent = function(block){
 	return (__private.blockchain[block.height] && __private.blockchain[block.height].id == block.id) || __private.orphanedBlocks[block.id];
-}
+};
 
 //
 //__API__ `isReady`
@@ -175,7 +175,7 @@ Blockchain.prototype.isReady = function(block){
 		__private.forkedChainBlocks[block.height]=block;
 		return false;
 	}
-}
+};
 
 //
 //__API__ `addBlock`
@@ -213,7 +213,7 @@ Blockchain.prototype.getPreviousBlock = function(block){
 	// 	previousBlock = __private.orphanedBlocks[block.previousBlock];
 	// }
 	return previousBlock;
-}
+};
 
 //
 //__API__ `removeBlock`
@@ -406,7 +406,7 @@ Blockchain.prototype.onBlockForged = function(block) {
 	block.broadcast = true;
 	library.logger.info("Adding forged to blockchain", block.id);
   self.addBlock(block);
-}
+};
 
 //
 //__EVENT__ `onBlockVerified`
@@ -420,7 +420,7 @@ Blockchain.prototype.onBlockVerified = function(block, cb) {
 	else{
 		__private.blockchain[block.height].verified = true;
 	}
-}
+};
 
 //
 //__EVENT__ `onBlockProcessed`
