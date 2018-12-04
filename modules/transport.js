@@ -28,7 +28,7 @@ function Transport (cb, scope) {
 
 	setInterval(function(){
 		var maxspliced = 10;
-		if(maxspliced > Object.keys(__private.broadcastTransactions).length) maxspliced = Object.keys(__private.broadcastTransactions).length;
+		if(maxspliced > Object.keys(__private.broadcastTransactions).length) {maxspliced = Object.keys(__private.broadcastTransactions).length;}
 		if(maxspliced > 0){
 			var transactions = Object.keys(__private.broadcastTransactions).splice(0, maxspliced).map(tx => {
 				var thistx = __private.broadcastTransactions[tx];
