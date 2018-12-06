@@ -47,7 +47,7 @@ Transfer.prototype.verify = function (trs, sender, cb) {
 		return cb('Invalid recipient');
 	}
 
-	if (trs.amount <= 0) {
+	if (trs.amount <= 1000) {
 		return cb('Invalid transaction amount');
 	}
 
