@@ -43,11 +43,17 @@ Transfer.prototype.calculateFee = function (trs) {
 //
 Transfer.prototype.verify = function (trs, sender, cb) {
 	var isAddress = /^[1-9A-Za-z]{1,35}$/g;
+	var amount = 0;
+
+	if (trs.timestamp > 32924856) {
+		amount = 1000;
+	}
+
 	if (!trs.recipientId || !isAddress.test(trs.recipientId)) {
 		return cb('Invalid recipient');
 	}
 
-	if (trs.amount <= 1000) {
+	if (trs.amount <= amount) {
 		return cb('Invalid transaction amount');
 	}
 
