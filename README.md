@@ -75,12 +75,17 @@ forever start app.js
 - For logs view:
 
 ```shell
-bash console.sh
+sh console.sh
 ```
 
 - Update Node-A scripts:
 ```shell
-bash update.sh
+sh update.sh
+```
+
+- Cli-mode:
+```shell
+sh cli.sh
 ```
 
 # Node-A Upgrade
