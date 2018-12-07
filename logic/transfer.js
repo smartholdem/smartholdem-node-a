@@ -44,6 +44,9 @@ Transfer.prototype.calculateFee = function (trs) {
 Transfer.prototype.verify = function (trs, sender, cb) {
 	var isAddress = /^[1-9A-Za-z]{1,35}$/g;
 	var amount = 0;
+	var days = trs.timestamp / 60 / 60 / 24;
+
+    library.logger.info('Days behind:' + Math.floor(days));
 
 	if (trs.timestamp > 32924856) {
 		amount = 1000;
