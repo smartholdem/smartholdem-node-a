@@ -4,7 +4,7 @@
   "version": "0.0.5",
   "fileLogLevel": "info",
   "logFileName": "logs/sth.log",
-  "consoleLogLevel": "debug",
+  "consoleLogLevel": "info",
   "trustProxy": false,
   "minimumVersion": "0.0.4",
   "compressionLevel": 6,

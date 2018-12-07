@@ -173,7 +173,7 @@ NodeManager.prototype.onBlocksReceived = function(blocks, peer, cb) {
 			currentBlock=block;
 			if(block.height%100 == 0){
 				library.logger.info("Processing block height", block.height);
-                library.logger.debug("Days behind", block.timestamp / 60 / 60 / 24);
+                library.logger.info("Days behind", block.timestamp / 60 / 60 / 24);
 			}
 			return library.bus.message('verifyBlock', block, eachSeriesCb);
 
