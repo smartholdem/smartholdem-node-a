@@ -261,9 +261,9 @@ __private.forge = function (cb) {
 						return cb(err);
 					}
 					else if(network.peers.length < minimumNetworkReach){
-						library.logger.info("Network reach is not sufficient to get quorum",[
-							"network # of reached peers:", network.peers.length,
-							"last block id:", lastBlock.id
+						library.logger.info('Network reach is not sufficient to get quorum',[
+							'network # of reached peers:', network.peers.length,
+							'last block id:', lastBlock.id
 						].join(' '));
 						return cb();
 					}
@@ -320,19 +320,19 @@ __private.forge = function (cb) {
 						}
 						else{
 							//We are forked!
-							library.logger.info("Forked from network",[
-								"network:", JSON.stringify(network.height),
-								"quorum:", quorum/(quorum+noquorum),
-								"last block id:", lastBlock.id
+							library.logger.info('Forked from network',[
+								'network:', JSON.stringify(network.height),
+								'quorum:', quorum/(quorum+noquorum),
+								'last block id:', lastBlock.id
 							].join(' '));
-							library.bus.message("fork",lastBlock, 6);
-							return cb("Fork 6 - Not enough quorum to forge next block: " + quorum/(quorum+noquorum));
+							library.bus.message('fork',lastBlock, 6);
+							return cb('Fork 6 - Not enough quorum to forge next block: ' + quorum/(quorum+noquorum));
 						}
 
 						if(letsforge){
-							library.logger.info("Enough quorum from network",[
-								"quorum:", quorum/(quorum+noquorum),
-								"last block id:", lastBlock.id
+							library.logger.info('Enough quorum from network',[
+								'quorum:', quorum/(quorum+noquorum),
+								'last block id:', lastBlock.id
 							].join(' '));
 							modules.blocks.generateBlock(currentBlockData.keypair, currentBlockData.time, function (err, b) {
 								if(!err){
