@@ -24,7 +24,7 @@
   "api": {
     "mount": true,
     "access": {
-      "whiteList": []
+      "whiteList": ["127.0.0.1"]
     },
     "options": {
       "limits": {
