@@ -1,7 +1,7 @@
 {
   "port": 6100,
   "address": "0.0.0.0",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "fileLogLevel": "info",
   "logFileName": "logs/sth.log",
   "consoleLogLevel": "debug",
