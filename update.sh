@@ -1,5 +1,5 @@
 #!/bin/bash
-forever stop app.js
+forever stop app.js >&- 2>&-
 forever cleanlogs
 rm ./logs/sth.log
 touch ./logs/sth.log
