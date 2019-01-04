@@ -29,7 +29,7 @@ module.exports = {
     blocktime: 8,
     numberLength: 100000000,
     requestLength: 104,
-    maxTxsPerQueue: 1024,
+    maxTxsPerQueue: 1000,
     rewards: {
         milestones: [
             200000000, // Initial Reward // 2 //   +6M  Year 2018
