@@ -1,4 +1,4 @@
-forever stop app.js
+forever stop app.js >&- 2>&-
 echo 'Getting last snapshot for' $USER
 wget http://snapshots.smartholdem.io/snapshot
 dropdb sth_smartholdem
