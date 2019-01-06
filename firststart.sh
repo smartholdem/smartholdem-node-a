@@ -9,4 +9,6 @@ pg_restore --no-acl --role=$USER -d sth_smartholdem snapshot >&- 2>&-
 echo 'Success!'
 rm snapshot
 forever start app.js --config config.json --genesis genesisBlock.json >&- 2>&-
+rm ./logs/sth.log
+touch ./logs/sth.log
 tail -f ./logs/sth.log
