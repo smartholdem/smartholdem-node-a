@@ -45,6 +45,7 @@ npm install
 - Edit Secret config
 
 ```shell
+mv sample.secret.json secret.json
 nano secret.json
 ```
 
@@ -52,7 +53,7 @@ insert your key
 
 ```json
 {
-    "secret": ["your delegate address secret pass phrase twelve words"]
+    "secret": ["delegate secret pass phrase twelve words"]
 }
 ```
   CTRL+o (save file)
@@ -63,7 +64,6 @@ insert your key
 
 ```shell
 sh firststart.sh
-sh console.sh
 ```
 
 - For standard start, if you did not use the previous item:
@@ -75,7 +75,7 @@ forever start app.js
 - For logs view:
 
 ```shell
-sh console.sh
+sh log.sh
 ```
 
 - Update Node-A scripts:
