@@ -4,7 +4,7 @@ This full node level A SmartHoldem network
 
 # Ubuntu Installation
 
-Recommend 4xCPU 3.4Ghz / HDD SSD 40GB / RAM 4Gb / OS Ubuntu 16 LTS
+Recommend 4xCPU 3.4Ghz / HDD SSD 40GB / RAM 16Gb / OS Ubuntu 16 LTS
 
 
 from root user:
@@ -60,32 +60,27 @@ insert your key
 
   CTRL+x (exit editor)
 
-- To quickly load the block chain & start your Node-A, use the command:
+### To quickly load the block chain & start your Node-A, use the command:
 
 ```shell
 sh firststart.sh
 ```
 
-- For standard start, if you did not use the previous item:
+### For standard start, if you did not use the previous item:
 
 ```shell
 forever start app.js
 ```
 
-- For logs view:
+### For logs view:
 
 ```shell
 sh log.sh
 ```
 
-- Update Node-A scripts:
+### Simple Update Node-A scripts:
 ```shell
 sh update.sh
-```
-
-- Cli-mode:
-```shell
-sh cli.sh
 ```
 
 # Node-A Upgrade
