@@ -91,9 +91,9 @@ sh stop.sh
 git checkout -p
 git pull
 rm -rf node_modules
-nvm install 8.12.0
-nvm use 8.12.0
-nvm alias default 8.12.0
+nvm install 8.15.0
+nvm use 8.15.0
+nvm alias default 8.15.0
 npm install -g npm forever grunt-cli
 npm install
 sh update.sh
