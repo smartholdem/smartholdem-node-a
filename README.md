@@ -35,9 +35,9 @@ cd node
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh 2>/dev/null | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm install 8.12.0 >>install.log
-nvm use 8.12.0 >>install.log
-nvm alias default 8.12.0
+nvm install 8.15.0 >>install.log
+nvm use 8.15.0 >>install.log
+nvm alias default 8.15.0
 npm install -g npm forever grunt-cli
 npm install
 ```
@@ -60,7 +60,7 @@ insert your key
 
   CTRL+x (exit editor)
 
-### To quickly load the block chain & start your Node-A, use the command:
+### To quickly load the block chain & start your Node-A background, use the command:
 
 ```shell
 sh firststart.sh
