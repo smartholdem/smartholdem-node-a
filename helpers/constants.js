@@ -11,7 +11,7 @@ module.exports = {
         send: 10000000,
         vote: 100000000,
         secondsignature: 500000000,
-        delegate: 5500000000,
+        delegate: 5500000000000,
         multisignature: 500000000
     },
     feeStart: 1,
@@ -34,10 +34,10 @@ module.exports = {
         milestones: [
             200000000, // Initial Reward // 2 //   +6M  Year 2018
             20000000, // Mil 1 // 0.20 //    600k Year 2019
-            10000000, // Mil 2 // 0.10 //    300k Year 2020
-            2000000,  // Mil 3 // 0.02 //    60k  Year 2021
-            0,    // Mil 4 // 0.001 //   0 STH Year 2022
-            0    // Mil 5 // 0.0001 //   0 STH Year 2023
+            20000000, // Mil 2 // 0.20 //    600k Year 2020
+            0,  // Mil 3 // 0 //   0 STH Year 2021
+            0,  // Mil 4 // 0 //   0 STH Year 2022
+            0   // Mil 5 // 0 //   0 STH Year 2023
         ],
         offset: 75600, // Start rewards, 7 days after net start
         distance: 3000000, // Distance between milestone
