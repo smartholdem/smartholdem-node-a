@@ -34,7 +34,7 @@
         "delayAfter": 0,
         "windowMs": 60000
       }
-    },
+    }
   },
   "peers": {
     "queryReach": 20,
