@@ -33,7 +33,8 @@
         "delayAfter": 0,
         "windowMs": 60000
       }
-    }
+    },
+    "blackList": []
   },
   "peers": {
     "queryReach": 20,
