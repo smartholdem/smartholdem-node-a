@@ -24,7 +24,8 @@
   "api": {
     "mount": true,
     "access": {
-      "whiteList": ["127.0.0.1"]
+      "whiteList": ["127.0.0.1"],
+      "blackList": []
     },
     "options": {
       "limits": {
@@ -34,7 +35,6 @@
         "windowMs": 60000
       }
     },
-    "blackList": []
   },
   "peers": {
     "queryReach": 20,
