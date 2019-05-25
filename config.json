@@ -104,6 +104,10 @@
     "fastSync": false,
     "skipPeersWithErr": false
   },
+  "notify": {
+    "walletnotify": "",
+    "blocknotify": ""
+  },
   "ssl": {
     "enabled": false,
     "options": {
