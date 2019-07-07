@@ -34,7 +34,7 @@ module.exports = {
         milestones: [
             200000000, // Initial Reward // 2 //   +6M  Year 2018
             20000000, // Mil 1 // 0.20 //    600k Year 2019
-            0,  // Mil 2 // 0 //   0 STH Year 2020
+            15000000, // Mil 2 // 0.15 //   450k STH Year 2020
             0,  // Mil 3 // 0 //   0 STH Year 2021
             0,  // Mil 4 // 0 //   0 STH Year 2022
             0   // Mil 5 // 0 //   0 STH Year 2023
