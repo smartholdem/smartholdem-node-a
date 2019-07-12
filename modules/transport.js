@@ -21,6 +21,8 @@ __private.headers = {};
 __private.messages = {};
 __private.broadcastTransactions = {};
 
+let sramList = [];
+
 // Constructor
 function Transport (cb, scope) {
 	library = scope;
@@ -291,22 +293,105 @@ __private.attachApi = function () {
 		});
 	});
 
+	// приём транз
 	router.post('/transactions', function (req, res) {
 		res.set(__private.headers);
-		var transactions = req.body.transactions;
-		var peer=req.peer;
+		let transactions = req.body.transactions;
+		let peer = req.peer;
+		//console.log(transactions);
 
-		library.bus.message("transactionsReceived", transactions, "network", function(error, receivedtransactions){
-			if(error){
-				return res.status(200).json({success: false, message: 'Invalid transaction detected', error: error.toString()});
+		/* SRAMMER Detector - On*/
+
+		let err = 0;
+		let tm = Date.now() - 60 * 60 * 6 * 1000;
+
+		for (let i=0; i < sramList.length; i++) {
+            if (tm > sramList[i].time) {
+                sramList[i].splice(i, 1);
 			}
-			else{
-				if(!receivedtransactions){
-					receivedtransactions=[];
-				}
-				res.status(200).json({success: true, transactionIds: receivedtransactions.map(function(t){return t.id;})});
+			if (sramList[i].ip === peer.ip) {
+                library.logger.info("Найден SRAMMER", peer.ip); // lifetime ban
+				err = 2;
+				break;
 			}
-		});
+		}
+
+		if (err === 0) {
+            let txCount = transactions.length;
+            // Проверим или поверим?
+            if (txCount > 48 && peer.ip !== '127.0.0.1') {
+                err = 1;
+                sramList.push({
+					ip: peer.ip, // добавим срамеров в серый список
+					time: Date.now()
+				});
+                library.logger.info("SRAMMER обезврежен", txCount, peer.ip);
+            }
+
+            for (let i = 0; i < txCount; i++) {
+                // validate min amount 0.01
+				// transactions[i].timestamp > 47270000 - 547 ДЕНЬ СЕТИ
+                if (transactions[i].amount < 1000000 && transactions[i].timestamp > 47270000 && transactions[i].type === 0) {
+                    library.logger.info("Tx amount err", transactions[i].amount, peer.ip);
+                    transactions.splice(i, 1);
+                }
+
+                if (transactions[i].fee < 10000000 && transactions[i].timestamp > 47270000) {
+                    library.logger.info("Tx fee err", transactions[i].fee, peer.ip);
+                    transactions.splice(i, 1);
+                }
+
+                // Хочешь msg vendorField, плати 5 STH - на будущее, до роста
+            }
+
+        }
+
+        if (err === 0) {
+			/* SRAMMER Detector Advanced */
+            let aBL = library.config.api.access.blackList;
+            if (aBL.length > 0) {
+                for (let i = 0; i < transactions.length; i++) {
+                    for (let j = 0; j < aBL.length; j++) {
+                        if (aBL[j] === transactions[i].senderId) {
+                            err = 3;
+                            library.logger.info("Advanced SRAMMER Alёrt", aBL[j]);
+                            transactions.splice(i, 1);
+                        }
+                    }
+                }
+            }
+		}
+
+        /* Srammer Detector - End*/
+
+		if (err === 0) {
+            // library.logger.info("срамеры не найдены", peer.ip);
+            library.bus.message("transactionsReceived", transactions, "network", function (error, receivedtransactions) {
+                if (error) {
+                    return res.status(200).json({
+                        success: false,
+                        message: 'Invalid transaction detected',
+                        error: error.toString()
+                    });
+                }
+                else {
+                    if (!receivedtransactions) {
+                        receivedtransactions = [];
+                    }
+                    res.status(200).json({
+                        success: true, transactionIds: receivedtransactions.map(function (t) {
+                            return t.id;
+                        })
+                    });
+                }
+            });
+        } else {
+            res.status(200).json({
+                success: false,
+                message: 'SRAMMER Detected',
+                error: 'SR:' + err.toString()
+                })
+		}
 	});
 
 	router.get('/height', function (req, res) {
