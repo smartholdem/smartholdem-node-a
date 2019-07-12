@@ -298,7 +298,6 @@ __private.attachApi = function () {
 		res.set(__private.headers);
 		let transactions = req.body.transactions;
 		let peer = req.peer;
-		//console.log(transactions);
 
 		/* SRAMMER Detector - On*/
 
@@ -310,7 +309,7 @@ __private.attachApi = function () {
                 sramList[i].splice(i, 1);
 			}
 			if (sramList[i].ip === peer.ip) {
-                library.logger.info("Найден SRAMMER", peer.ip); // lifetime ban
+                library.logger.info("Найден SRAMMER", peer.ip); // temporary ban
 				err = 2;
 				break;
 			}
@@ -318,11 +317,10 @@ __private.attachApi = function () {
 
 		if (err === 0) {
             let txCount = transactions.length;
-            // Проверим или поверим?
             if (txCount > 48 && peer.ip !== '127.0.0.1') {
                 err = 1;
                 sramList.push({
-					ip: peer.ip, // добавим срамеров в серый список
+					ip: peer.ip, // temporary добавим срамеров в серый список
 					time: Date.now()
 				});
                 library.logger.info("SRAMMER обезврежен", txCount, peer.ip);
@@ -341,7 +339,6 @@ __private.attachApi = function () {
                     transactions.splice(i, 1);
                 }
 
-                // Хочешь msg vendorField, плати 5 STH - на будущее, до роста
             }
 
         }
