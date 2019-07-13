@@ -21,7 +21,12 @@ __private.headers = {};
 __private.messages = {};
 __private.broadcastTransactions = {};
 
-let sramList = [];
+let sramList = [
+	{
+		ip: '1.1.1.1',
+        time: Date.now()
+	}
+];
 
 // Constructor
 function Transport (cb, scope) {
@@ -302,14 +307,14 @@ __private.attachApi = function () {
 		/* SRAMMER Detector - On*/
 
 		let err = 0;
-		let tm = Date.now() - 60 * 60 * 6 * 1000;
+		let tm = Date.now() - 60 * 60 * 2 * 1000; //2h
 
-		for (let i=0; i < sramList.length; i++) {
+		for (let i = 1; i < sramList.length; i++) {
             if (tm > sramList[i].time) {
-                sramList[i].splice(i, 1);
+                    sramList[i].splice(i, 1);
 			}
 			if (sramList[i].ip === peer.ip) {
-                library.logger.info("Найден SRAMMER", peer.ip); // temporary ban
+                library.logger.info("Найден SRAMMER", peer.ip); // temporary ban 2h
 				err = 2;
 				break;
 			}
