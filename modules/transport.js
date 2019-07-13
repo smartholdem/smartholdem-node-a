@@ -335,16 +335,16 @@ __private.attachApi = function () {
                 // validate min amount 0.01
 				// transactions[i].timestamp > 47270000 - 547 ДЕНЬ СЕТИ
                 if (transactions[i].amount < 1000000 && transactions[i].timestamp > 47270000 && transactions[i].type === 0) {
-                    library.logger.info("Tx amount err", transactions[i].amount, peer.ip);
+                    library.logger.info("Tx amount err, minimum 0.01 STH", transactions[i].amount, peer.ip);
                     transactions.splice(i, 1);
                 }
 
                 if (transactions[i].fee < 10000000 && transactions[i].timestamp > 47270000) {
-                    library.logger.info("Tx fee err", transactions[i].fee, peer.ip);
+                    library.logger.info("Tx fee err, minimum 0.10 STH", transactions[i].fee, peer.ip);
                     transactions.splice(i, 1);
                 }
-
             }
+
 
         }
 
