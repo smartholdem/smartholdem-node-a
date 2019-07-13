@@ -40,7 +40,7 @@ module.exports = {
             0   // Mil 5 // 0 //   0 STH Year 2023
         ],
         offset: 75600, // Start rewards, 7 days after net start
-        distance: 3000000, // Distance between milestone
+        distance: 3000000, // Distance between milestone // 277.7 days
     },
     signatureLength: 196,
     totalAmount: 24000000000000000,
