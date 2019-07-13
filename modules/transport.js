@@ -314,7 +314,7 @@ __private.attachApi = function () {
                     sramList[i].splice(i, 1);
 			}
 			if (sramList[i].ip === peer.ip) {
-                library.logger.info("Найден SRAMMER", peer.ip); // temporary ban 2h
+                library.logger.info("Found SRAMMER", peer.ip); // temporary ban 2h
 				err = 2;
 				break;
 			}
@@ -328,7 +328,7 @@ __private.attachApi = function () {
 					ip: peer.ip, // temporary добавим срамеров в серый список
 					time: Date.now()
 				});
-                library.logger.info("SRAMMER обезврежен", txCount, peer.ip);
+                library.logger.info("SRAMMER neutralized 2h", txCount, peer.ip);
             }
 
             for (let i = 0; i < txCount; i++) {
