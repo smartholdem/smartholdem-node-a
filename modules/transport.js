@@ -316,6 +316,7 @@ __private.attachApi = function () {
 			if (sramList[i].ip === peer.ip) {
                 library.logger.info("Found SRAMMER", peer.ip); // temporary ban 2h
 				err = 2;
+                transactions = []
 				break;
 			}
 		}
