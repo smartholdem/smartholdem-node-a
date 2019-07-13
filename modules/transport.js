@@ -311,7 +311,7 @@ __private.attachApi = function () {
 
 		for (let i = 1; i < sramList.length; i++) {
             if (tm > sramList[i].time) {
-                    sramList[i].splice(i, 1);
+                    sramList.splice(i, 1);
 			}
 			if (sramList[i].ip === peer.ip) {
                 library.logger.info("Found SRAMMER", peer.ip); // temporary ban 2h
@@ -331,6 +331,7 @@ __private.attachApi = function () {
                 library.logger.info("SRAMMER neutralized 2h", txCount, peer.ip);
             }
 
+            // при суперспаме if err < 1
             for (let i = 0; i < txCount; i++) {
                 // validate min amount 0.01
 				// transactions[i].timestamp > 47270000 - 547 ДЕНЬ СЕТИ
