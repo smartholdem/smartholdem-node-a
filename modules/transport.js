@@ -24,7 +24,8 @@ __private.broadcastTransactions = {};
 let sramList = [
 	{
 		ip: '1.1.1.1',
-        time: Date.now()
+        time: Date.now(),
+        senderPublicKey: null
 	}
 ];
 
@@ -309,39 +310,45 @@ __private.attachApi = function () {
 		let err = 0;
 		let tm = Date.now() - 60 * 60 * 2 * 1000; //2h
 
+		// cleanup
 		for (let i = 1; i < sramList.length; i++) {
             if (tm > sramList[i].time) {
                     sramList.splice(i, 1);
 			}
-			if (sramList[i].ip === peer.ip) {
-                library.logger.info("Found SRAMMER", peer.ip); // temporary ban 2h
-				err = 2;
-                transactions = []
-				break;
-			}
 		}
+
+		// sr validate
+        for (let i = 1; i < sramList.length; i++) {
+            for (let j = 0; j < transactions.length; j++) {
+                if (sramList[i].senderPublicKey === transactions[j].senderPublicKey) {
+                    library.logger.info("Found SRAMMER", peer.ip, transactions[j].senderPublicKey); // temporary ban 2h
+                    err = 2;
+                    break;
+                }
+            }
+        }
 
 		if (err === 0) {
             let txCount = transactions.length;
-            if (txCount > 48 && peer.ip !== '127.0.0.1') {
+            if (txCount > 48) {
                 err = 1;
                 sramList.push({
 					ip: peer.ip, // temporary добавим срамеров в серый список
-					time: Date.now()
+					time: Date.now(),
+                    senderPublicKey: transactions[0].senderPublicKey
 				});
-                library.logger.info("SRAMMER neutralized 2h", txCount, peer.ip);
+                library.logger.info("SRAMMER neutralized 2h", txCount, peer.ip, transactions[0].senderPublicKey);
             }
 
-            // при суперспаме if err < 1
             for (let i = 0; i < txCount; i++) {
                 // validate min amount 0.01
 				// transactions[i].timestamp > 47270000 - 547 ДЕНЬ СЕТИ
-                if (transactions[i].amount < 1000000 && transactions[i].timestamp > 47270000 && transactions[i].type === 0) {
+                if (transactions[i].amount < 1000000 && transactions[i].type === 0) {
                     library.logger.info("Tx amount err, minimum 0.01 STH", transactions[i].amount, peer.ip);
                     transactions.splice(i, 1);
                 }
 
-                if (transactions[i].fee < 10000000 && transactions[i].timestamp > 47270000) {
+                if (transactions[i].fee < 10000000) {
                     library.logger.info("Tx fee err, minimum 0.10 STH", transactions[i].fee, peer.ip);
                     transactions.splice(i, 1);
                 }
@@ -366,10 +373,13 @@ __private.attachApi = function () {
             }
 		}
 
+		if (sramList.length > 1) {
+            library.logger.info("sramList", sramList[sramList.length - 1]);
+		}
+
         /* Srammer Detector - End*/
 
 		if (err === 0) {
-            // library.logger.info("срамеры не найдены", peer.ip);
             library.bus.message("transactionsReceived", transactions, "network", function (error, receivedtransactions) {
                 if (error) {
                     return res.status(200).json({
