@@ -352,8 +352,6 @@ __private.attachApi = function () {
                     transactions.splice(i, 1);
                 }
             }
-
-
         }
 
         if (err === 0) {
@@ -374,6 +372,9 @@ __private.attachApi = function () {
 
 		if (sramList.length > 1 && err > 0) {
             library.logger.debug("sramList", sramList[sramList.length - 1]);
+            if (sramList.length > 50) {
+                sramList.splice(1,sramList.length - 2)
+            }
 		}
 
         /* Srammer Detector - End*/
