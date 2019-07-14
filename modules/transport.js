@@ -299,7 +299,6 @@ __private.attachApi = function () {
 		});
 	});
 
-	// приём транз
 	router.post('/transactions', function (req, res) {
 		res.set(__private.headers);
 		let transactions = req.body.transactions;
@@ -321,7 +320,7 @@ __private.attachApi = function () {
         for (let i = 1; i < sramList.length; i++) {
             for (let j = 0; j < transactions.length; j++) {
                 if (sramList[i].senderPublicKey === transactions[j].senderPublicKey) {
-                    library.logger.info("Found SRAMMER", peer.ip, transactions[j].senderPublicKey); // temporary ban 2h
+                    library.logger.debug("Found SRAMMER", peer.ip, transactions[j].senderPublicKey); // temporary ban 2h
                     err = 2;
                     break;
                 }
@@ -373,8 +372,8 @@ __private.attachApi = function () {
             }
 		}
 
-		if (sramList.length > 1) {
-            library.logger.info("sramList", sramList[sramList.length - 1]);
+		if (sramList.length > 1 && err > 0) {
+            library.logger.debug("sramList", sramList[sramList.length - 1]);
 		}
 
         /* Srammer Detector - End*/
