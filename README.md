@@ -138,6 +138,8 @@ nvm use 10.16.0 >>install.log
 nvm alias default 10.16.0
 npm install -g npm forever grunt-cli
 npm install
+
+sh update.sh
 ```
 
 ---
