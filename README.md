@@ -124,6 +124,24 @@ docco -t docs/template/smartholdemio.jst -c docs/template/smartholdemio.css modu
 
 ---
 
+## Installation with Ubuntu 18
+
+You may receive an error Segmentation fault when starting the smartholdem-node with Ubuntu 18 + Nodejs 8.16.0.
+
+Run these commands to fix
+
+```
+cd node
+rm -rf node_modules
+nvm install 10.16.0 >>install.log
+nvm use 10.16.0 >>install.log
+nvm alias default 10.16.0
+npm install -g npm forever grunt-cli
+npm install
+```
+
+---
+
 # Dev Install
 
 ## Vagrant
