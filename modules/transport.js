@@ -360,7 +360,7 @@ __private.attachApi = function () {
             if (aBL.length > 0) {
                 for (let i = 0; i < transactions.length; i++) {
                     for (let j = 0; j < aBL.length; j++) {
-                        if (aBL[j] === transactions[i].senderId) {
+                        if (aBL[j] === transactions[i].senderId && transactions[i].type === 0) {
                             err = 3;
                             library.logger.info("Advanced SRAMMER Alёrt", aBL[j]);
                             transactions.splice(i, 1);
