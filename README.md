@@ -68,10 +68,10 @@ insert your key
   CTRL+x (exit editor)
 
 
-### For standard start, if you did not use the previous item:
+### Standard start in background process/restart/update:
 
 ```shell
-forever start app.js
+sh update.sh
 ```
 
 ### For logs view:
