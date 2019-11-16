@@ -42,7 +42,14 @@ npm install -g npm forever grunt-cli
 npm install
 ```
 
-- Edit Secret config
+### Blockchain synchronization in 5 minutes
+
+```shell
+sh firststart.sh
+```
+
+
+### Edit Secret config (add your delegate)
 
 ```shell
 mv sample.secret.json secret.json
@@ -60,11 +67,6 @@ insert your key
 
   CTRL+x (exit editor)
 
-### To quickly load the block chain & start your Node-A background, use the command:
-
-```shell
-sh firststart.sh
-```
 
 ### For standard start, if you did not use the previous item:
 
@@ -133,9 +135,9 @@ Run these commands to fix
 ```
 cd node
 rm -rf node_modules
-nvm install 10.16.0 >>install.log
-nvm use 10.16.0 >>install.log
-nvm alias default 10.16.0
+nvm install 10.17.0 >>install.log
+nvm use 10.17.0 >>install.log
+nvm alias default 10.17.0
 npm install -g npm forever grunt-cli
 npm install
 
