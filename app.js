@@ -1,7 +1,7 @@
 'use strict';
 
 var appConfig = require('./config.json');
-const appSecret = require('./secret.json'); // conectar secret.json
+var appSecret = require('./secret.json');
 var networks = require('./networks.json');
 var async = require('async');
 var checkIpInList = require('./helpers/checkIpInList.js');
