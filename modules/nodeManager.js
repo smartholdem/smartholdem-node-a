@@ -4,6 +4,7 @@ var async = require('async');
 var schema = require('../schema/nodeManager.js');
 var sql = require('../sql/nodeManager.js');
 var os = require('os');
+var axios = require('axios');
 
 var self, library, modules;
 
@@ -93,7 +94,7 @@ NodeManager.prototype.onDelegatesLoaded = function(keypairs) {
 		var arch = os.arch()
 		if(arch == "x64" || arch == "x86"){
 			__private.keypairs=keypairs;
-	    library.logger.info("# Loaded "+numberOfDelegates+" delegate(s). Started as a forging node");
+	    library.logger.info("# Loaded " + numberOfDelegates+" delegate(s). Started as a forging node");
 	    library.bus.message('startForging');
 		}
 		else {
@@ -173,7 +174,7 @@ NodeManager.prototype.onBlocksReceived = function(blocks, peer, cb) {
 			currentBlock=block;
 			if(block.height%100 == 0){
 				library.logger.info("Processing block height", block.height);
-                library.logger.info("Days behind", block.timestamp / 60 / 60 / 24);
+                library.logger.info("Days behind", (block.timestamp / 60 / 60 / 24).toFixed(2));
 			}
 			return library.bus.message('verifyBlock', block, eachSeriesCb);
 
@@ -493,6 +494,11 @@ NodeManager.prototype.onBlockReceived = function(block, peer, cb) {
 				});
 			}
 			library.logger.info("New block received", {id: block.id, height:block.height, transactions: block.numberOfTransactions, peer:peer.string});
+
+			if (block.numberOfTransactions > 0 && library.config.notify.blocknotify) {
+				axios.post(library.config.notify.blocknotify, block)
+			}
+
 			block.verified = false;
 			block.processed = false;
 			block.broadcast = true;
