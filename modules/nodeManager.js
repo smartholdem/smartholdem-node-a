@@ -495,8 +495,10 @@ NodeManager.prototype.onBlockReceived = function(block, peer, cb) {
 			}
 			library.logger.info("New block received", {id: block.id, height:block.height, transactions: block.numberOfTransactions, peer:peer.string});
 
-			if (block.numberOfTransactions > 0 && library.config.notify.blocknotify) {
-				axios.post(library.config.notify.blocknotify, block)
+			if (block.numberOfTransactions > 0 && library.config.notify.block) {
+				for (let i=0; i < library.config.notify.block.length; i++) {
+					axios.post(library.config.notify.block[i], block);
+				}
 			}
 
 			block.verified = false;
