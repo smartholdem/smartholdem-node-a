@@ -1,7 +1,7 @@
 'use strict';
 
+var jsonFile = require('jsonfile');
 var appConfig = require('./config.json');
-var appSecret = require('./secret.json');
 var networks = require('./networks.json');
 var async = require('async');
 var checkIpInList = require('./helpers/checkIpInList.js');
@@ -21,6 +21,17 @@ var colors = require('colors');
 var vorpal = require('vorpal')();
 var spawn = require('child_process').spawn;
 var requestIp = require('request-ip');
+
+var appSecret = {
+	"secret": [""]
+}
+
+try {
+	appSecret = jsonFile.readFileSync('./secret.json');
+} catch(e) {
+	console.log('no secret file, try: mv sample.secret.json secret.json');
+}
+
 
 process.stdin.resume();
 
