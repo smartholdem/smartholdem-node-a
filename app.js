@@ -1,7 +1,7 @@
 'use strict';
 
 var appConfig = require('./config.json');
-const appSecret = require('./secret.json'); // conectar secret.json
+//const appSecret = require('./secret.json'); // conectar secret.json
 var networks = require('./networks.json');
 var async = require('async');
 var checkIpInList = require('./helpers/checkIpInList.js');
@@ -21,10 +21,21 @@ var colors = require('colors');
 var vorpal = require('vorpal')();
 var spawn = require('child_process').spawn;
 var requestIp = require('request-ip');
+var appSecret = {
+	secret: []
+};
 
 process.stdin.resume();
 
 var versionBuild = fs.readFileSync(path.join(__dirname, 'build'), 'utf8');
+
+var logger = new Logger({ echo: appConfig.consoleLogLevel, errorLevel: appConfig.fileLogLevel, filename: appConfig.logFileName });
+
+try {
+	appSecret = require('./secret.json');
+} catch(e) {
+	logger.info('NO DELEGATE SECRET FILE, TRY COMMAND: mv sample.secret.json secret.json');
+}
 
 program
 	.version(packageJson.version)
@@ -118,7 +129,7 @@ if(appConfig.modules){
 	}
 }
 
-var logger = new Logger({ echo: appConfig.consoleLogLevel, errorLevel: appConfig.fileLogLevel, filename: appConfig.logFileName });
+//var logger = new Logger({ echo: appConfig.consoleLogLevel, errorLevel: appConfig.fileLogLevel, filename: appConfig.logFileName });
 
 var d = require('domain').create();
 
