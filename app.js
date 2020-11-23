@@ -34,7 +34,8 @@ var logger = new Logger({ echo: appConfig.consoleLogLevel, errorLevel: appConfig
 try {
 	appSecret = require('./secret.json');
 } catch(e) {
-	logger.info('NO DELEGATE SECRET FILE, TRY COMMAND: mv sample.secret.json secret.json');
+	fs.writeFileSync('./secret.json', '{"secret":[]}');
+	logger.info('NO DELEGATE SECRET FILE: secret.json created');
 }
 
 program
