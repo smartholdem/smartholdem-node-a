@@ -1,7 +1,7 @@
 'use strict';
 
-var jsonFile = require('jsonfile');
 var appConfig = require('./config.json');
+//const appSecret = require('./secret.json'); // conectar secret.json
 var networks = require('./networks.json');
 var async = require('async');
 var checkIpInList = require('./helpers/checkIpInList.js');
@@ -21,21 +21,22 @@ var colors = require('colors');
 var vorpal = require('vorpal')();
 var spawn = require('child_process').spawn;
 var requestIp = require('request-ip');
-
 var appSecret = {
-	"secret": [""]
-}
-
-try {
-	appSecret = jsonFile.readFileSync('./secret.json');
-} catch(e) {
-	console.log('no secret file, try: mv sample.secret.json secret.json');
-}
-
+	secret: []
+};
 
 process.stdin.resume();
 
 var versionBuild = fs.readFileSync(path.join(__dirname, 'build'), 'utf8');
+
+var logger = new Logger({ echo: appConfig.consoleLogLevel, errorLevel: appConfig.fileLogLevel, filename: appConfig.logFileName });
+
+try {
+	appSecret = require('./secret.json');
+} catch(e) {
+	fs.writeFileSync('./secret.json', '{"secret":[]}');
+	logger.info('NO DELEGATE SECRET FILE: secret.json created');
+}
 
 program
 	.version(packageJson.version)
@@ -54,7 +55,7 @@ if (program.config) {
 }
 
 if (appSecret.secret.length > 0) {
-    appConfig.forging.secret = appSecret.secret; // si los delegados están en secret.json, entonces úselos
+	appConfig.forging.secret = appSecret.secret; // si los delegados están en secret.json, entonces úselos
 }
 
 if (program.genesis) {
@@ -129,7 +130,7 @@ if(appConfig.modules){
 	}
 }
 
-var logger = new Logger({ echo: appConfig.consoleLogLevel, errorLevel: appConfig.fileLogLevel, filename: appConfig.logFileName });
+//var logger = new Logger({ echo: appConfig.consoleLogLevel, errorLevel: appConfig.fileLogLevel, filename: appConfig.logFileName });
 
 var d = require('domain').create();
 
@@ -140,7 +141,7 @@ d.on('error', function (err) {
 
 d.run(function () {
 	var modules = [];
-    console.log(colors.green("\n\
+	console.log(colors.green("\n\
       {___     {__    {____     {_____    {________\n\
      {_ {__   {__  {__    {__  {__   {__ {__\n\
     {__ {__  {__{__        {__{__    {__{__\n\
@@ -529,15 +530,15 @@ process.on('uncaughtException', function (err) {
 
 function startInteractiveMode(scope){
 	vorpal
-	  .command('rebuild', 'Rebuild node from scratch')
-	  .action(function(args, callback) {
-	    this.log('Not Implemented');
-	    callback();
-	  });
+		.command('rebuild', 'Rebuild node from scratch')
+		.action(function(args, callback) {
+			this.log('Not Implemented');
+			callback();
+		});
 
 	vorpal
-	  .command('status', 'Send status of the node')
-	  .action(function(args, callback) {
+		.command('status', 'Send status of the node')
+		.action(function(args, callback) {
 			var self = this;
 			scope.modules.loader.getNetwork(true, function(err, network){
 				var lastBlock = scope.modules.blockchain.getLastBlock();
@@ -551,13 +552,13 @@ function startInteractiveMode(scope){
 			self.log("Connected Peers:", peers.length);
 			self.log("Mempool size:", scope.modules.transactionPool.getMempoolSize());
 
-	  });
+		});
 
 	var tail;
 
 	vorpal
-	  .command('log start', 'Start output logs')
-	  .action(function(args, callback) {
+		.command('log start', 'Start output logs')
+		.action(function(args, callback) {
 			var self=this;
 			if(tail){
 				self.log("Already listening to logs");
@@ -565,46 +566,46 @@ function startInteractiveMode(scope){
 			}
 			tail = spawn('tail', ['-f', appConfig.logFileName]);
 			tail.stdout.on('data', function(data) {
-			  self.log(data.toString("UTF-8"));
+				self.log(data.toString("UTF-8"));
 			});
 			callback();
-	  });
+		});
 
 	vorpal
-	  .command('log stop', 'Stop output logs')
-	  .action(function(args, callback) {
+		.command('log stop', 'Stop output logs')
+		.action(function(args, callback) {
 			var self=this;
 			if(tail){
 				tail.kill();
 				tail=null;
 			}
 			callback();
-	  });
+		});
 
 	vorpal
-	  .command('log grep <query>', 'Grep logs with <query>')
-	  .action(function(args, callback) {
+		.command('log grep <query>', 'Grep logs with <query>')
+		.action(function(args, callback) {
 			var self=this;
 			var grep = spawn('grep', ['-e', args.query, appConfig.logFileName]);
 			grep.stdout.on('data', function(data) {
-			  self.log(data.toString("UTF-8"));
+				self.log(data.toString("UTF-8"));
 			});
 			callback();
-	  });
+		});
 
 	vorpal
-	  .command('update node', 'force update from network')
-	  .action(function(args, callback) {
+		.command('update node', 'force update from network')
+		.action(function(args, callback) {
 			var self = this;
-	    scope.bus.message("updatePeers");
-	    callback();
-	  });
+			scope.bus.message("updatePeers");
+			callback();
+		});
 
 	vorpal
-	  .command('sql <query>', 'query database')
-	  .action(function(args, callback) {
+		.command('sql <query>', 'query database')
+		.action(function(args, callback) {
 			var self = this;
-	    scope.db.query(args.query).then(function(rows){
+			scope.db.query(args.query).then(function(rows){
 				self.log(rows.map(function(row){return JSON.stringify(row)}).join("\n"));
 				callback();
 			}).catch(function(error){
@@ -612,24 +613,24 @@ function startInteractiveMode(scope){
 				callback();
 			});
 
-	  });
+		});
 
 	vorpal
-	  .command('create account', 'generate a new random account')
-	  .action(function(args, callback) {
+		.command('create account', 'generate a new random account')
+		.action(function(args, callback) {
 			var self = this;
-	    var passphrase = require("bip39").generateMnemonic();
+			var passphrase = require("bip39").generateMnemonic();
 			self.log("Seed    - private:",passphrase);
 			self.log("WIF     - private:",require("sthjs").crypto.getKeys(passphrase).toWIF());
 			self.log("Address - public :",require("sthjs").crypto.getAddress(require("sthjs").crypto.getKeys(passphrase).publicKey));
 			callback();
-	  });
+		});
 	var account=null;
 	vorpal
-	  .mode('account <address>', 'get info of account (balance, vote, username, publicKey etc...)')
-	  .delimiter('account>')
-	  .init(function(args, callback){
-	    var self=this;
+		.mode('account <address>', 'get info of account (balance, vote, username, publicKey etc...)')
+		.delimiter('account>')
+		.init(function(args, callback){
+			var self=this;
 			scope.db.query("select * from mem_accounts where address ='"+args.address+"'").then(function(rows){
 				account=rows[0];
 				self.log('Managing account '+args.address+'. Commands: '+Object.keys(account).join(", ")+'. To exit, type `exit`.');
@@ -639,27 +640,27 @@ function startInteractiveMode(scope){
 				self.log('Account not found '+args.address+'. To exit, type `exit`.');
 				callback();
 			});
-	  })
-	  .action(function(command, callback) {
-	    var self = this;
-	    this.log(account[command]);
+		})
+		.action(function(command, callback) {
+			var self = this;
+			this.log(account[command]);
 			callback();
-	  });
-
-		vorpal
-		  .command('spv fix', 'fix database using SPV on all accounts')
-		  .action(function(args, callback) {
-				var self = this;
-				scope.modules.nodeManager.fixDatabase(function(err, results){
-					if(err) self.log(colors.red(err));
-					else self.log("Fixed "+results[3].length+" accounts");
-					callback();
-				});
-		  });
+		});
 
 	vorpal
-	  .command('spv <address>', 'Perform Simple Payment Verification against the blockchain')
-	  .action(function(args, callback) {
+		.command('spv fix', 'fix database using SPV on all accounts')
+		.action(function(args, callback) {
+			var self = this;
+			scope.modules.nodeManager.fixDatabase(function(err, results){
+				if(err) self.log(colors.red(err));
+				else self.log("Fixed "+results[3].length+" accounts");
+				callback();
+			});
+		});
+
+	vorpal
+		.command('spv <address>', 'Perform Simple Payment Verification against the blockchain')
+		.action(function(args, callback) {
 			scope.db.query("select * from mem_accounts where address ='"+args.address+"'").then(function(rows){
 				var publicKey=rows[0].publicKey.toString("hex");
 				var receivedSQL='select sum(amount) as total, count(amount) as count from transactions where amount > 0 and "recipientId" = \''+args.address+'\';'
@@ -694,11 +695,11 @@ function startInteractiveMode(scope){
 			});
 			var self = this;
 
-	  });
+		});
 
 	vorpal.history('smartholdem-cli');
 
 	vorpal
-	  .delimiter('smartholdem-cli>')
-	  .show();
+		.delimiter('smartholdem-cli>')
+		.show();
 }
