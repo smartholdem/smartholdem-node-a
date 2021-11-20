@@ -85,38 +85,6 @@ sh log.sh
 sh update.sh
 ```
 
-# Node-A Upgrade
-
-```shell
-cd node
-sh stop.sh
-git checkout -p
-git pull
-rm -rf node_modules
-nvm install 8.16.0
-nvm use 8.16.0
-nvm alias default 8.16.0
-npm install -g npm forever grunt-cli
-npm install
-sh update.sh
-```
-
-reenter pass phrase if nessesary
-
-```
-nano secret.json
-```
-
-insert pass phrase
-
-```json
-{
-    "secret": ["your delegate address secret phrase twelve words"]
-}
-```
-
-CTRL+o, CTRL+x
-
 ## Docs Generate
 
 ```shell
