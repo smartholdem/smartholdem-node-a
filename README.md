@@ -4,7 +4,7 @@ This full node level A SmartHoldem network
 
 # Ubuntu Installation
 
-Recommend 4xCPU 3.4Ghz / HDD SSD 40GB / RAM 16Gb / OS Ubuntu 16 LTS
+Recommend 2xCPU 2Ghz / HDD SSD 40GB / RAM 4Gb / OS Ubuntu 18-20
 
 
 from root user:
@@ -35,9 +35,9 @@ cd node
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh 2>/dev/null | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm install 8.16.0 >>install.log
-nvm use 8.16.0 >>install.log
-nvm alias default 8.16.0
+nvm install 12.22.7
+nvm use 12.22.7
+nvm alias default 12.22.7
 npm install -g npm forever grunt-cli
 npm install
 ```
@@ -126,26 +126,6 @@ docco -t docs/template/smartholdemio.jst -c docs/template/smartholdemio.css modu
 
 ---
 
-## Installation with Ubuntu 18
-
-You may receive an error Segmentation fault when starting the smartholdem-node with Ubuntu 18 + Nodejs 8.16.0.
-
-Run these commands to fix
-
-```
-cd node
-rm -rf node_modules
-nvm install 10.17.0 >>install.log
-nvm use 10.17.0 >>install.log
-nvm alias default 10.17.0
-npm install -g npm forever grunt-cli
-npm install
-
-sh update.sh
-```
-
----
-
 # Dev Install
 
 ## Vagrant
@@ -183,7 +163,7 @@ vagrant destroy
 
 The MIT License (MIT)
 
-Copyright (c) 2018 SmartHoldem
+Copyright (c) 2018-2021 SmartHoldem
 Copyright (c) 2016 Ark
 Copyright (c) 2016 Lisk
 Copyright (c) 2014-2015 Crypti
