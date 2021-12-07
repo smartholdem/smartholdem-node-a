@@ -17,11 +17,8 @@ cd /home/smartholdem
 su smartholdem
 ```
 
-ENTER user password (if it is needed)
-
 ```shell
-sudo apt-get install postgresql postgresql-contrib libpq-dev build-essential g++ python git curl ntp -y
-sudo apt-get install jq libtool autoconf locales automake locate zip unzip htop nmon iftop nano -y
+sudo apt-get install postgresql postgresql-contrib libpq-dev build-essential g++ python git curl ntp jq libtool autoconf locales automake locate zip unzip htop nmon iftop nano -y
 ```
 
 ENTER user password (if it is needed)
